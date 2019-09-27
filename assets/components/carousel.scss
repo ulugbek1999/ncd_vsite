@@ -1,0 +1,32 @@
+$mainColor: #be993e;
+
+.display-3 {
+    color: #fff;
+    line-height: 35px;  
+    font-size: 60px;
+    font-family: "Ubuntu";
+    font-weight: 400;
+}
+
+.display-1 {
+    @extend .display-3;
+    margin-top: 50px;
+    font-weight: 500;
+}
+
+.c-wrapper {
+    margin-top: 150px;
+    text-align: center;
+}
+
+.c-btn {
+    margin: {
+        top: 40px;
+    }
+    padding: 10px 30px !important;
+    font: {
+        family: "Arial";
+        size: 18px;
+    }
+    color: $mainColor;
+}

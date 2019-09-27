@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+
+$mainColor: #be993e;
+
+#main {
+    background-color: #fff;
+    font-family: "Ubuntu", sans-serif;
+    color: #000;
+    size: 18px;
+}
+
+.nav-mobile {
+    display: none;
+}
+
+h2 {
+    font-size: 48px;
+    line-height: 35px;
+    color: $mainColor;
+    font-family: "Ubuntu";
+    font-weight: 400;
+}
+
+.auth-container {
+    text-align: center;
+    font-weight: bold;
+}
+
+.lang-change {
+    font-size: 20px;
+    line-height: 35px;
+    color: #000000;
+    font-family: "Ubuntu";
+    font-weight: 600;
+    text-align: center;
+}
+
+.lang-change span {
+    margin-right: 5px;
+}
+
+.link:hover {
+    color: $mainColor;
+    cursor: pointer;
+}
+
+.page {
+    position: relative;
+    top: -100px;
+    max-width: 90%;
+    z-index: 100;
+    text-align: center;
+    padding: 100px 30px 100px;
+}
+
+.page h2 {
+    margin-top: 100px;
+}
+
+.footer {
+    position: relative;
+    top: -310px;
+    z-index: 99;
+}
+
+.about {
+    margin-top: 40px;
+    margin-left: 65px;
+    font-size: 24px;
+    line-height: 35px;
+    font-weight: 400px;
+}
+
+.divider {
+    width: 10px;
+    background-color: $mainColor;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.stronger {
+    color: $mainColor;
+    font-size: 26px;
+}
+
+.flag-container {
+    position: relative;
+    top: 30px;
+}
+
+.img-shadow-container {
+    z-index: 100;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -120px;
+}
+
+.img-shadow {
+    position: absolute;
+    z-index: 99;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.mss-wrapper {
+    font: {
+        size: 20px;
+        family: "Ubuntu";
+        weight: 400;
+    }
+    width: 80%;
+}
+
+.mission-text {
+    text-align: left;
+    width: 60%;
+    margin: 0 auto;
+}
+
+.mission-text h2 {
+    font-size: 48px;
+    line-height: 24px;
+    color: #000000;
+    font-family: "Ubuntu";
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.mission-text p {
+    font-size: 24px;
+}
+
+.collab-wrapper {
+    @extend .mission-text;
+    width: 90%;
+}
+
+.collab-wrapper h2 {
+    color: $mainColor
+}
+
+.footer-info {
+    margin-top: 300px;
+}
+
+.footer h2 {
+    color: #fff;
+    text-align: center;
+}
+
+.services-container {
+    width: 60%;
+    margin-top: 200px;
+    text-align: center;
+}
+
+.service-header {
+    font-size: 24px;
+    line-height: 18px;
+    color: #ffffff;
+    padding: 20px 0;
+}
+
+.service-content {
+    font-size: 18px;
+    line-height: 18px;
+    color: #000;
+}
+
+.copyright-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#logo-footer {
+    width: 500px;
+}
+
+.contacts-header {
+    font-size: 30px;
+    line-height: 35px;
+}
+
+// Responsiveness
+
+@media screen and (max-width: 900px) {
+    .nav-desktop {
+        display: none;
+    }
+
+    .nav-mobile {
+        display: block;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+
+}
+
+.lang-selector {
+    right: 17px;
+}
+
+.mobile-navigator-lines {
+    left: 12px;
+}
+
+.side-menu-overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 101;
+    background-color: rgba(24, 23, 23, 0.322);
+}
+
+.side-menu {
+    left: -300px;
+    width: 299px;
+    z-index: 9999999999;
+    overflow-y: auto;
+    top: 0;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 20px 30px;
+    position: absolute;
+    background-color: #424242;
+    transition: all .5s ease;
+}
+
+.side-menu .close-btn {
+    position: absolute;
+    color: #fff;
+    font-size: 30px;
+    right: 15px;
+    top: 0;
+}
+
+.side-menu .close-btn:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.nav-list {
+    color: #fff;
+    margin-top: 50px;
+}
+
+.nav-list > ul {
+    padding: 0;
+}
+
+.nav-list > ul > li {
+    list-style-type: none;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.294);
+}
+
