@@ -4,7 +4,7 @@
     justify-center
     align-center
   >
-  <v-card light="" class="page">
+  <v-card light="" class="page" width="90%">
     <h2>О компании</h2>
     <v-row class="about">
       <v-col 
