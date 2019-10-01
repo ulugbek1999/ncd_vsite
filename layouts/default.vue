@@ -125,7 +125,7 @@
         <v-col cols="12" lg="3" md="3" v-for="(service, index) in services" :key="'service-' + index">
           <div class="service-container">
             <div class="service-image-container">
-              <img :src="'http://127.0.0.1:8000' + service.image" alt="" class="service-image mx-auto">
+              <img :src="domain + service.image" alt="" class="service-image mx-auto">
             </div>
             <h4 class="service-header">
               {{ service.title_en }}
@@ -140,7 +140,7 @@
         <v-col cols="12" lg="3" md="3" v-for="(service, index) in services" :key="'service-' + index">
           <div class="service-container">
             <div class="service-image-container">
-              <img :src="'http://127.0.0.1:8000' + service.image" alt="" class="service-image mx-auto">
+              <img :src="domain + service.image" alt="" class="service-image mx-auto">
             </div>
             <h4 class="service-header">
               {{ service.title_kz }}
@@ -155,7 +155,7 @@
         <v-col cols="12" lg="3" md="3" v-for="(service, index) in services" :key="'service-' + index">
           <div class="service-container">
             <div class="service-image-container">
-              <img :src="'http://127.0.0.1:8000' + service.image" alt="" class="service-image mx-auto">
+              <img :src="domain + service.image" alt="" class="service-image mx-auto">
             </div>
             <h4 class="service-header">
               {{ service.title_uz }}
