@@ -5,7 +5,7 @@
     align-center
   >
   <v-card light="" class="page" width="90%">
-    <h2>О компании</h2>
+    <h2>{{ translation.about_company }}</h2>
     <v-row class="about">
       <v-col 
         cols="12"
@@ -36,10 +36,7 @@
         class="text-left"
         align-self="center"
       >
-        <p>
-          <v-badge class="stronger">National Center for Development</v-badge> - это быстроразвивающая компания, позволяющая эффективно эффективно использовать трудовые ресурсы мигрантов и направлять их в соответствии с их квалификацией в те страны и те организации, где они наилучшим образом смогут применить свои навыки и знания.
-          Мы оказываем квалифицированную помощь трудовым мигрантам Республики Казахстан и других стран Центральной Азии, желающим найти работу за рубежом...
-        </p>
+        <p v-html="about"></p>
       </v-col>
     </v-row>
     <v-row justify="center">
@@ -55,19 +52,15 @@
       class="mx-auto mb-5"
     ></v-img>
     <v-row justify="center">
-      <div class="mss-wrapper mt-5 mb-10">
-        <p>Manpower scoring system - это уникальная платформа празработаная нами, которая позволяет централизованно хранить, проводить отбор, оценивать квалификацию кадровых ресурсов для заинтересованных компаний и партнеров как внутри Республики Казахстан, так и за рубежом. Идея такой системы ранее не применялась и не использовалась в Республике Казахстан.</p>
-        <p>Согласно нашей задумке, MSS позволяет собирать и систематизировать данные обо всех кандидатах, обращающихся к нам и желающих работать за рубежом. Информация о кандидате содержит сведения, касающиеся образования, владения языками, опыта работы, личных данных, а также некие оценочные данные о заявителе, определяющие его готовность к трудоустройству в другой стране.</p>
-        <p>Собранная информация подлежит оценке. Чем больше навыков и знаний у кандидата, чем более богатый опыт работы он имеет, тем более высокий балл он получит в результате проведения скоринга. Также оценке подлежат возрастные и физические критерии, такие как рост или вес. При рассмотрении кандидатов нами также учитывается наличие или отсутствие у заявителя судимости.</p>
-        <p>Наша платформа значительно повышает эффективность взаимодействия с работодателями, существенно расширяет возможности поиска новых рабочих мест. Работодатели, имеющие партнерский статус в компании NCD, получают возможность обращаться непосредственно к огромной базе данных соискателей и выбирать подходящих кандидатов по нужным критериям. В результате такого взаимодействия время поиска работы для соискателя сокращается примерно в 10 раз.</p>
+      <div class="mss-wrapper mt-10 mb-10">
+        <p v-html="mss"></p>
       </div>
     </v-row>
     <v-row class="mission mt-10" justify="center" align="center">
       <v-col cols="12" lg="6" md="6">
         <div class="mission-text">
-          <h2>Наша миссия</h2>
-          <p>
-стать самой успешной и этичной компанией по трудоустройству иностранных работников, а также быть мостом для повышения грамотности и развития образования на рынке труда Казахстана, путем применения...</p>
+          <h2>{{ translation.our_mission }}</h2>
+          <p v-html="mission"></p>
         </div>
       </v-col>
       <v-col cols="12" lg="6" md="6">
@@ -88,9 +81,8 @@
       </v-col>
       <v-col cols="12" lg="6" md="6">
         <div class="collab-wrapper">
-          <h2>Сотрудничество</h2>
-          <p>На сегодняшний день наши офисы находятся в городах Ташкент и Алматы. Мы сотрудничаем с работодателями Словакии, Чехии, Японии, Южной Кореи, США, Канады, Германии, Великобритании, России, Казахстана и стран Восточной Европы.
-Со временем наша база данных вырастет до больших размеров, и пул ресурсов и знаний станет достаточно большим. Интерес к нашей деятельности уже проявляют многие зарубежные партнеры. Мы же в свою очередь предлагаем абсолютно прозрачное, легальное и надежное сотрудничество всем...</p>
+          <h2>{{ translation.cooperation }}</h2>
+          <p v-html="cooperation"></p>
         </div>
       </v-col>
     </v-row>
@@ -101,11 +93,86 @@
 <script>
 import Logo from '~/components/Logo.vue'
 import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import { async } from 'q'
+import { mapState, mapGetters } from 'vuex'
+import { DICTIONARY } from '~/settings/settings.js'
 
 export default {
   components: {
     Logo,
     VuetifyLogo
+  },
+  head () {
+    return {
+      title: "Homepage"
+    }
+  },
+  computed: {
+    ...mapState({
+      cms: state => state.cmsData
+    }), 
+    language() {
+      return this.$route.params.lang
+    },
+    about() {
+      if (this.language == "ru") {
+        return this.cms.about[0].content_ru
+      }
+      else if (this.language == "en") {
+        return this.cms.about[0].content_en
+      }
+      else if (this.language == "uz") {
+        return this.cms.about[0].content_uz
+      }
+      else {
+        return this.cms.about[0].content_kz
+      }
+    },
+    mss () {
+      if (this.language == "ru") {
+        return this.cms.about[2].content_ru
+      }
+      else if (this.language == "en") {
+        return this.cms.about[2].content_en
+      }
+      else if (this.language == "uz") {
+        return this.cms.about[2].content_uz
+      }
+      else {
+        return this.cms.about[2].content_kz
+      }
+    },
+    mission () {
+      if (this.language == "ru") {
+        return this.cms.about[1].content_ru
+      }
+      else if (this.language == "en") {
+        return this.cms.about[1].content_en
+      }
+      else if (this.language == "uz") {
+        return this.cms.about[1].content_uz
+      }
+      else {
+        return this.cms.about[1].content_kz
+      }
+    },
+    cooperation () {
+      if (this.language == "ru") {
+        return this.cms.about[3].content_ru
+      }
+      else if (this.language == "en") {
+        return this.cms.about[3].content_en
+      }
+      else if (this.language == "uz") {
+        return this.cms.about[3].content_uz
+      }
+      else {
+        return this.cms.about[3].content_kz
+      }
+    },
+    translation() {
+      return DICTIONARY[this.language]
+    }
   }
 }
 </script>

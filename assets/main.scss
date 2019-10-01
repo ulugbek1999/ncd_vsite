@@ -13,6 +13,10 @@ $mainColor: #be993e;
     display: none;
 }
 
+.mobile-lang {
+    text-transform: capitalize;
+}
+
 h2 {
     font-size: 48px;
     line-height: 35px;
@@ -37,6 +41,10 @@ h2 {
 
 .lang-change span {
     margin-right: 5px;
+}
+
+.link {
+    text-transform: uppercase;
 }
 
 .link:hover {
@@ -151,21 +159,31 @@ h2 {
 
 .services-container {
     width: 60%;
-    margin-top: 200px;
+    margin-top: 100px;
     text-align: center;
 }
 
 .service-header {
-    font-size: 24px;
+    font-size: 20px;
     line-height: 18px;
     color: #ffffff;
     padding: 20px 0;
+    line-height: 20px;
+}
+
+.service-image-container {
+    min-height: 145px;
 }
 
 .service-content {
-    font-size: 18px;
+    font-size: 15px;
     line-height: 18px;
     color: #000;
+}
+
+.service-image {
+    width: 145px;
+    height: auto;
 }
 
 .copyright-container {

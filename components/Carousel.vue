@@ -11,15 +11,14 @@
         :key="i"
         :src="slide.image"
     >
-    
         <v-row
             class="fill-height"
             justify="center"
         >
             <div class="c-wrapper">
-                <div class="display-3" v-if="slide.title">{{ slide.title }}</div>
-                <div class="display-1" v-if="slide.subtitle">{{ slide.subtitle }}</div>
-                <v-btn class="c-btn" v-if="slide.btnTitle" light>{{ slide.btnTitle }}</v-btn>
+                <div class="display-3" v-if="slide.title[language]">{{ slide.title[language] }}</div>
+                <div class="display-1" v-if="slide.subtitle[language]">{{ slide.subtitle[language] }}</div>
+                <v-btn class="c-btn" v-if="slide.btnTitle[language]" light>{{ slide.btnTitle[language] }}</v-btn>
             </div> 
         </v-row>
     </v-carousel-item>
@@ -43,10 +42,12 @@ export default {
     props: {
         slides: {
             type: Array
+        },
+        language: {
+            type: String,
+            required: true
         }
     },
-    mounted () {
-    }
 }
 </script>
 
