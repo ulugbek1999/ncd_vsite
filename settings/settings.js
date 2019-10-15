@@ -1,6 +1,6 @@
 
-export const CMS_DOMAIN = 'http://127.0.0.1:8000';
-export const AUTH_DOMAIN = 'http://127.0.0.1:7000';
+export const CMS_DOMAIN = 'https://manage.ncd.kz';
+export const AUTH_DOMAIN = 'https://ncd.kz';
 
 // DICTIONARY handles the website in different languages
 export const DICTIONARY = {
