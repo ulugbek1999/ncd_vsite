@@ -185,7 +185,7 @@
 
 <script>
 import Carousel from "~/components/Carousel.vue"
-import { BASE_DOMAIN, DICTIONARY } from "~/settings/settings.js"
+import { CMS_DOMAIN, DICTIONARY } from "~/settings/settings.js"
 
 export default {
   middleware: "language",
@@ -278,7 +278,7 @@ export default {
         if (this.slider.length != 0) {
           for (const slide of this.slider) {
             this.slides.push({
-              image: BASE_DOMAIN + slide.image,
+              image: CMS_DOMAIN + slide.image,
               title: {
                 ru: slide.title_ru,
                 en: slide.title_en,
@@ -329,7 +329,7 @@ export default {
       return this.$store.state.cmsData.service
     },
     domain() {
-      return BASE_DOMAIN
+      return CMS_DOMAIN
     }
   },
   created () {

@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {BASE_DOMAIN} from '~/settings/settings.js';
+import {CMS_DOMAIN} from '~/settings/settings.js';
 
 const apiClient = axios.create({
-  baseURL: BASE_DOMAIN,
+  baseURL: CMS_DOMAIN,
   withCredentials: false,
   headers: {
     'Accept': 'application/json',

@@ -1,6 +1,6 @@
 
 
-import CMSService from '@/cms/CMSService.js';
+import CMSService from '@/services/CMSService.js';
 
 
 export const state = () => ({
