@@ -4,6 +4,10 @@ $mainColor: #be993e;
 $headerColor: rgb(117, 117, 117);
 $mainFont: "Ubuntu", sans-serif;
 
+html, body {
+    overflow-x: hidden !important;
+}
+
 .slider-container {
     min-height: 100vh;
     background-color: #000;
@@ -415,4 +419,8 @@ h2 {
 .partners-carousel {
     width: 70%;
     margin: 0 auto;
+}
+
+.newsletter-button {
+    display: none;
 }

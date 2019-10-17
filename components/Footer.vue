@@ -17,9 +17,9 @@
                   class="footer-navigation"
                 >
                     <p><div class="footer-header">НАВИГАЦИЯ</div></p>
-                    <p>Главная</p>
-                    <p>О нас</p>
-                    <p>Наши услуги</p>
+                    <p class="footer-secondary">Главная</p>
+                    <p class="footer-secondary">О нас</p>
+                    <p class="footer-secondary">Наши услуги</p>
                 </v-col>
                 <v-col
                   cols="12"
@@ -28,9 +28,9 @@
                   sm="6"
                 >
                     <p><div class="footer-header">КОНТАКТЫ</div></p>
-                    <p>+7 707 020 25 49; +7 778 683 83 28<br>+7 700 222 56 70; +7 705 391 81 21</p>
-                    <p>info@ncd.kz</p>
-                    <p>г. Алматы, Мухамеджанова 9</p>
+                    <p class="footer-secondary">+7 707 020 25 49; +7 778 683 83 28<br>+7 700 222 56 70; +7 705 391 81 21</p>
+                    <p class="footer-secondary">info@ncd.kz</p>
+                    <p class="footer-secondary">г. Алматы, Мухамеджанова 9</p>
                 </v-col>
                 <v-col
                   cols="12"
@@ -40,7 +40,7 @@
                 >
                     <div class="mx-auto newsletter-main">
                         <p><div class="footer-header">ПОДПИШИТЕСЬ НА РАССЫЛКУ</div></p>
-                        <div class="newsletter-container d-flex">
+                        <div class="newsletter-container">
                             <v-text-field
                                 label="Ваш Email"
                                 required
@@ -55,7 +55,7 @@
                                 class="mt-2"
                                 
                             ></v-text-field>
-                            <div class="ml-5">
+                            <div class="ml-5 pencil">
                                 <v-btn 
                                 class="mx-2"
                                 fab
@@ -66,6 +66,14 @@
                                     <v-icon dark>mdi-pencil</v-icon dark>
                                 </v-btn>
                             </div>
+                            <v-btn 
+                              class="newsletter-button mb-10"
+                              outlined
+                              color="#999"
+                              rounded
+                            >
+                              Подписаться
+                            </v-btn>
                         </div>
                     </div>
                     
