@@ -1,10 +1,32 @@
 @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
 
 $mainColor: #be993e;
+$headerColor: rgb(117, 117, 117);
+$mainFont: "Ubuntu", sans-serif;
+
+.slider-container {
+    min-height: 100vh;
+    background-color: #000;
+}
+
+.header-main {
+    color: $headerColor;
+}
+
+.header-split {
+    width: 156px;
+    height: 10px;
+    background-color: $mainColor;
+    margin: 15px auto;
+}
+
+body {
+    font-family: $mainFont
+}
 
 #main {
     background-color: #fff;
-    font-family: "Ubuntu", sans-serif;
+    font-family: $mainFont;
     color: #000;
     size: 18px;
 }
@@ -20,7 +42,6 @@ $mainColor: #be993e;
 h2 {
     font-size: 48px;
     line-height: 35px;
-    color: $mainColor;
     font-family: "Ubuntu";
     font-weight: 400;
 }
@@ -76,6 +97,81 @@ h2 {
     font-size: 24px;
     line-height: 35px;
     font-weight: 400px;
+}
+
+.about-info-container {
+    height: 620px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.about-info {
+    width: 50%;
+    height: 100%;
+    background-color: #eeecec;
+}
+
+.about-image {
+    background: {
+        position: center;
+        size: cover;
+        repeat: no-repeat;
+        attachment: fixed;
+    }
+    height: 100%;
+    width: 50%;
+}
+
+.about-align {
+    margin: 70px 0px 29px 100px;
+}
+
+.about-align .display-1 {
+    color: $mainColor;
+    font-weight: bold;
+}
+
+.about-align p {
+    width: 90%;
+    font-size: 16px;
+    margin-top: 45px;
+}
+
+.stats-wrapper {
+    width: 70%;
+    margin: 30px auto;
+}
+
+.stat {
+    width: 33%;
+    position: relative;
+    float: left
+}
+
+.stat::after {
+    content: "";
+    width: 2px;
+    height: 100px;
+    background-color: #fff;
+    right: 0;
+    position: absolute;
+    top: 0%;
+}
+
+.stat:last-child::after {
+    background: transparent;
+}
+
+
+.stat h2 {
+    color: #fff;
+    font-size: 60px;
+}
+
+.stat p {
+    color: #fff;
+    font-size: 25px;
+    margin-top: 20px;
 }
 
 .divider {
@@ -158,8 +254,8 @@ h2 {
 }
 
 .services-container {
-    width: 60%;
-    margin-top: 100px;
+    width: 100%;
+    margin-top: 50px;
     text-align: center;
 }
 
@@ -186,6 +282,14 @@ h2 {
     height: auto;
 }
 
+.services-list {
+    width: 70%;
+    margin: 50px auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
 .copyright-container {
     position: absolute;
     bottom: 0;
@@ -203,22 +307,6 @@ h2 {
 }
 
 // Responsiveness
-
-@media screen and (max-width: 900px) {
-    .nav-desktop {
-        display: none;
-    }
-
-    .nav-mobile {
-        display: block;
-    }
-
-    .container {
-        padding: 0;
-    }
-
-
-}
 
 .lang-selector {
     right: 17px;
@@ -270,6 +358,7 @@ h2 {
     margin-top: 50px;
 }
 
+
 .nav-list > ul {
     padding: 0;
 }
@@ -280,3 +369,50 @@ h2 {
     border-bottom: 1px solid rgba(255, 255, 255, 0.294);
 }
 
+.nav-list > ul > li:hover {
+    cursor: pointer;
+    color: $mainColor;
+}
+
+.primary-button {
+    background-color: $mainColor;
+    color: #fff;
+    padding: 8px 15px;
+    font-size: 14px;
+    border: none;
+    transition: all .5s ease;
+    display: inline-block;
+}
+
+.stats {
+    width: 100%;
+    min-height: 229px;
+    background-color: $mainColor;
+}
+
+.google-maps-container {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.contact-form-container {
+    @extend .google-maps-container;
+    margin-top: 30px;
+}
+
+.contact-info {
+    color: rgba(0, 0, 0, 0.596);
+}
+
+.footer-container {
+    width: 80%;
+}
+
+.titles-mobile {
+    display: none;
+}
+
+.partners-carousel {
+    width: 70%;
+    margin: 0 auto;
+}

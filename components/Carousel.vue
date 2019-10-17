@@ -44,8 +44,7 @@ export default {
             type: Array
         },
         language: {
-            type: String,
-            required: true
+            type: String
         }
     },
 }

@@ -1,0 +1,124 @@
+// Between 996px and 1200px
+@media screen and (max-width: 1200px) {
+    .services-list {
+        width: 90%;
+    }
+
+    .about-info-container {
+        display: block;
+        height: 540px;
+        flex-wrap: unset;
+        margin-top: 0px !important;
+        padding-top: 0px !important;
+        background-color: #eeecec;
+    }
+
+    .about-align {
+        margin-top: 20px;
+        padding-top: 45px;
+    }
+
+    .partners-carousel {
+        width: 90%;
+    }
+
+    .owl-item .item {
+        min-height: 310px !important;
+    } 
+
+    .owl-item .partners-item {
+        min-height: 310px;
+    }
+
+    .about-info {
+        width: 100%;
+    }
+
+    .about-image {
+        display: none;
+    }
+
+    .google-maps-container {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    .contact-form-container {
+        width: 90%;
+    }
+
+    .footer-container {
+        width: 95%;
+    }
+    .newsletter-main {
+        width: 60% !important;
+    }
+    .social-media-icons {
+        width: 60% !important;
+    }
+    .stats-wrapper {
+        width: 90%;
+    }
+}
+// Between 768px and 996px
+@media screen and (max-width: 996px) {
+    .nav-mobile {
+        display: block;
+    }
+    .nav-desktop {
+        display: none !important;
+    }
+    .titles-desktop {
+        display: none
+    }
+    .titles-mobile {
+        display: block;
+    }
+    .slide-title {
+        font-size: 40px !important;
+        color: #fff;
+    }
+    .slide-subtitle {
+        font-size: 20px;
+        color: #fff;
+    }
+    .partners-carousel {
+        width: 80%;
+    }
+    .partners-item {
+        width: 100%;
+    }
+    .service-widget {
+        width: 45% !important;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .titles-mobile {
+        margin-top: -100px;
+    }
+    .slide-title {
+        font-size: 30px !important;
+    }
+    .services-list {
+        width: 80% !important;
+    }
+    .service-widget {
+        width: 100% !important;
+    }
+    .about-info-container {
+        height: 800px;
+    }
+    .stat h2 {
+        font-size: 40px;
+    }
+    .stat p {
+        font-size: 15px;
+    }
+    .newsletter-main {
+        width: 90% !important;
+    }
+    .social-media-icons {
+        width: 90% !important;
+    }
+}

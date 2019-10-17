@@ -32,8 +32,6 @@ export default {
   /*
   ** Plugins to load before mounting the App
   */
-  plugins: [
-  ],
   /*
   ** Nuxt.js dev-modules
   */
@@ -45,6 +43,9 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
+    ["nuxt-gmaps", {
+      key: "AIzaSyCkZeTnnzUkywiK6MPqHJZkQvAi7BkEmsM"
+    }]
   ],
   /*
   ** vuetify module configuration
@@ -53,7 +54,8 @@ export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
-      dark: true,
+      dark: false,
+      light: true,
       themes: {
         dark: {
           primary: colors.blue.darken2,
@@ -71,10 +73,8 @@ export default {
   ** Build configuration
   */
   build: {
-    /*
-    ** You can extend webpack config here
-    */
     extend(config, ctx) {
+      
     },
   },
 };

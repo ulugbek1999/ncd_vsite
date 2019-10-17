@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous&display=swap');
+$widgetColor: #f7f7f7;
+$widgetFontColor: #3d5975;
+$righteous: 'Righteous', cursive;
+$footerHeaderColor: #525252; 
+
+.service-widget {
+    width: 30%;
+    box-sizing: border-box;
+    text-shadow: none;
+    border-radius: 5px !important;
+    box-shadow: 0 0 10px lightgray;
+    margin-bottom: 30px;
+}
+
+.service-info {
+    background-color: $widgetColor;
+    min-height: 131px;
+}
+
+.service-widget-header {
+    color: #000;
+    line-height: 1.1em;
+    font: {
+        size: 17px;
+        weight: bold;
+    }
+}
+
+.service-widget-content {
+    font: {
+        size: 14px;
+    }
+}
+
+.item {
+    padding: 0 7.5px;
+}
+
+.partners-item {
+    text-align: center;
+    background-color: #fff;
+    min-height: 250px;
+    border-radius: 2px;
+    margin: 15px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25)
+}
+
+.partners-item > a {
+    display: block;
+    padding: 25px 15px;
+    color: black !important;
+    text-decoration: none;
+}
+
+.partners-item > a img {
+    max-width: 90%;
+    max-height: 180px;
+    min-height: 180px;
+    width: auto;
+    margin: 0 auto;
+}
+
+.partners-item > a span {
+    font-size: 18px;
+    line-height: 20px;
+    font-weight: 600;
+    color: #031b4e;
+    margin: 20px 0;
+    display: block;
+}
+
+.google-maps {
+    width: 60%;
+}
+
+.footer-header {
+    color: $footerHeaderColor;
+    font: {
+        size: 25px;
+        weight: 600;
+    }
+}
+
+.copyright p {
+    margin-bottom: 0px !important;
+}
