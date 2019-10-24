@@ -17,9 +17,33 @@
           justify="center"
         >
         <div class="text-center">
-          <div class="titles-desktop">
-            <div class="display-3 slide-title">{{slide.title}}</div>
-            <div class="display-1 slide-subtitle">{{slide.subtitle}}</div>
+          <div class="titles-desktop" v-if="i === 0">
+            <div
+              class="display-3 slide-title"
+              data-aos="fade-up"
+              data-aos-duration="2000"
+              data-aos-delay="1000"
+              data-aos-once="true"
+            >
+              {{slide.title}}
+            </div>
+            <div
+              class="display-1 slide-subtitle"
+              data-aos="fade-up"
+              data-aos-duration="2000"
+              data-aos-delay="2000"
+              data-aos-once="true"
+            >{{slide.subtitle}}</div>
+          </div>
+          <div class="titles-desktop" v-else>
+            <div
+              class="display-3 slide-title"
+            >
+              {{slide.title}}
+            </div>
+            <div
+              class="display-1 slide-subtitle"
+            >{{slide.subtitle}}</div>
           </div>
           <div class="titles-mobile">
             <div class="slide-title">{{slide.title}}</div>

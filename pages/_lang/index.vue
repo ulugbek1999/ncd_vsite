@@ -1,178 +1,318 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
-  <v-card light="" class="page" width="90%">
-    <h2>{{ translation.about_company }}</h2>
-    <v-row class="about">
-      <v-col 
-        cols="12"
-        lg="5"
-        md="5"
-        class="text-right"
-      >
-        <v-img 
-          :src="require('~/static/pages/logo-sec.png')"
-          height="400px"
-          contain
-          position="right"
-        ></v-img>
-      </v-col>
-      <v-col 
-        cols="12"
-        lg="1"
-        md="1"
-      >
-        <v-item-group class="divider">
-
-        </v-item-group>
-      </v-col>
-      <v-col 
-        cols="12"
-        lg="5"
-        md="5"
-        class="text-left"
-        align-self="center"
-      >
-        <p v-html="about"></p>
-      </v-col>
-    </v-row>
-    <v-row justify="center">
-      <v-img 
-        :src="require('~/static/pages/image.png')"
-        max-width="95%"
-      ></v-img>
-    </v-row>
-    <v-img 
-      :src="require('~/static/icons/goal.png')"
-      max-width="40%"
-      contain
-      class="mx-auto mb-5"
-    ></v-img>
-    <v-row justify="center">
-      <div class="mss-wrapper mt-10 mb-10">
-        <p v-html="mss"></p>
-      </div>
-    </v-row>
-    <v-row class="mission mt-10" justify="center" align="center">
-      <v-col cols="12" lg="6" md="6">
-        <div class="mission-text">
-          <h2>{{ translation.our_mission }}</h2>
-          <p v-html="mission"></p>
+    <v-app>
+        <div class="slider-container">
+            <main-carousel :slides="slides"></main-carousel>
         </div>
-      </v-col>
-      <v-col cols="12" lg="6" md="6">
-        <v-img 
-          :src="require('~/static/icons/peace.png')"
-          max-width="40%"
-          class="mx-auto"
-        ></v-img>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" lg="6" md="6">
-        <v-img 
-          class="mx-auto mt-10"
-          :src="require('~/static/icons/win.png')"
-          max-width="40%"
-        ></v-img>
-      </v-col>
-      <v-col cols="12" lg="6" md="6">
-        <div class="collab-wrapper">
-          <h2>{{ translation.cooperation }}</h2>
-          <p v-html="cooperation"></p>
+        <div class="services-container">
+            <div class="display-2 text-center font-weight-bold header-main">Наши услуги</div>
+            <div class="header-split"></div>
+            <div class="services-list">
+                <widget-service 
+                  data-aos="fade-up"
+                  v-for="(service, i) in services"
+                  :key="'service-' + i"
+                  :service="service"
+                  class="widget-service"
+                  data-aos-mirror="true"
+                  data-aos-duration="3000"
+                  data-aos-once="true"
+                />
+            </div>
         </div>
-      </v-col>
-    </v-row>
-  </v-card>
-  </v-layout>
+        <div class="about-container">
+            <div
+              class="display-2 text-center font-weight-bold header-main"
+              data-aos="fade"
+              data-aos-mirror="true"
+              data-aos-duration="2000"
+              data-aos-once="false"
+            >
+              О компании
+            </div>
+            <div class="header-split"></div>
+            <div class="about-info-container mt-10" id="about">
+                <div class="about-info">
+                    <div class="about-align">
+                        <div class="display-1">National Center for Development</div>
+                        <p>
+                            <b>National Center for Development (NCD)</b> - быстроразвивающаяся компания, позволяющая эффективно использовать трудовые ресурсы мигрантов и направлять их в соответствии с их квалификацией в те страны и те организации, где они наилучшим образом смогут применить свои навыки и знания.
+                        </p>
+                        <p>
+                            Мы оказываем квалифицированную помощь трудовым мигрантам Республики Узбекистан и других стран Центральной Азии, желающим найти работу за рубежом, включая посильное содействие в процессе языковой адаптации в другой стране.
+                        </p>
+                            <v-btn
+                              tile
+                              color="#be993e"
+                              dark
+                              :to="{name: 'lang-about', params: {'lang': this.$route.params.lang}}"
+                            >
+                                Подробнее
+                            </v-btn>
+                        </nuxt-link>
+                    </div>
+                </div>
+                <div class="about-image" :style="'background-image: url(' + require('~/static/pages/about.jpg') + ')'"></div>
+            </div>
+            <div class="stats pt-10"  id="stats">
+                <div class="stats-wrapper text-center">
+                    <div class="stat">
+                        <h2>
+                            <animated-number
+                                :value="stats.employers"
+                                :formatValue="formatToNumber"
+                                :duration="2000"
+                            >
+                            </animated-number>
+                        </h2>
+                        <p>работодателей</p>
+                    </div>
+                    <div class="stat">
+                        <h2>
+                            <animated-number
+                                :value="stats.employees"
+                                :formatValue="formatToNumber"
+                                :duration="3000"
+                            >
+                            </animated-number>
+                        </h2>
+                        <p>аппликантов</p>
+                    </div>
+                    <div class="stat">
+                        <h2>
+                             <animated-number
+                                :value="stats.years"
+                                :formatValue="formatToNumber"
+                                :duration="2000"
+                            >
+                            </animated-number>
+                        </h2>
+                        <p>год опыта</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="partners-container mt-10 mb-10">
+            <div 
+                class="display-2 text-center font-weight-bold header-main"
+                data-aos="fade-right"
+                data-aos-duration="2000"
+                data-aos-mirror="true"
+                data-aos-once="true"
+            >
+                Партнеры
+            </div>
+            <div class="header-split"></div>
+            <partners-slick :partners="partners"/>
+        </div>
+        <div class="location mt-10 mb-10">
+            <div 
+                class="display-2 text-center font-weight-bold header-main"
+                data-aos="fade-right"
+                data-aos-mirror="true"
+                data-aos-once="true"
+                data-aos-duration="2000"
+            >
+                Контакты
+            </div>
+            <div class="header-split mb-10"></div>
+            <div class="google-maps-container mt-10">
+                <keep-alive>
+                    <component
+                      :is="'google-maps'"
+                    />
+                </keep-alive>
+            </component>
+            </div>
+            <v-container class="contact-form-container ">
+                <v-row>
+                    <v-col
+                      cols="12"
+                      lg="6"
+                      md="6"
+                      sm="12"
+                      xl="6"
+                    >
+                        <div class="inquiry">
+                            <div class="display-1">Вопросы</div>
+                            <p class="contact-info mt-5">По любым вопросам или рекомендациям, звоните на номер +7 707 020 25 49 или заполните следующую форму:</p>
+                        </div>
+                        <form class="contact-form mt-10">
+                            <v-text-field
+                                color="#be993e"
+                                label="Имя"
+                                filled
+                                required
+                            ></v-text-field>
+                            <v-text-field
+                                color="#be993e"
+                                label="Email"
+                                filled
+                                required
+                            ></v-text-field>
+                            <v-text-field
+                                color="#be993e"
+                                label="Тема"
+                                filled
+                                required
+                            ></v-text-field>
+                            <v-textarea
+                                filled
+                                name="input-7-4"
+                                id="message"
+                                style="resize: none;"
+                                label="Сообщение"
+                                auto-grow
+                                color="#be993e"
+                            ></v-textarea>
+                            <v-btn
+                              tile
+                              color="#be993e"
+                              dark
+                              style="float: right;"
+                            >Отправить</v-btn>
+                        </form>
+                    </v-col>
+                    <v-col
+                      cols="12"
+                      xl="6"
+                      lg="6"
+                      md="6"
+                      sm="12"
+                    >
+                        <div class="display-1">Главный офис</div>
+                        <p class="contact-info mt-5">г. Алматы, Мухамеджанова 9 </p>   <p class="contact-info mt-5">info@ncd.kz</p> 
+                        <p class="contact-info">+7 707 020 25 49</p>   <p class="contact-info">+7 778 683 83 28</p> 
+                        <div class="display-1 mt-10">Устройство на работу</div>
+                        <p class="contact-info mt-5">Чтобы устроиться на работу, отправьте своё резюме на электронный адрес info@ncd.kz</p>
+                    </v-col>
+                </v-row>
+            </v-container>
+        </div>
+    </v-app>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
-import { async } from 'q'
-import { mapState, mapGetters } from 'vuex'
-import { DICTIONARY } from '~/settings/settings.js'
+import MainCarousel from '~/components/MainCarousel'
+import WidgetService from '~/components/WidgetService'
+import PartnersSlick from '~/components/PartnersSlick'
+import GoogleMaps from '~/components/GoogleMaps'
+import AOS from 'aos'
+import AnimatedNumber from "animated-number-vue";
 
 export default {
-  components: {
-    Logo,
-    VuetifyLogo
-  },
-  head () {
-    return {
-      title: "Homepage"
+    layout: "main",
+    head() {
+        return {
+            title: "Homepage"
+        }
+    },
+    data () {
+        return {
+            slides: [
+                {
+                    image: require("~/static/pages/slider-1.jpg"),
+                    title: "Трудоустройство за рубежом",
+                    subtitle: "Поможем найти достойную работу"
+                },
+                {
+                    image: require("~/static/pages/slider-2.jpg"),
+                    title: "Содействие в получении виз",
+                    subtitle: "Консультации по визовым вопросам"
+                },
+                {
+                    image: require("~/static/pages/slider-3.jpg"),
+                    title: "Профиль соискателя",
+                    subtitle: "Личная карточка для оценки квалификации"
+                },
+            ],
+            services: [
+                {
+                    image: require("~/static/pages/database.jpg"),
+                    title: "База данных соискателей",
+                    content: "Структурированные данные и быстрый поиск"
+                },
+                {
+                    image: require("~/static/pages/profile.jpg"),
+                    title: "Профиль соискателя",
+                    content: "Личная карточка для оценки квалификации"
+                },
+                {
+                    image: require("~/static/pages/consulting.jpg"),
+                    title: "Бесплатная консультация",
+                    content: "Мы ответим на все интересующие вас вопросы"
+                },
+                {
+                    image: require("~/static/pages/visa.jpg"),
+                    title: "Содействие в получении виз",
+                    content: "Консультации по визовым вопросам"
+                },
+                {
+                    image: require("~/static/pages/departure.jpg"),
+                    title: "Подготовка к отъезду",
+                    content: "Финальные шаги"
+                },
+                {
+                    image: require("~/static/pages/education.jpg"),
+                    title: "Предоставления обучения",
+                    content: "Повышение квалификации и уровня владения языком"
+                }
+            ],
+            partners: [
+                {
+                    image: require("~/static/pages/interlingvo.jpg"),
+                    title: "Учебный центр Intelingvo"
+                },
+                {
+                    image: require("~/static/pages/biovela.png"),
+                    title: "BIOVELA-UTENOS MĖSA"
+                },
+                {
+                    image: require("~/static/pages/sobirovs.jpg"),
+                    title: "Sobirovs Law Firm"
+                }
+            ],
+            stats: {
+                employers: 0,
+                employees: 0,
+                years: 0,
+                animated: false
+            }
+        }
+    },
+    components: {
+        MainCarousel,
+        WidgetService,
+        PartnersSlick,
+        GoogleMaps,
+        AnimatedNumber        
+    },
+    computed: {},
+    mounted() {
+
+        var stats = document.querySelector("#stats")
+        window.addEventListener('scroll', () => {
+            if ((window.scrollY >= (stats.offsetTop - window.innerHeight)) && !this.stats.animated) {
+                this.stats = {
+                    employers: 19,
+                    employees: 431,
+                    years: 1,
+                    animated: true
+                }
+            }
+        })
+
+        // Rerender google maps component every time when this page is mounted
+    },
+    methods: {
+        formatToNumber(value) {
+            return value.toFixed(0)
+        }
+    },
+    watch: {
+
     }
-  },
-  computed: {
-    ...mapState({
-      cms: state => state.cmsData
-    }), 
-    language() {
-      return this.$route.params.lang
-    },
-    about() {
-      if (this.language == "ru") {
-        return this.cms.about[0].content_ru
-      }
-      else if (this.language == "en") {
-        return this.cms.about[0].content_en
-      }
-      else if (this.language == "uz") {
-        return this.cms.about[0].content_uz
-      }
-      else {
-        return this.cms.about[0].content_kz
-      }
-    },
-    mss () {
-      if (this.language == "ru") {
-        return this.cms.about[2].content_ru
-      }
-      else if (this.language == "en") {
-        return this.cms.about[2].content_en
-      }
-      else if (this.language == "uz") {
-        return this.cms.about[2].content_uz
-      }
-      else {
-        return this.cms.about[2].content_kz
-      }
-    },
-    mission () {
-      if (this.language == "ru") {
-        return this.cms.about[1].content_ru
-      }
-      else if (this.language == "en") {
-        return this.cms.about[1].content_en
-      }
-      else if (this.language == "uz") {
-        return this.cms.about[1].content_uz
-      }
-      else {
-        return this.cms.about[1].content_kz
-      }
-    },
-    cooperation () {
-      if (this.language == "ru") {
-        return this.cms.about[3].content_ru
-      }
-      else if (this.language == "en") {
-        return this.cms.about[3].content_en
-      }
-      else if (this.language == "uz") {
-        return this.cms.about[3].content_uz
-      }
-      else {
-        return this.cms.about[3].content_kz
-      }
-    },
-    translation() {
-      return DICTIONARY[this.language]
-    }
-  }
 }
 </script>
+
+<style lang="scss" scoped src="~/assets/components/others.scss"></style>
+

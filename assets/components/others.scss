@@ -3,6 +3,7 @@ $widgetColor: #f7f7f7;
 $widgetFontColor: #3d5975;
 $righteous: 'Righteous', cursive;
 $footerHeaderColor: #525252; 
+$mainColor: #be993e;
 
 .service-widget {
     width: 30%;
@@ -16,10 +17,10 @@ $footerHeaderColor: #525252;
 .service-info {
     background-color: $widgetColor;
     min-height: 131px;
+    color: #000;
 }
 
 .service-widget-header {
-    color: #000;
     line-height: 1.1em;
     font: {
         size: 17px;
@@ -71,7 +72,7 @@ $footerHeaderColor: #525252;
 }
 
 .google-maps {
-    width: 60%;
+    width: 100%;
 }
 
 .footer-header {
@@ -88,4 +89,18 @@ $footerHeaderColor: #525252;
 
 .newsletter-container {
     display: flex;
+}
+
+.widget-service {
+    transition: all 1.1s ease !important;
+}
+
+.widget-service:hover {
+    transform: scale(1.09) !important;
+    cursor: pointer;
+}
+
+.service-widget:hover .service-info {
+    background-color: $mainColor;
+    color: $widgetColor;
 }

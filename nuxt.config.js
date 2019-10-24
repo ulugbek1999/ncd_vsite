@@ -25,13 +25,6 @@ export default {
   */
   loading: {color: '#39b982'},
   /*
-  ** Global CSS
-  */
-  css: [
-  ],
-  /*
-  ** Plugins to load before mounting the App
-  */
   /*
   ** Nuxt.js dev-modules
   */
@@ -58,7 +51,7 @@ export default {
       light: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
+          primary: "#be993e",
           accent: colors.grey.darken3,
           secondary: colors.amber.darken3,
           info: colors.teal.lighten1,
@@ -76,5 +69,8 @@ export default {
     extend(config, ctx) {
       
     },
+    vendor: ["aos"]
   },
+  plugins: [{src: "~/plugins/aos", ssr: false}],
+  css: ["aos/dist/aos.css"]
 };
