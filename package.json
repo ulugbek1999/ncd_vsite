@@ -5,9 +5,9 @@
   "author": "Ulugbek",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
+    "dev": "HOST=127.0.0.1 nuxt",
     "build": "nuxt build",
-    "start": "nuxt start",
+    "start": "HOST=127.0.0.1 nuxt start",
     "generate": "nuxt generate",
     "test": "jest"
   },
@@ -23,7 +23,8 @@
     "nuxt-gmaps": "^1.0.4",
     "sass-loader": "^8.0.0",
     "vue-owl-carousel": "^2.0.3",
-    "vue-slick": "^1.1.15"
+    "vue-slick": "^1.1.15",
+    "vue2-google-maps": "^0.10.7"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.0.0",

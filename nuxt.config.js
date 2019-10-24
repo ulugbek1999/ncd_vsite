@@ -36,9 +36,9 @@ export default {
   */
   modules: [
     '@nuxtjs/axios',
-    ["nuxt-gmaps", {
-      key: "AIzaSyCkZeTnnzUkywiK6MPqHJZkQvAi7BkEmsM"
-    }]
+    // ["nuxt-gmaps", {
+    //   key: "AIzaSyCkZeTnnzUkywiK6MPqHJZkQvAi7BkEmsM"
+    // }]
   ],
   /*
   ** vuetify module configuration
@@ -69,8 +69,11 @@ export default {
     extend(config, ctx) {
       
     },
-    vendor: ["aos"]
+    vendor: ["aos", "vue2-google-maps"]
   },
-  plugins: [{src: "~/plugins/aos", ssr: false}],
+  plugins: [
+    {src: "~/plugins/aos", ssr: false},
+    {src: "~/plugins/vue2-google-maps.js" }
+  ],
   css: ["aos/dist/aos.css"]
 };
