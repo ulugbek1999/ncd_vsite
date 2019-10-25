@@ -108,7 +108,7 @@
             <div class="header-split"></div>
             <partners-slick :partners="partners"/>
         </div>
-        <div class="location mt-10 mb-10">
+        <div class="location mt-10 mb-10" id="contacts">
             <div 
                 class="display-2 text-center font-weight-bold header-main"
                 data-aos="fade-right"

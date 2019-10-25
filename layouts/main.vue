@@ -57,7 +57,7 @@ export default {
                 },
                 {
                     name: "Контакты",
-                    link: ""
+                    link: this.currentLocation + "#contacts"
                 }
                 ]
             })
