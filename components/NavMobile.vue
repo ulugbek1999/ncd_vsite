@@ -42,7 +42,7 @@
                 <div class="close-btn" @click="sideMenuToggle">&times;</div>
                 <div class="nav-list">
                     <ul>
-                        <li v-for="(l, i) in navItems" :key="'nav-mobile-item-' + i">{{ l.name }}</li>
+                        <nuxt-link :to="l.link" tag="li" @click.native="sideMenuToggle" v-for="(l, i) in navItems" :key="'nav-mobile-item-' + i">{{ l.name }}</nuxt-link>
                     </ul>
                 </div>
             </div>

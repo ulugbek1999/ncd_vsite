@@ -3,20 +3,24 @@
         <div class="slider-container">
             <main-carousel :slides="slides"></main-carousel>
         </div>
-        <div class="services-container">
+        <div class="services-container" id="services">
             <div class="display-2 text-center font-weight-bold header-main">Наши услуги</div>
             <div class="header-split"></div>
             <div class="services-list">
-                <widget-service 
-                  data-aos="fade-up"
-                  v-for="(service, i) in services"
-                  :key="'service-' + i"
-                  :service="service"
-                  class="widget-service"
-                  data-aos-mirror="true"
-                  data-aos-duration="3000"
-                  data-aos-once="true"
-                />
+                <div
+                    v-for="(service, i) in services"
+                    :key="'service-' + i"
+                    class="service-widget"
+                    data-aos="fade-up"
+                    data-aos-mirror="true"
+                    data-aos-duration="3000"
+                    data-aos-once="true"
+                >
+                    <div class="service-occupier" @click="navigateToService" :data-index="i"></div>
+                    <widget-service
+                      :service="service"
+                    />
+                </div>
             </div>
         </div>
         <div class="about-container">
@@ -198,6 +202,7 @@ import PartnersSlick from '~/components/PartnersSlick'
 import GoogleMaps from '~/components/GoogleMaps'
 import AOS from 'aos'
 import AnimatedNumber from "animated-number-vue";
+import {mapState} from "vuex";
 
 export default {
     layout: "main",
@@ -224,38 +229,6 @@ export default {
                     title: "Профиль соискателя",
                     subtitle: "Личная карточка для оценки квалификации"
                 },
-            ],
-            services: [
-                {
-                    image: require("~/static/pages/database.jpg"),
-                    title: "База данных соискателей",
-                    content: "Структурированные данные и быстрый поиск"
-                },
-                {
-                    image: require("~/static/pages/profile.jpg"),
-                    title: "Профиль соискателя",
-                    content: "Личная карточка для оценки квалификации"
-                },
-                {
-                    image: require("~/static/pages/consulting.jpg"),
-                    title: "Бесплатная консультация",
-                    content: "Мы ответим на все интересующие вас вопросы"
-                },
-                {
-                    image: require("~/static/pages/visa.jpg"),
-                    title: "Содействие в получении виз",
-                    content: "Консультации по визовым вопросам"
-                },
-                {
-                    image: require("~/static/pages/departure.jpg"),
-                    title: "Подготовка к отъезду",
-                    content: "Финальные шаги"
-                },
-                {
-                    image: require("~/static/pages/education.jpg"),
-                    title: "Предоставления обучения",
-                    content: "Повышение квалификации и уровня владения языком"
-                }
             ],
             partners: [
                 {
@@ -286,7 +259,11 @@ export default {
         GoogleMaps,
         AnimatedNumber        
     },
-    computed: {},
+    computed: {
+        ...mapState({
+            services: state => state.services
+        })
+    },
     mounted() {
 
         var stats = document.querySelector("#stats")
@@ -306,6 +283,12 @@ export default {
     methods: {
         formatToNumber(value) {
             return value.toFixed(0)
+        },
+        navigateToService(event) {
+            this.$router.push({
+                name: 'lang-services-s',
+                params: {s: event.target.dataset.index}
+            })
         }
     },
     watch: {

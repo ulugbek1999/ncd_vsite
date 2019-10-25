@@ -26,13 +26,31 @@
               :class="'about-more-' + index"
               class="about-page__item"
             >
-                <v-row v-if="index % 2 != 0">
-                    <v-col
-                      cols="12"
-                      xl="7"
-                      lg="7"
-                      md="7"
-                      sm="7"
+                <div v-if="index % 2 != 0" style="clear: both; display: table">
+                    <div
+                      class="about-item__image" v-if="index % 2 != 0"
+                      data-aos="fade-up"
+                      data-aos-duration="2000"
+                      data-aos-once="true"
+                    >
+                        <div class="about-item__imagebg"></div>
+                        <div class="about-item__image-on">
+                            <img
+                                v-if="about.image == null"
+                                src="https://uzncd.com/media/cache/59/e3/59e3f04eaafc07d6879d2c6256826ad1.jpg"
+                                alt="image"
+                                width="480"
+                            >
+                            <img
+                                v-else
+                                :src="cms + about.image"
+                                :alt="about.title_en"
+                                width="480"
+                            >
+                        </div>
+                    </div>
+                    <div
+                      
                       v-if="index % 2 != 0"
                     >
                         <div class="display-2 mb-5 header-main" v-if="lang == 'en'">{{ about.title_en }}</div>
@@ -43,41 +61,18 @@
                         <span v-if="lang == 'ru'" v-html="about.content_ru"></span>
                         <span v-if="lang == 'kz'" v-html="about.content_kz"></span>
                         <span v-if="lang == 'uz'" v-html="about.content_uz"></span>
-                    </v-col>
-                    <v-col cols="12" xl="2" lg="2" md="2" sm="2"></v-col>
-                    <v-col
-                      cols="12"
-                      xl="3"
-                      lg="3"
-                      md="3"
-                      sm="3"
-                      v-if="index % 2 != 0"
-                    >
-                        <div class="about-item__image">
-                            <div class="about-item__imagebg"></div>
-                            <div class="about-item__image-on">
-                                <img
-                                    v-if="about.image == null"
-                                    src="https://uzncd.com/media/cache/59/e3/59e3f04eaafc07d6879d2c6256826ad1.jpg"
-                                    alt="image"
-                                    width="480"
-                                    height="350"
-                                >
-                                <img
-                                    v-else
-                                    :src="cms + about.image"
-                                    :alt="about.title_en"
-                                    width="480"
-                                    height="350"
-                                >
-                            </div>
-                        </div>
-                    </v-col>
-                </v-row>
+                    </div>
+                    
+                </div>
                 <div
                     v-if="index % 2 == 0"
                 >
-                    <div class="about-item__image">
+                    <div
+                      class="about-item__image"
+                      data-aos="fade-up"
+                      data-aos-duration="2000"
+                      data-aos-once="true"
+                    >
                         <div class="about-item__imagebg"></div>
                         <div class="about-item__image-on">
                             <img
@@ -85,14 +80,12 @@
                                 src="https://uzncd.com/media/cache/59/e3/59e3f04eaafc07d6879d2c6256826ad1.jpg"
                                 alt="image"
                                 width="480"
-                                height="350"
                             >
                             <img
                                 v-else
                                 :src="cms + about.image"
                                 :alt="about.title_en"
                                 width="480"
-                                height="350"
                             >
                         </div>
                     </div>

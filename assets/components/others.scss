@@ -12,6 +12,16 @@ $mainColor: #be993e;
     border-radius: 5px !important;
     box-shadow: 0 0 10px lightgray;
     margin-bottom: 30px;
+    position: relative;
+}
+
+.service-occupier {
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 
 .service-info {
@@ -91,11 +101,11 @@ $mainColor: #be993e;
     display: flex;
 }
 
-.widget-service {
+.service-widget {
     transition: all 1.1s ease !important;
 }
 
-.widget-service:hover {
+.service-widget:hover {
     transform: scale(1.09) !important;
     cursor: pointer;
 }

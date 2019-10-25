@@ -37,7 +37,7 @@ export default {
             this.links = [
                 {
                     name: "Услуги",
-                    link: ""
+                    link: this.currentLocation + "#services"
                 },
                 {
                     name: "О компании",

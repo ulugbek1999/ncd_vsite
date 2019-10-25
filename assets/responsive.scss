@@ -59,6 +59,11 @@
     .stats-wrapper {
         width: 90%;
     }
+
+    .about-more-container .header-main {
+        font-weight: unset;
+        font-size: 2em !important;
+    }
 }
 // Between 768px and 996px
 @media screen and (max-width: 996px) {
@@ -89,6 +94,12 @@
     }
     .service-widget {
         width: 45% !important;
+    }
+    .about-item__image {
+        float: unset;
+    }
+    .about-page__item:nth-child(2n) .about-item__image {
+        float: unset;
     }
 }
 
@@ -126,6 +137,19 @@
     }
     .social-media-icons {
         width: 90% !important;
+    }
+    .about-item__image {
+        width: 100%;
+        height: unset !important;
+    }
+    .about-item__imagebg {
+        display: none;
+    }
+    .about-item__image-on {
+        margin: 0 auto;
+        width: 100%;
+        height: auto !important;
+        position: static;
     }
 }
 

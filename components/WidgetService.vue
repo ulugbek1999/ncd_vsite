@@ -1,5 +1,5 @@
 <template>
-    <div class="service-widget">
+    <div>
         <v-img 
           :src="service.image"
           height="300px"
