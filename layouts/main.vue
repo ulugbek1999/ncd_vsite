@@ -37,27 +37,33 @@ export default {
             this.links = [
                 {
                     name: "Услуги",
-                    link: this.currentLocation + "#services"
+                    link: this.currentLocation + "#services",
+                    scrollable: true
                 },
                 {
                     name: "О компании",
-                    link: this.currentLocation + "#about"
+                    link: this.currentLocation + "#about",
+                    scrollable: true
                 },
                 {
                     name: "Вакансии",
-                    link: ""
+                    link: this.$router.resolve({name: "lang-vacancies"}).href,
+                    scrollable: false
                 },
                 {
                     name: "Документы",
-                    link: ""
+                    link: "",
+                    scrollable: false
                 },
                 {
                     name: "Вопросы",
-                    link: ""
+                    link: "",
+                    scrollable: false
                 },
                 {
                     name: "Контакты",
-                    link: this.currentLocation + "#contacts"
+                    link: this.currentLocation + "#contacts",
+                    scrollable: true
                 }
                 ]
             })

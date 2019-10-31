@@ -430,19 +430,19 @@ h2 {
 
 // about.vue
 
-.about-page__item {
+.detail-page__item {
     margin: 30px 0 0 0;
     overflow: hidden;
 }
 
-.about-item__image {
+.detail-item__image {
     width: 580px;
     height: 420px;
     position: relative;
     float: left;
 }
 
-.about-item__imagebg {
+.detail-item__imagebg {
     width: 480px;
     height: 350px;
     background: $mainColor;
@@ -451,7 +451,7 @@ h2 {
     left: 0;
 }
 
-.about-item__image-on {
+.detail-item__image-on {
     width: 480px;
     background: #ffffff;
     position: absolute;
@@ -461,28 +461,42 @@ h2 {
     border-radius: 2px;
 }
 
-.about-page__item:nth-child(2n) .about-item__image {
+.detail-page__item:nth-child(2n) .detail-item__image {
     float: right;
 }
 
-.about-page__item:nth-child(2n) .about-item__image .about-item__imagebg {
+.detail-page__item:nth-child(2n) .detail-item__image .detail-item__imagebg {
     right: 0;
     bottom: 0;
     top: auto;
     left: auto;
 }
 
-.about-page__item:nth-child(2n) .about-item__image-on {
+.detail-page__item:nth-child(2n) .detail-item__image-on {
     bottom: auto;
     right: auto;
     left: 30px;
     top: 20px;
 }
 
-.about-page__item .about-item__image-on img {
+.detail-page__item .detail-item__image-on img {
     width: 100%;
 }
 
 .about-more-container .header-main {
     font-weight: bold !important;
+}
+
+.mobile-s {
+    display: none !important;
+}
+
+.common-info {
+    font-size: 1.25rem;
+    letter-spacing: 0.0125em !important;
+    font-family: "Roboto", sans-serif !important;
+}
+
+hr {
+    color: rgba(173, 173, 173, 0.342)
 }

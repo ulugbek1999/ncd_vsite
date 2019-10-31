@@ -24,17 +24,17 @@
               v-for="(about, index) in abouts"
               :key="'about-more-' + index"
               :class="'about-more-' + index"
-              class="about-page__item"
+              class="detail-page__item"
             >
                 <div v-if="index % 2 != 0" style="clear: both; display: table">
                     <div
-                      class="about-item__image" v-if="index % 2 != 0"
+                      class="detail-item__image" v-if="index % 2 != 0"
                       data-aos="fade-up"
                       data-aos-duration="2000"
                       data-aos-once="true"
                     >
-                        <div class="about-item__imagebg"></div>
-                        <div class="about-item__image-on">
+                        <div class="detail-item__imagebg"></div>
+                        <div class="detail-item__image-on">
                             <img
                                 v-if="about.image == null"
                                 src="https://uzncd.com/media/cache/59/e3/59e3f04eaafc07d6879d2c6256826ad1.jpg"
@@ -53,10 +53,14 @@
                       
                       v-if="index % 2 != 0"
                     >
-                        <div class="display-2 mb-5 header-main" v-if="lang == 'en'">{{ about.title_en }}</div>
-                        <div class="display-2 mb-5 header-main" v-if="lang == 'ru'">{{ about.title_ru }}</div>
-                        <div class="display-2 mb-5 header-main" v-if="lang == 'kz'">{{ about.title_kz }}</div>
-                        <div class="display-2 mb-5 header-main" v-if="lang == 'uz'">{{ about.title_uz }}</div>
+                        <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'en'">{{ about.title_en }}</div>
+                        <div class="title mt-5 mobile-s mb-5 header-main" v-if="lang == 'en'">{{ about.title_en }}</div>
+                        <div class="display-2 mb-5 desktop-s header-main" v-if="lang == 'ru'">{{ about.title_ru }}</div>
+                        <div class="title mt-5 mobile-s mb-5 header-main" v-if="lang == 'ru'">{{ about.title_ru }}</div>
+                        <div class="display-2 mb-5 desktop-s header-main" v-if="lang == 'kz'">{{ about.title_kz }}</div>
+                        <div class="title mt-5 mobile-s mb-5 header-main" v-if="lang == 'kz'">{{ about.title_kz }}</div>
+                        <div class="display-2 mb-5 desktop-s header-main" v-if="lang == 'uz'">{{ about.title_uz }}</div>
+                        <div class="title mt-5 mobile-s mb-5 header-main" v-if="lang == 'uz'">{{ about.title_uz }}</div>
                         <span v-if="lang == 'en'" v-html="about.content_en"></span>
                         <span v-if="lang == 'ru'" v-html="about.content_ru"></span>
                         <span v-if="lang == 'kz'" v-html="about.content_kz"></span>
@@ -68,13 +72,13 @@
                     v-if="index % 2 == 0"
                 >
                     <div
-                      class="about-item__image"
+                      class="detail-item__image"
                       data-aos="fade-up"
                       data-aos-duration="2000"
                       data-aos-once="true"
                     >
-                        <div class="about-item__imagebg"></div>
-                        <div class="about-item__image-on">
+                        <div class="detail-item__imagebg"></div>
+                        <div class="detail-item__image-on">
                             <img
                                 v-if="about.image == null"
                                 src="https://uzncd.com/media/cache/59/e3/59e3f04eaafc07d6879d2c6256826ad1.jpg"
@@ -93,10 +97,13 @@
                 <div
                   v-if="index % 2 == 0"
                 >
-                    <div class="display-2 mb-5 header-main" v-if="lang == 'en'">{{ about.title_en }}</div>
-                    <div class="display-2 mb-5 header-main" v-if="lang == 'ru'">{{ about.title_ru }}</div>
-                    <div class="display-2 mb-5 header-main" v-if="lang == 'kz'">{{ about.title_kz }}</div>
-                    <div class="display-2 mb-5 header-main" v-if="lang == 'uz'">{{ about.title_uz }}</div>
+                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'en'">{{ about.title_en }}</div>
+                    <div class="display-2 title mt-5 mobile-s mb-5 header-main" v-if="lang == 'en'">{{ about.title_en }}</div>
+                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'ru'">{{ about.title_ru }}</div>
+                    <div class="display-2 title mt-5 mobile-s mb-5 header-main" v-if="lang == 'ru'">{{ about.title_ru }}</div>
+                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'kz'">{{ about.title_kz }}</div>
+                    <div class="display-2 title mt-5 mobile-s mb-5 header-main" v-if="lang == 'kz'">{{ about.title_kz }}</div>
+                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'uz'">{{ about.title_uz }}</div>
                     <div v-if="lang == 'en'" v-html="about.content_en"></div>
                     <div v-if="lang == 'ru'" v-html="about.content_ru"></div>
                     <div v-if="lang == 'kz'" v-html="about.content_kz"></div>

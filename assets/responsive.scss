@@ -13,6 +13,10 @@
         background-color: #eeecec;
     }
 
+    .vacancy-more-image {
+        float: unset !important;
+        margin-bottom: 20px;
+    }
     .about-align {
         margin-top: 20px;
         padding-top: 45px;
@@ -95,10 +99,13 @@
     .service-widget {
         width: 45% !important;
     }
-    .about-item__image {
+    .vacancy-widget {
+        width: 45% !important;
+    }
+    .detail-item__image {
         float: unset;
     }
-    .about-page__item:nth-child(2n) .about-item__image {
+    .detail-page__item:nth-child(2n) .detail-item__image {
         float: unset;
     }
 }
@@ -120,6 +127,9 @@
     .service-widget {
         width: 100% !important;
     }
+    .vacancy-widget {
+        width: 80% !important;
+    }
     .about-info-container {
         height: 700px;
     }
@@ -138,18 +148,22 @@
     .social-media-icons {
         width: 90% !important;
     }
-    .about-item__image {
+    .detail-item__image {
         width: 100%;
         height: unset !important;
     }
-    .about-item__imagebg {
+    .detail-item__imagebg {
         display: none;
     }
-    .about-item__image-on {
+    .detail-item__image-on {
         margin: 0 auto;
         width: 100%;
         height: auto !important;
         position: static;
+    }
+
+    .vacancy-more-image {
+        width: 100%;
     }
 }
 
@@ -188,5 +202,17 @@
     }
     .copyright p:last-of-type {
         padding: unset;
+    }
+
+    .mobile-s {
+        display: block !important;
+    }
+
+    .desktop-s {
+        display: none !important;
+    }
+
+    .vacancy-widget {
+        width: 100% !important;
     }
 }

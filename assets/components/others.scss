@@ -114,3 +114,15 @@ $mainColor: #be993e;
     background-color: $mainColor;
     color: $widgetColor;
 }
+
+.vacancy-widget {
+    @extend .service-widget;
+}
+
+.vacancy-widget:hover {
+    cursor: unset;
+}
+
+.vacancy-more-image {
+    float: right;
+}

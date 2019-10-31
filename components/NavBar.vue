@@ -17,6 +17,7 @@
                     :to="link.link"
                     :data-url="link.link"
                     @click.native="navigateTo"
+                    :data-scroll="link.scrollable"
                 >
                     {{ link.name }}
                 </nuxt-link>
@@ -40,7 +41,9 @@ export default {
     },
     methods: {
         navigateTo(event) {
-            location.href = event.target.dataset.url
+            if (event.target.dataset.scroll == "true") {
+                location.href = event.target.dataset.url
+            }
         }
     }
 }

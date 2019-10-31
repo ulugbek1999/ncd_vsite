@@ -108,13 +108,14 @@
             <div class="header-split"></div>
             <partners-slick :partners="partners"/>
         </div>
-        <div class="location mt-10 mb-10" id="contacts">
+        <div class="location mt-10 mb-10">
             <div 
                 class="display-2 text-center font-weight-bold header-main"
                 data-aos="fade-right"
                 data-aos-mirror="true"
                 data-aos-once="true"
                 data-aos-duration="2000"
+                id="contacts"
             >
                 Контакты
             </div>
