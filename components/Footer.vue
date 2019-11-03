@@ -18,7 +18,7 @@
                 >
                     <p><div class="footer-header">НАВИГАЦИЯ</div></p>
                     <nuxt-link
-                      class="footer-secondary"
+                      class="footer-secondary footer-nav-link"
                       :to="currentLocation + '#slider'"
                       tag="p"
                       :data-url="currentLocation + '#slider'"
@@ -27,14 +27,14 @@
                       Главная
                     </nuxt-link>
                     <nuxt-link
-                      class="footer-secondary"
+                      class="footer-secondary footer-nav-link"
                       :to="currentLocation + '#about'"
                       tag="p"
                       :data-url="currentLocation + '#about'"
                       @click.native="navigateTo"
                     >О нас</nuxt-link>
                     <nuxt-link
-                      class="footer-secondary"
+                      class="footer-secondary footer-nav-link"
                       :to="currentLocation + '#services'"
                       tag="p"
                       :data-url="currentLocation + '#services'"

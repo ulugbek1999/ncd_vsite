@@ -14,7 +14,8 @@
                     data-aos="fade-up"
                     data-aos-mirror="true"
                     data-aos-duration="3000"
-                    data-aos-once="true"
+                    data-aos-once="false"
+                    v-if="service.status"
                 >
                     <div class="service-occupier" @click="navigateToService" :data-index="i"></div>
                     <widget-service
@@ -167,6 +168,8 @@
                                 label="Тема"
                                 filled
                                 v-model="query.subject"
+                                :rules="rules.subject"
+                                required
                             ></v-text-field>
                             <v-textarea
                                 filled
@@ -299,11 +302,10 @@ export default {
     },
     computed: {
         ...mapState({
-            services: state => state.services
+            services: state => state.cmsData.service
         })
     },
     mounted() {
-
         var stats = document.querySelector("#stats")
         window.addEventListener('scroll', () => {
             if ((window.scrollY >= (stats.offsetTop - window.innerHeight)) && !this.stats.animated) {

@@ -26,24 +26,24 @@
                     <div class="detail-item__imagebg"></div>
                     <div class="detail-item__image-on">
                         <img
-                            :src="services[index].image"
+                            :src="cms + services[index].image_new"
                             width="480"
                         >
                     </div>
                 </div>
                     <div>
-                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'en'">{{ services[index].title }}</div>
-                    <div class="title mt-5 mobile-s mb-5 header-main" v-if="lang == 'en'">{{ services[index].title }}</div>
-                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'ru'">{{ services[index].title }}</div>
-                    <div class="title mt-5 mb-5 mobile-s header-main" v-if="lang == 'ru'">{{ services[index].title }}</div>
-                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'kz'">{{ services[index].title }}</div>
-                    <div class="title mt-5 mobile-s mb-5 header-main" v-if="lang == 'kz'">{{ services[index].title }}</div>
-                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'uz'">{{ services[index].title }}</div>
-                    <div class="title mt-5 mobile-s mb-5 header-main" v-if="lang == 'uz'">{{ services[index].title }}</div>
-                    <span v-if="lang == 'en'" v-html="cmsData.service[index].content_en"></span>
-                    <span v-if="lang == 'ru'" v-html="cms.service[index].content_ru"></span>
-                    <span v-if="lang == 'kz'" v-html="cms.service[index].content_kz"></span>
-                    <span v-if="lang == 'uz'" v-html="cms.service[index].content_uz"></span>
+                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'en'">{{ services[index].title_en }}</div>
+                    <div class="title mt-5 mobile-s mb-5 header-main" v-if="lang == 'en'">{{ services[index].title_en }}</div>
+                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'ru'">{{ services[index].title_ru }}</div>
+                    <div class="title mt-5 mb-5 mobile-s header-main" v-if="lang == 'ru'">{{ services[index].title_ru }}</div>
+                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'kz'">{{ services[index].title_kz }}</div>
+                    <div class="title mt-5 mobile-s mb-5 header-main" v-if="lang == 'kz'">{{ services[index].title_kz }}</div>
+                    <div class="display-2 desktop-s mb-5 header-main" v-if="lang == 'uz'">{{ services[index].title_uz }}</div>
+                    <div class="title mt-5 mobile-s mb-5 header-main" v-if="lang == 'uz'">{{ services[index].title_uz }}</div>
+                    <span v-if="lang == 'en'" v-html="services[index].content_en"></span>
+                    <span v-if="lang == 'ru'" v-html="services[index].content_ru"></span>
+                    <span v-if="lang == 'kz'" v-html="services[index].content_kz"></span>
+                    <span v-if="lang == 'uz'" v-html="services[index].content_uz"></span>
                 </div>
             </div>
         </v-container>
@@ -52,6 +52,7 @@
 
 <script>
 import {mapState} from 'vuex'
+import {CMS_DOMAIN} from "~/settings/settings"
 export default {
     layout: 'main',
     head() {
@@ -66,11 +67,13 @@ export default {
     },
     computed: {
         ...mapState({
-            services: state => state.services,
-            cms: state => state.cmsData
+            services: state => state.cmsData.service
         }),
         index() {
             return this.$route.params.s
+        },
+        cms() {
+            return CMS_DOMAIN
         }
     }
 }

@@ -37,6 +37,7 @@
                   tile
                   color="#be993e"
                   dark
+                  @click="apply"
                 >
                     Подать заявку
                 </v-btn>
@@ -47,7 +48,7 @@
 
 <script>
 import {mapState} from "vuex"
-import {CMS_DOMAIN} from "~/settings/settings"
+import {CMS_DOMAIN, eventBus} from "~/settings/settings"
 export default {
     layout: "main",
     head() {
@@ -142,6 +143,11 @@ export default {
             else if(this.lang == "uz") {
                 return this.vacancies[this.index].description_uz
             }
+        }
+    },
+    methods: {
+        apply() {
+            eventBus.$emit('alert-error', "This function is not available yet!")
         }
     },
     mounted() {
