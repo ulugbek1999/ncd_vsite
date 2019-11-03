@@ -16,7 +16,7 @@
                 Вакансии
             </div>
         </v-img>
-        <v-container style="width: 70%">
+        <v-container style="width: 90%">
             <section class="vacancies-section text-center">
                 <div class="display-1 header-main">Список вакансий</div>
                 <div class="d-flex flex-wrap vacancy-list justify-space-around" v-if="Math.floor(paginatedData.length / 3) >= 1">

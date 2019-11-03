@@ -18,6 +18,7 @@
                     :data-url="link.link"
                     @click.native="navigateTo"
                     :data-scroll="link.scrollable"
+                    :data-overlay="link.overlay"
                 >
                     {{ link.name }}
                 </nuxt-link>
@@ -27,6 +28,7 @@
 </template>
 
 <script>
+import {eventBus} from "~/settings/settings"
 export default {
     props: {
         links: {
@@ -41,6 +43,10 @@ export default {
     },
     methods: {
         navigateTo(event) {
+            if (event.target.dataset.overlay) {
+                event.preventDefault()
+                eventBus.$emit('overlay', true)
+            }
             if (event.target.dataset.scroll == "true") {
                 location.href = event.target.dataset.url
             }

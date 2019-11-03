@@ -1,6 +1,6 @@
 <template>
     <v-app>
-        <div class="slider-container">
+        <div class="slider-container" id="slider">
             <main-carousel :slides="slides"></main-carousel>
         </div>
         <div class="services-container" id="services">
@@ -141,24 +141,32 @@
                             <div class="display-1">Вопросы</div>
                             <p class="contact-info mt-5">По любым вопросам или рекомендациям, звоните на номер +7 707 020 25 49 или заполните следующую форму:</p>
                         </div>
-                        <form class="contact-form mt-10">
+                        <v-form 
+                          class="contact-form mt-10"
+                          v-model="validQuery"
+                          ref="queryForm"
+                        >
                             <v-text-field
                                 color="#be993e"
                                 label="Имя"
                                 filled
                                 required
+                                v-model="query.name"
+                                :rules="rules.name"
                             ></v-text-field>
                             <v-text-field
                                 color="#be993e"
                                 label="Email"
                                 filled
                                 required
+                                :rules="rules.email"
+                                v-model="query.email"
                             ></v-text-field>
                             <v-text-field
                                 color="#be993e"
                                 label="Тема"
                                 filled
-                                required
+                                v-model="query.subject"
                             ></v-text-field>
                             <v-textarea
                                 filled
@@ -168,14 +176,18 @@
                                 label="Сообщение"
                                 auto-grow
                                 color="#be993e"
+                                required
+                                :rules="rules.message"
+                                v-model="query.message"
                             ></v-textarea>
                             <v-btn
                               tile
                               color="#be993e"
                               dark
                               style="float: right;"
+                              @click="sendQuery"
                             >Отправить</v-btn>
-                        </form>
+                        </v-form>
                     </v-col>
                     <v-col
                       cols="12"
@@ -204,6 +216,8 @@ import GoogleMaps from '~/components/GoogleMaps'
 import AOS from 'aos'
 import AnimatedNumber from "animated-number-vue";
 import {mapState} from "vuex";
+import {eventBus} from "~/settings/settings"
+import vs from "~/services/VisitorService"
 
 export default {
     layout: "main",
@@ -250,7 +264,30 @@ export default {
                 employees: 0,
                 years: 0,
                 animated: false
-            }
+            },
+            query: {
+                name: "",
+                email: "",
+                subject: "",
+                message: "",
+                location: ""
+            },
+            rules: {
+                name: [
+                    v => !!v || 'Name is required',
+                ],
+                email: [
+                    v => !!v || 'E-mail is required',
+                    v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+                ],
+                subject: [
+                    v => !!v || 'Subject is required',
+                ],
+                message: [
+                    v => !!v || 'Message is required',
+                ]
+            },
+            validQuery: true
         }
     },
     components: {
@@ -290,6 +327,36 @@ export default {
                 name: 'lang-services-s',
                 params: {s: event.target.dataset.index}
             })
+        },
+        sendQuery() {
+            if (!this.validQuery) {
+                eventBus.$emit("alert-error", "Please, fill all the required fields correctly!")
+                return
+            }
+            this.query.location = location.host
+            this.$nuxt.$loading.start()
+            vs.clientRequest(this.query).then((response) => {
+                eventBus.$emit("alert-success", response.data)
+                this.query = {
+                    name: "",
+                    email: "",
+                    subject: "",
+                    message: "",
+                    location: ""
+                }
+                this.resetValidation()
+              }).catch(error => {
+                  if (error.response.status == 500) {
+                      eventBus.$emit("alert-error", "Something went wrong!")
+                      return
+                  }
+                  eventBus.$emit("alert-error", error.response.data)
+              }).finally(() => {
+                  this.$nuxt.$loading.finish()
+              })
+        },
+        resetValidation () {
+            this.$refs.queryForm.resetValidation()
         }
     },
     watch: {

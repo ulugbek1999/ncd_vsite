@@ -43,7 +43,7 @@ export const state = () => ({
 export const mutations = {
   SET_CMS_DATA(state, cmsData) {
     state.cmsData = cmsData;
-  }
+  },
 };
 
 export const actions = {

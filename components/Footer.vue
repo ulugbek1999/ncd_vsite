@@ -17,9 +17,30 @@
                   class="footer-navigation"
                 >
                     <p><div class="footer-header">НАВИГАЦИЯ</div></p>
-                    <p class="footer-secondary">Главная</p>
-                    <p class="footer-secondary">О нас</p>
-                    <p class="footer-secondary">Наши услуги</p>
+                    <nuxt-link
+                      class="footer-secondary"
+                      :to="currentLocation + '#slider'"
+                      tag="p"
+                      :data-url="currentLocation + '#slider'"
+                      @click.native="navigateTo"
+                    >
+                      Главная
+                    </nuxt-link>
+                    <nuxt-link
+                      class="footer-secondary"
+                      :to="currentLocation + '#about'"
+                      tag="p"
+                      :data-url="currentLocation + '#about'"
+                      @click.native="navigateTo"
+                    >О нас</nuxt-link>
+                    <nuxt-link
+                      class="footer-secondary"
+                      :to="currentLocation + '#services'"
+                      tag="p"
+                      :data-url="currentLocation + '#services'"
+                      @click.native="navigateTo"
+                    >Услуги</nuxt-link>
+
                 </v-col>
                 <v-col
                   cols="12"
@@ -42,18 +63,18 @@
                         <p><div class="footer-header">ПОДПИШИТЕСЬ НА РАССЫЛКУ</div></p>
                         <div class="newsletter-container">
                             <v-text-field
-                                label="Ваш Email"
-                                required
-                                rounded
-                                filled
-                                dense
-                                light
-                                full-width
-                                background-color="#fff"
-                                width="200px"
-                                color="#000"
-                                class="mt-2"
-                                
+                              label="Ваш Email"
+                              required
+                              rounded
+                              filled
+                              dense
+                              light
+                              full-width
+                              background-color="#fff"
+                              width="200px"
+                              color="#000"
+                              class="mt-2"
+                              v-model="email"
                             ></v-text-field>
                             <div class="ml-5 pencil">
                                 <v-btn 
@@ -62,6 +83,7 @@
                                 dark
                                 large
                                 color="cyan"
+                                @click="sendMailingQuery"
                                 >
                                     <v-icon dark>mdi-pencil</v-icon dark>
                                 </v-btn>
@@ -71,6 +93,7 @@
                               outlined
                               color="#999"
                               rounded
+                              @click="sendMailingQuery"
                             >
                               Подписаться
                             </v-btn>
@@ -96,8 +119,51 @@
 </template>
 
 <script>
+import vs from "~/services/VisitorService"
+import {eventBus} from "~/settings/settings"
 export default {
-    
+  data() {
+    return {
+      email: "",
+      lang: this.$route.params.lang
+    }
+  },
+  props: {
+    currentLocation: String
+  },
+  methods: {
+    sendMailingQuery() {
+      if (!(/.+@.+\..+/.test(this.email))) {
+        eventBus.$emit("alert-error", "Please, write the email in the correct format!")
+        return
+      }
+      else {
+        this.$nuxt.$loading.start()
+        var code = location.host.slice(-2).toUpperCase()
+        vs.mailingRequest({
+          email: this.email,
+          country_code: code
+        }).then(response => {
+          if (response.status == 200) {
+            eventBus.$emit("alert-success", response.data)
+            this.email = ""
+          }
+        }).catch(error => {
+          if (error.response.status == 500) {
+            eventBus.$emit("alert-error", "Something went wrong!")
+          }
+          else {
+            eventBus.$emit("alert-error", error.response.data)
+          }
+        }).finally(() => {
+          this.$nuxt.$loading.finish()
+        })
+      }
+    },
+    navigateTo() {
+      location.href = event.target.dataset.url
+    }
+  }
 }
 </script>
 

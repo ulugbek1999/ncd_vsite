@@ -1,6 +1,8 @@
 
+import Vue from 'vue'
+
 export const CMS_DOMAIN = 'https://manage.ncd.kz';
-export const AUTH_DOMAIN = 'https://ncd.kz';
+export const AUTH_DOMAIN = 'http://127.0.0.1:8000';
 
 // DICTIONARY handles the website in different languages
 export const DICTIONARY = {
@@ -19,6 +21,7 @@ export const DICTIONARY = {
     cooperation: 'Сотрудничество',
     our_services: 'Наши услуги',
     copyright: '2019 NCD. Все права защищены',
+    close: 'Закрыть'
   },
   'kz': {
     login: 'Kіrý',
@@ -35,6 +38,7 @@ export const DICTIONARY = {
     cooperation: 'Yntymaqtastyq',
     our_services: 'Bizdiñ qızmetterimiz',
     copyright: '2019 NCD. Barlıq quqıqtar saqtalğan',
+    close: 'Jabw'
   },
   'en': {
     login: 'Login',
@@ -51,6 +55,7 @@ export const DICTIONARY = {
     cooperation: 'Cooperation',
     our_services: 'Our services',
     copyright: '2019 NCD. All rights reserved',
+    close: 'Close'
   },
   'uz': {
     login: 'Kirish',
@@ -67,5 +72,8 @@ export const DICTIONARY = {
     cooperation: 'Hamkorlik',
     our_services: 'Bizning xizmatlarimiz',
     copyright: '2019 NCD. Barcha huquqlar himoyalangan',
+    close: 'Yopish'
   },
 };
+
+export const eventBus = new Vue()

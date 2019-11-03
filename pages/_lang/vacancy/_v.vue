@@ -17,10 +17,10 @@
             </div>
         </v-img>
         <v-container style="width: 70%">
-            <img
+            <v-img
               :src="cms + vacancies[index].image"
-              width="480"
-              contain
+              width="400"
+              aspect-ratio="1.778"
               class="vacancy-more-image"
             />
             <div class="display-1 header-main mb-12">{{title}}</div>

@@ -23,7 +23,7 @@ export default {
   /*
   ** Customize the progress-bar color
   */
-  loading: {color: '#39b982'},
+  loading: {color: '#be993e'},
   /*
   /*
   ** Nuxt.js dev-modules

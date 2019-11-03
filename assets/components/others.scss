@@ -126,3 +126,25 @@ $mainColor: #be993e;
 .vacancy-more-image {
     float: right;
 }
+
+.documents-modal {
+    width: 460px;
+    background-color: #fff;
+    min-height: 300px;
+    color: #000 !important;
+    margin: 10vw auto;
+}
+
+.documents-list {
+    min-height: 200px;
+}
+
+.documents-list .no-files {
+    color: $footerHeaderColor
+}
+
+.footer-secondary:hover {
+    cursor: pointer;
+    color: $mainColor;
+}
+
