@@ -16,7 +16,7 @@
                   md="6"
                   class="footer-navigation"
                 >
-                    <p><div class="footer-header">НАВИГАЦИЯ</div></p>
+                    <p><div class="footer-header text-uppercase">{{t.navigation}}</div></p>
                     <nuxt-link
                       class="footer-secondary footer-nav-link"
                       :to="currentLocation + '#slider'"
@@ -24,7 +24,7 @@
                       :data-url="currentLocation + '#slider'"
                       @click.native="navigateTo"
                     >
-                      Главная
+                      {{t.main}}
                     </nuxt-link>
                     <nuxt-link
                       class="footer-secondary footer-nav-link"
@@ -32,14 +32,14 @@
                       tag="p"
                       :data-url="currentLocation + '#about'"
                       @click.native="navigateTo"
-                    >О нас</nuxt-link>
+                    >{{t.about_us}}</nuxt-link>
                     <nuxt-link
                       class="footer-secondary footer-nav-link"
                       :to="currentLocation + '#services'"
                       tag="p"
                       :data-url="currentLocation + '#services'"
                       @click.native="navigateTo"
-                    >Услуги</nuxt-link>
+                    >{{t.services}}</nuxt-link>
 
                 </v-col>
                 <v-col
@@ -48,10 +48,10 @@
                   md="6"
                   sm="6"
                 >
-                    <p><div class="footer-header">КОНТАКТЫ</div></p>
-                    <p class="footer-secondary">+7 707 020 25 49; +7 778 683 83 28<br>+7 700 222 56 70; +7 705 391 81 21</p>
-                    <p class="footer-secondary">info@ncd.kz</p>
-                    <p class="footer-secondary">г. Алматы, Мухамеджанова 9</p>
+                    <p><div class="footer-header text-uppercase">{{t.contacts}}</div></p>
+                    <p class="footer-secondary" style="max-width: 200px">{{phoneCms[0].short_content_en}}</p>
+                    <p class="footer-secondary">{{emailCms[0].short_content_en}}</p>
+                    <p class="footer-secondary">{{addressContent}}</p>
                 </v-col>
                 <v-col
                   cols="12"
@@ -60,10 +60,10 @@
                   sm="12"
                 >
                     <div class="mx-auto newsletter-main">
-                        <p><div class="footer-header">ПОДПИШИТЕСЬ НА РАССЫЛКУ</div></p>
+                        <p><div class="footer-header text-uppercase">{{t.subscribe_mail}}</div></p>
                         <div class="newsletter-container">
                             <v-text-field
-                              label="Ваш Email"
+                              :label="t.your +  ' Email'"
                               required
                               rounded
                               filled
@@ -95,7 +95,7 @@
                               rounded
                               @click="sendMailingQuery"
                             >
-                              Подписаться
+                              {{t.subscribe}}
                             </v-btn>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
               
             >
                 <p>&copy;&nbsp;NCD&nbsp;|&nbsp;International</p>
-                <p>Все права защищены</p>
+                <p>{{t.all_rights}}</p>
             </v-container>
         </v-container>
     </v-footer>
@@ -120,7 +120,8 @@
 
 <script>
 import vs from "~/services/VisitorService"
-import {eventBus} from "~/settings/settings"
+import {eventBus, DICTIONARY} from "~/settings/settings"
+import {mapState} from "vuex"
 export default {
   data() {
     return {
@@ -162,6 +163,46 @@ export default {
     },
     navigateTo() {
       location.href = event.target.dataset.url
+    }
+  },
+  computed: {
+    t() {
+      return DICTIONARY[this.lang]
+    },
+    ...mapState({
+      extra: state => state.cmsData.extra
+    }),
+    phoneCms() {
+      return this.extra.filter((el) => {
+        return el.title_en == "Phone";
+      })
+    },
+    emailCms() {
+      return this.extra.filter((el) => {
+        return el.title_en == "Email";
+      })
+    },
+    addressCms() {
+      return this.extra.filter((el) => {
+        return el.title_en == "Address";
+      })
+    },
+    addressContent() {
+      if (this.lang == "ru") {
+          return this.addressCms[0].short_content_ru
+      }
+      else if(this.lang == "en") {
+          return this.addressCms[0].short_content_en
+      }
+      else if (this.lang == "uz") {
+          return this.addressCms[0].short_content_uz
+      }
+      else if (this.lang == "kz") {
+          return this.addressCms[0].short_content_kz
+      }
+      else {
+          return this.addressCms[0].short_content_ru
+      }
     }
   }
 }

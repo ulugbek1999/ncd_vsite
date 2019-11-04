@@ -57,16 +57,17 @@ import NavMobile from '~/components/NavMobile'
 import NavBar from '~/components/NavBar'
 import NcdOverlay from '~/components/Overlay'
 import DocumentsList from '~/components/DocumentsList'
-import {eventBus} from '~/settings/settings'
+import {eventBus, DICTIONARY} from '~/settings/settings'
 import {mapState} from 'vuex'
 
 export default {
+    middlerware: 'language',
     data() {
         return {
             links: [],
             languages: ["Ru", "En", "Kz", "Uz"],
             currentLocation: null,
-            currentLanguage: "ru",
+            currentLanguage: this.$route.params.lang,
             alert: {
                 success: false,
                 successMessage: "Success",
@@ -95,37 +96,37 @@ export default {
             this.resolveLinks().then(() => {
             this.links = [
                 {
-                    name: "Услуги",
+                    name: this.t.services,
                     link: this.currentLocation + "#services",
                     scrollable: true,
                     overlay: false,
                 },
                 {
-                    name: "О компании",
+                    name: this.t.about_company,
                     link: this.currentLocation + "#about",
                     scrollable: true,
                     overlay: false,
                 },
                 {
-                    name: "Вакансии",
+                    name: this.t.vacancies,
                     link: this.$router.resolve({name: "lang-vacancies"}).href,
                     scrollable: false,
                     overlay: false,
                 },
                 {
-                    name: "Документы",
+                    name: this.t.documents,
                     link: "",
                     scrollable: false,
                     overlay: true,
                 },
                 {
-                    name: "Вопросы",
+                    name: this.t.faq,
                     link: this.$router.resolve({name: "lang-questions"}).href,
                     scrollable: false,
                     overlay: false,
                 },
                 {
-                    name: "Контакты",
+                    name: this.t.contacts,
                     link: this.currentLocation + "#contacts",
                     scrollable: true,
                     overlay: false,
@@ -143,6 +144,11 @@ export default {
             this.alert.errorMessage = message;
             this.alert.error = true;
         })
+    },
+    computed: {
+        t() {
+            return DICTIONARY[this.currentLanguage]
+        }
     }
 }
 </script>

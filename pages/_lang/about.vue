@@ -13,7 +13,7 @@
               data-aos-once="true"
               data-aos-duration="2000"
             >
-                О компании
+                {{t.about_company}}
             </div>
         </v-img>
         <v-container
@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import {CMS_DOMAIN} from "~/settings/settings"
+import {CMS_DOMAIN, DICTIONARY} from "~/settings/settings"
 
 export default {
     layout: "main",
@@ -138,6 +138,9 @@ export default {
     computed: {
         abouts() {
             return this.$store.state.cmsData.about
+        },
+        t() {
+            return DICTIONARY[this.lang]
         }
     },
     mounted () {

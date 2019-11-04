@@ -14,13 +14,13 @@
           color="#be993e"
           :to="{name: 'lang-vacancy-v', params: {v: index}}"
         >
-            Подробнее
+            {{t.read_more}}
         </v-btn>
     </div>
 </template>
 
 <script>
-import {CMS_DOMAIN} from '~/settings/settings'
+import {CMS_DOMAIN, DICTIONARY} from '~/settings/settings'
 export default {
     props: {
         vacancy: {
@@ -77,6 +77,9 @@ export default {
             else {
                 return this.vacancy.wages_uz
             }
+        },
+        t() {
+            return DICTIONARY[this.lang]
         }
     }
 }

@@ -4,7 +4,7 @@
             <main-carousel :slides="slides"></main-carousel>
         </div>
         <div class="services-container" id="services">
-            <div class="display-2 text-center font-weight-bold header-main">Наши услуги</div>
+            <div class="display-2 text-center font-weight-bold header-main">{{t.our_services}}</div>
             <div class="header-split"></div>
             <div class="services-list">
                 <div
@@ -32,26 +32,22 @@
               data-aos-duration="2000"
               data-aos-once="false"
             >
-              О компании
+              {{ t.about_company }}
             </div>
             <div class="header-split"></div>
             <div class="about-info-container mt-10" id="about">
                 <div class="about-info">
                     <div class="about-align">
                         <div class="display-1">National Center for Development</div>
-                        <p>
-                            <b>National Center for Development (NCD)</b> - быстроразвивающаяся компания, позволяющая эффективно использовать трудовые ресурсы мигрантов и направлять их в соответствии с их квалификацией в те страны и те организации, где они наилучшим образом смогут применить свои навыки и знания.
-                        </p>
-                        <p>
-                            Мы оказываем квалифицированную помощь трудовым мигрантам Республики Узбекистан и других стран Центральной Азии, желающим найти работу за рубежом, включая посильное содействие в процессе языковой адаптации в другой стране.
-                        </p>
+                        <p v-html="aboutContent"></p>
                             <v-btn
+                              class="mt-4"
                               tile
                               color="#be993e"
                               dark
                               :to="{name: 'lang-about', params: {'lang': this.$route.params.lang}}"
                             >
-                                Подробнее
+                                {{ t.read_more }}
                             </v-btn>
                         </nuxt-link>
                     </div>
@@ -59,7 +55,7 @@
                 <div class="about-image" :style="'background-image: url(' + require('~/static/pages/about.jpg') + ')'"></div>
             </div>
             <div class="stats pt-10"  id="stats">
-                <div class="stats-wrapper text-center">
+                <div class="stats-wrapper text-center text-lowercase">
                     <div class="stat">
                         <h2>
                             <animated-number
@@ -69,7 +65,7 @@
                             >
                             </animated-number>
                         </h2>
-                        <p>работодателей</p>
+                        <p>{{t.employers}}</p>
                     </div>
                     <div class="stat">
                         <h2>
@@ -80,7 +76,7 @@
                             >
                             </animated-number>
                         </h2>
-                        <p>аппликантов</p>
+                        <p>{{t.candidates}}</p>
                     </div>
                     <div class="stat">
                         <h2>
@@ -91,7 +87,7 @@
                             >
                             </animated-number>
                         </h2>
-                        <p>год опыта</p>
+                        <p>{{t.year_of_exp}}</p>
                     </div>
                 </div>
             </div>
@@ -104,7 +100,7 @@
                 data-aos-mirror="true"
                 data-aos-once="true"
             >
-                Партнеры
+                {{t.partners}}
             </div>
             <div class="header-split"></div>
             <partners-slick :partners="partners"/>
@@ -118,7 +114,7 @@
                 data-aos-duration="2000"
                 id="contacts"
             >
-                Контакты
+                {{t.contacts}}
             </div>
             <div class="header-split mb-10"></div>
             <div class="google-maps-container mt-10">
@@ -139,8 +135,8 @@
                       xl="6"
                     >
                         <div class="inquiry">
-                            <div class="display-1">Вопросы</div>
-                            <p class="contact-info mt-5">По любым вопросам или рекомендациям, звоните на номер +7 707 020 25 49 или заполните следующую форму:</p>
+                            <div class="display-1 font-weight-bold">{{ questionsTitle }}</div>
+                            <p class="contact-info mt-5">{{questionsContent}}</p>
                         </div>
                         <v-form 
                           class="contact-form mt-10"
@@ -149,7 +145,7 @@
                         >
                             <v-text-field
                                 color="#be993e"
-                                label="Имя"
+                                :label="t.name"
                                 filled
                                 required
                                 v-model="query.name"
@@ -165,7 +161,7 @@
                             ></v-text-field>
                             <v-text-field
                                 color="#be993e"
-                                label="Тема"
+                                :label="t.subject"
                                 filled
                                 v-model="query.subject"
                                 :rules="rules.subject"
@@ -176,7 +172,7 @@
                                 name="input-7-4"
                                 id="message"
                                 style="resize: none;"
-                                label="Сообщение"
+                                :label="t.message"
                                 auto-grow
                                 color="#be993e"
                                 required
@@ -189,7 +185,7 @@
                               dark
                               style="float: right;"
                               @click="sendQuery"
-                            >Отправить</v-btn>
+                            >{{t.send}}</v-btn>
                         </v-form>
                     </v-col>
                     <v-col
@@ -199,11 +195,11 @@
                       md="6"
                       sm="12"
                     >
-                        <div class="display-1">Главный офис</div>
-                        <p class="contact-info mt-5">г. Алматы, Мухамеджанова 9 </p>   <p class="contact-info mt-5">info@ncd.kz</p> 
-                        <p class="contact-info">+7 707 020 25 49</p>   <p class="contact-info">+7 778 683 83 28</p> 
-                        <div class="display-1 mt-10">Устройство на работу</div>
-                        <p class="contact-info mt-5">Чтобы устроиться на работу, отправьте своё резюме на электронный адрес info@ncd.kz</p>
+                        <div class="display-1 font-weight-bold">{{officeTitle}}</div>
+                        <p class="contact-info mt-5">{{addressContent}}</p>   <p class="contact-info mt-5">info@ncd.kz</p> 
+                        <p class="contact-info" v-for="(phone, i) in phoneArray" :key="'phone-' + i">{{ phone }}</p> 
+                        <div class="display-1 mt-10 font-weight-bold">{{employmentTitle}}</div>
+                        <p class="contact-info mt-5">{{employmentContent}}</p>
                     </v-col>
                 </v-row>
             </v-container>
@@ -219,11 +215,12 @@ import GoogleMaps from '~/components/GoogleMaps'
 import AOS from 'aos'
 import AnimatedNumber from "animated-number-vue";
 import {mapState} from "vuex";
-import {eventBus} from "~/settings/settings"
+import {eventBus, DICTIONARY} from "~/settings/settings"
 import vs from "~/services/VisitorService"
 
 export default {
     layout: "main",
+    middleware: "language",
     head() {
         return {
             title: "Homepage"
@@ -231,23 +228,6 @@ export default {
     },
     data () {
         return {
-            slides: [
-                {
-                    image: require("~/static/pages/slider-1.jpg"),
-                    title: "Трудоустройство за рубежом",
-                    subtitle: "Поможем найти достойную работу"
-                },
-                {
-                    image: require("~/static/pages/slider-2.jpg"),
-                    title: "Содействие в получении виз",
-                    subtitle: "Консультации по визовым вопросам"
-                },
-                {
-                    image: require("~/static/pages/slider-3.jpg"),
-                    title: "Профиль соискателя",
-                    subtitle: "Личная карточка для оценки квалификации"
-                },
-            ],
             partners: [
                 {
                     image: require("~/static/pages/interlingvo.jpg"),
@@ -290,7 +270,8 @@ export default {
                     v => !!v || 'Message is required',
                 ]
             },
-            validQuery: true
+            validQuery: true,
+            lang: this.$route.params.lang
         }
     },
     components: {
@@ -302,8 +283,174 @@ export default {
     },
     computed: {
         ...mapState({
-            services: state => state.cmsData.service
-        })
+            services: state => state.cmsData.service,
+            extra: state => state.cmsData.extra,
+            about: state => state.cmsData.about
+        }),
+        questionsCms() {
+            return this.extra.filter((el) => {
+                return el.title_en == "Questions"
+            })
+        },
+        questionsTitle() {
+            if (this.lang == "ru") {
+                return this.questionsCms[0].title_ru
+            }
+            else if(this.lang == "en") {
+                return this.questionsCms[0].title_en
+            }
+            else if (this.lang == "uz") {
+                return this.questionsCms[0].title_uz
+            }
+            else if (this.lang == "kz") {
+                return this.questionsCms[0].title_kz
+            }
+            else {
+                return this.questionsCms[0].title_ru
+            }
+        },
+        questionsContent() {
+            if (this.lang == "ru") {
+                return this.questionsCms[0].short_content_ru
+            }
+            else if(this.lang == "en") {
+                return this.questionsCms[0].short_content_en
+            }
+            else if (this.lang == "uz") {
+                return this.questionsCms[0].short_content_uz
+            }
+            else if (this.lang == "kz") {
+                return this.questionsCms[0].short_content_kz
+            }
+            else {
+                return this.questionsCms[0].short_content_ru
+            }
+        },
+        officeTitle() {
+            if (this.lang == "ru") {
+                return "Главный офис"
+            }
+            else if(this.lang == "en") {
+                return "Main office"
+            }
+            else if (this.lang == "uz") {
+                return "Bosh ofisimiz"
+            }
+            else if (this.lang == "kz") {
+                return "Bas keñse"
+            }
+            else {
+                return "Главный офис"
+            }
+        },
+        addressCms() {
+            return this.extra.filter((el) => {
+                return el.title_en == "Address"
+            })
+        },
+        addressContent() {
+            if (this.lang == "ru") {
+                return this.addressCms[0].short_content_ru
+            }
+            else if(this.lang == "en") {
+                return this.addressCms[0].short_content_en
+            }
+            else if (this.lang == "uz") {
+                return this.addressCms[0].short_content_uz
+            }
+            else if (this.lang == "kz") {
+                return this.addressCms[0].short_content_kz
+            }
+            else {
+                return this.addressCms[0].short_content_ru
+            }
+        },
+        phoneCms() {
+            return this.extra.filter((el) => {
+                return el.title_en == "Phone"
+            })
+        },
+        phoneArray() {
+            return this.phoneCms[0].short_content_en.split(";")
+        },
+        employmentCms() {
+            return this.extra.filter((el) => {
+                return el.title_en == "Employment"
+            })
+        },
+        employmentTitle() {
+            if (this.lang == "ru") {
+                return this.employmentCms[0].title_ru
+            }
+            else if(this.lang == "en") {
+                return this.employmentCms[0].title_en
+            }
+            else if (this.lang == "uz") {
+                return this.employmentCms[0].title_uz
+            }
+            else if (this.lang == "kz") {
+                return this.employmentCms[0].title_kz
+            }
+            else {
+                return this.employmentCms[0].title_ru
+            }
+        },
+        employmentContent() {
+            if (this.lang == "ru") {
+                return this.employmentCms[0].short_content_ru
+            }
+            else if(this.lang == "en") {
+                return this.employmentCms[0].short_content_en
+            }
+            else if (this.lang == "uz") {
+                return this.employmentCms[0].short_content_uz
+            }
+            else if (this.lang == "kz") {
+                return this.employmentCms[0].short_content_kz
+            }
+            else {
+                return this.employmentCms[0].short_content_ru
+            }
+        },
+        t() {
+            return DICTIONARY[this.lang]
+        },
+        aboutContent() {
+            if (this.lang == "ru") {
+                return this.about[0].content_ru
+            }
+            else if(this.lang == "en") {
+                return this.about[0].content_en
+            }
+            else if (this.lang == "uz") {
+                return this.about[0].content_uz
+            }
+            else if (this.lang == "kz") {
+                return this.about[0].content_kz
+            }
+            else {
+                return this.about[0].content_ru
+            }
+        },
+        slides() {
+            return [
+                {
+                    image: require("~/static/pages/slider-1.jpg"),
+                    title: this.t.employment_abroad,
+                    subtitle: this.t.employment_abroad_text
+                },
+                {
+                    image: require("~/static/pages/slider-2.jpg"),
+                    title: this.t.help_with_visa,
+                    subtitle: this.t.help_with_visa_text
+                },
+                {
+                    image: require("~/static/pages/slider-3.jpg"),
+                    title: this.t.applicant_profile,
+                    subtitle: this.t.applicant_profile_text
+                }
+            ]
+        }
     },
     mounted() {
         var stats = document.querySelector("#stats")
@@ -360,9 +507,6 @@ export default {
         resetValidation () {
             this.$refs.queryForm.resetValidation()
         }
-    },
-    watch: {
-
     }
 }
 </script>

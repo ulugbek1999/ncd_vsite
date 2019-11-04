@@ -13,12 +13,12 @@
               data-aos-once="true"
               data-aos-duration="2000"
             >
-                Вакансии
+                {{ t.vacancies }}
             </div>
         </v-img>
         <v-container style="width: 90%">
             <section class="vacancies-section text-center">
-                <div class="display-1 header-main">Список вакансий</div>
+                <div class="display-1 header-main">{{t.list_of_vacancies}}</div>
                 <div class="d-flex flex-wrap vacancy-list justify-space-around" v-if="Math.floor(paginatedData.length / 3) >= 1">
                     <vacancy-widget v-for="(vacancy, index) in paginatedData" :key="'vacancy-' + index" :index="(page - 1) * size + index" :vacancy="vacancy   " class="mt-12 mb-12"/>
                 </div>
@@ -49,6 +49,7 @@
 <script>
 import VacancyWidget from '~/components/VacancyWidget'
 import {mapState} from "vuex"
+import {DICTIONARY} from "~/settings/settings"
 export default {
     layout: "main",
     head() {
@@ -62,7 +63,8 @@ export default {
     data() {
         return {
             page: 1,
-            size: 9
+            size: 9,
+            lang: this.$route.params.lang
         }
     },
     computed: {
@@ -77,6 +79,9 @@ export default {
             const end = start + this.size
             
             return this.vacancies.slice(start, end)
+        },
+        t() {
+            return DICTIONARY[this.lang]
         }
     },
     watch: {

@@ -13,7 +13,7 @@
               data-aos-once="true"
               data-aos-duration="2000"
             >
-                Вакансия
+                {{t.vacancy}}
             </div>
         </v-img>
         <v-container style="width: 70%">
@@ -26,8 +26,8 @@
             <div class="display-1 header-main mb-12">{{title}}</div>
             <div class="common-info mb-12">
                 <div v-html="short_description"></div>
-                <div class="mb-4"><strong>Страна: </strong><span v-html="location"></span></div>
-                <div><strong>Заработная плата: </strong>{{wages}}</div>
+                <div class="mb-4"><strong>{{t.country}}: </strong><span v-html="location"></span></div>
+                <div><strong>{{t.wages}}: </strong>{{wages}}</div>
             </div>
             <hr>
             <div class="common-info mt-12 mb-5" v-html="description"></div>
@@ -39,7 +39,7 @@
                   dark
                   @click="apply"
                 >
-                    Подать заявку
+                    {{t.apply}}
                 </v-btn>
             </div>
         </v-container>
@@ -48,7 +48,7 @@
 
 <script>
 import {mapState} from "vuex"
-import {CMS_DOMAIN, eventBus} from "~/settings/settings"
+import {CMS_DOMAIN, eventBus, DICTIONARY} from "~/settings/settings"
 export default {
     layout: "main",
     head() {
@@ -143,6 +143,9 @@ export default {
             else if(this.lang == "uz") {
                 return this.vacancies[this.index].description_uz
             }
+        },
+        t() {
+            return DICTIONARY[this.lang]
         }
     },
     methods: {

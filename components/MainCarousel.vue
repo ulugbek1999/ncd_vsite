@@ -19,7 +19,7 @@
         <div class="text-center">
           <div class="titles-desktop" v-if="i === 0">
             <div
-              class="display-3 slide-title"
+              class="display-3 slide-title font-weight-bold"
               data-aos="fade-up"
               data-aos-duration="2000"
               data-aos-delay="1000"
@@ -28,7 +28,7 @@
               {{slide.title}}
             </div>
             <div
-              class="display-1 slide-subtitle"
+              class="display-1 slide-subtitle font-weight-bold"
               data-aos="fade-up"
               data-aos-duration="2000"
               data-aos-delay="2000"
@@ -37,12 +37,12 @@
           </div>
           <div class="titles-desktop" v-else>
             <div
-              class="display-3 slide-title"
+              class="display-3 slide-title font-weight-bold"
             >
               {{slide.title}}
             </div>
             <div
-              class="display-1 slide-subtitle"
+              class="display-1 slide-subtitle font-weight-bold"
             >{{slide.subtitle}}</div>
           </div>
           <div class="titles-mobile">
