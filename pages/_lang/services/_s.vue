@@ -13,7 +13,7 @@
               data-aos-once="true"
               data-aos-duration="2000"
             >
-                Услуги
+                {{t.services}}
             </div>
         </v-img>
         <v-container style="width: 80%">
@@ -52,7 +52,7 @@
 
 <script>
 import {mapState} from 'vuex'
-import {CMS_DOMAIN} from "~/settings/settings"
+import {CMS_DOMAIN, DICTIONARY} from "~/settings/settings"
 export default {
     layout: 'main',
     head() {
@@ -74,6 +74,9 @@ export default {
         },
         cms() {
             return CMS_DOMAIN
+        },
+        t() {
+            return DICTIONARY[this.lang]
         }
     }
 }

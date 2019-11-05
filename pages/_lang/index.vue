@@ -216,6 +216,7 @@ import vs from "~/services/VisitorService"
 
 export default {
     layout: "main",
+    middleware: "language",
     head() {
         return {
             title: "Homepage"
