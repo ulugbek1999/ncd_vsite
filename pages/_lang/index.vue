@@ -183,7 +183,7 @@
           <v-col cols="12" xl="6" lg="6" md="6" sm="12">
             <div class="display-1 font-weight-bold">{{ officeTitle }}</div>
             <p class="contact-info mt-5">{{ addressContent }}</p>
-            <p class="contact-info mt-5">info@ncd.kz</p>
+            <p class="contact-info mt-5">{{email}}</p>
             <p
               v-for="(phone, i) in phoneArray"
               :key="'phone-' + i"
