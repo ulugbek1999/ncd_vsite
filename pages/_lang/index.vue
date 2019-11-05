@@ -289,37 +289,47 @@ export default {
             })
         },
         questionsTitle() {
-            if (this.lang == "ru") {
-                return this.questionsCms[0].title_ru
-            }
-            else if(this.lang == "en") {
-                return this.questionsCms[0].title_en
-            }
-            else if (this.lang == "uz") {
-                return this.questionsCms[0].title_uz
-            }
-            else if (this.lang == "kz") {
-                return this.questionsCms[0].title_kz
+            if (this.questionsCms.length >= 1) {
+                if (this.lang == "ru") {
+                    return this.questionsCms[0].title_ru
+                }
+                else if(this.lang == "en") {
+                    return this.questionsCms[0].title_en
+                }
+                else if (this.lang == "uz") {
+                    return this.questionsCms[0].title_uz
+                }
+                else if (this.lang == "kz") {
+                    return this.questionsCms[0].title_kz
+                }
+                else {
+                    return this.questionsCms[0].title_ru
+                }
             }
             else {
-                return this.questionsCms[0].title_ru
+                return ""
             }
         },
         questionsContent() {
-            if (this.lang == "ru") {
-                return this.questionsCms[0].short_content_ru
-            }
-            else if(this.lang == "en") {
-                return this.questionsCms[0].short_content_en
-            }
-            else if (this.lang == "uz") {
-                return this.questionsCms[0].short_content_uz
-            }
-            else if (this.lang == "kz") {
-                return this.questionsCms[0].short_content_kz
+            if (this.questionsCms.length >= 1) {
+                if (this.lang == "ru") {
+                    return this.questionsCms[0].short_content_ru
+                }
+                else if(this.lang == "en") {
+                    return this.questionsCms[0].short_content_en
+                }
+                else if (this.lang == "uz") {
+                    return this.questionsCms[0].short_content_uz
+                }
+                else if (this.lang == "kz") {
+                    return this.questionsCms[0].short_content_kz
+                }
+                else {
+                    return this.questionsCms[0].short_content_ru
+                }
             }
             else {
-                return this.questionsCms[0].short_content_ru
+                return ""
             }
         },
         officeTitle() {
@@ -345,21 +355,25 @@ export default {
             })
         },
         addressContent() {
-            return "г. Алматы, Мухамеджанова 9"
-            if (this.lang == "ru") {
-                return this.addressCms[0].short_content_ru
-            }
-            else if(this.lang == "en") {
-                return this.addressCms[0].short_content_en
-            }
-            else if (this.lang == "uz") {
-                return this.addressCms[0].short_content_uz
-            }
-            else if (this.lang == "kz") {
-                return this.addressCms[0].short_content_kz
+            if (this.addressCms.length >= 1)  {
+                if (this.lang == "ru") {
+                    return this.addressCms[0].short_content_ru
+                }
+                else if(this.lang == "en") {
+                    return this.addressCms[0].short_content_en
+                }
+                else if (this.lang == "uz") {
+                    return this.addressCms[0].short_content_uz
+                }
+                else if (this.lang == "kz") {
+                    return this.addressCms[0].short_content_kz
+                }
+                else {
+                    return this.addressCms[0].short_content_ru
+                }
             }
             else {
-                return this.addressCms[0].short_content_ru
+                return ""
             }
         },
         phoneCms() {
@@ -368,7 +382,12 @@ export default {
             })
         },
         phoneArray() {
-            return this.phoneCms[0].short_content_en.split(";")
+            if (this.phoneCms.length >= 1) {
+                return this.phoneCms[0].short_content_en.split(";")
+            }
+            else {
+                return ""
+            }
         },
         employmentCms() {
             return this.extra.filter((el) => {
@@ -376,58 +395,72 @@ export default {
             })
         },
         employmentTitle() {
-            return "Устройство на работу"
-            if (this.lang == "ru") {
-                return this.employmentCms[0].title_ru
-            }
-            else if(this.lang == "en") {
-                return this.employmentCms[0].title_en
-            }
-            else if (this.lang == "uz") {
-                return this.employmentCms[0].title_uz
-            }
-            else if (this.lang == "kz") {
-                return this.employmentCms[0].title_kz
+            if (this.employmentCms.length >= 1) {
+                if (this.lang == "ru") {
+                    return this.employmentCms[0].title_ru
+                }
+                else if(this.lang == "en") {
+                    return this.employmentCms[0].title_en
+                }
+                else if (this.lang == "uz") {
+                    return this.employmentCms[0].title_uz
+                }
+                else if (this.lang == "kz") {
+                    return this.employmentCms[0].title_kz
+                }
+                else {
+                    return this.employmentCms[0].title_ru
+                }
             }
             else {
-                return this.employmentCms[0].title_ru
+                return ""
             }
         },
         employmentContent() {
-            if (this.lang == "ru") {
-                return this.employmentCms[0].short_content_ru
-            }
-            else if(this.lang == "en") {
-                return this.employmentCms[0].short_content_en
-            }
-            else if (this.lang == "uz") {
-                return this.employmentCms[0].short_content_uz
-            }
-            else if (this.lang == "kz") {
-                return this.employmentCms[0].short_content_kz
+            if (this.employmentCms.length >= 1) {
+                if (this.lang == "ru") {
+                    return this.employmentCms[0].short_content_ru
+                }
+                else if(this.lang == "en") {
+                    return this.employmentCms[0].short_content_en
+                }
+                else if (this.lang == "uz") {
+                    return this.employmentCms[0].short_content_uz
+                }
+                else if (this.lang == "kz") {
+                    return this.employmentCms[0].short_content_kz
+                }
+                else {
+                    return this.employmentCms[0].short_content_ru
+                }
             }
             else {
-                return this.employmentCms[0].short_content_ru
+                return ""
             }
         },
         t() {
             return DICTIONARY[this.lang]
         },
         aboutContent() {
-            if (this.lang == "ru") {
-                return this.about[0].content_ru
-            }
-            else if(this.lang == "en") {
-                return this.about[0].content_en
-            }
-            else if (this.lang == "uz") {
-                return this.about[0].content_uz
-            }
-            else if (this.lang == "kz") {
-                return this.about[0].content_kz
+            if (this.about.length >= 1) {
+                if (this.lang == "ru") {
+                    return this.about[0].content_ru
+                }
+                else if(this.lang == "en") {
+                    return this.about[0].content_en
+                }
+                else if (this.lang == "uz") {
+                    return this.about[0].content_uz
+                }
+                else if (this.lang == "kz") {
+                    return this.about[0].content_kz
+                }
+                else {
+                    return this.about[0].content_ru
+                }
             }
             else {
-                return this.about[0].content_ru
+                return ""
             }
         },
         slides() {
