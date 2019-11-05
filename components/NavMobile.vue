@@ -39,10 +39,28 @@
         </v-row>
         <div class="side-menu-overlay" v-show="activeSideMenu">
             <div class="side-menu" id="side">
-                <div class="close-btn" @click="sideMenuToggle">&times;</div>
+                <div class="close-btn" @click="sideMenuToggle(); navigateTo();">&times;</div>
                 <div class="nav-list">
                     <ul>
-                        <nuxt-link :to="l.link" tag="li" @click.native="sideMenuToggle" v-for="(l, i) in navItems" :key="'nav-mobile-item-' + i">{{ l.name }}</nuxt-link>
+                        <nuxt-link
+                          :to="l.link"
+                          tag="li"
+                          v-if="!l.overlay"
+                          @click.native="sideMenuToggle"
+                          :data-overlay="l.overlay"
+                          :data-scroll="l.scrollable"
+                          v-for="(l, i) in navItems"
+                          :key="'nav-mobile-item-' + i"
+                        >
+                            {{ l.name }}
+                        </nuxt-link>
+                        <li
+                          v-else
+                          :key="'nav-mobile-item-' + i"
+                          @click="navigateTo"
+                        >
+                            {{ l.name }}
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -51,6 +69,7 @@
 </template>
 
 <script>
+import {eventBus} from "~/settings/settings"
 export default {
     data() {
         return {
@@ -73,6 +92,13 @@ export default {
                 }, 700)
             }
         },
+        navigateTo() {
+            this.sideMenuToggle()
+            if (event.target.dataset.overlay) {
+                event.preventDefault()
+                eventBus.$emit('overlay', true)
+            }
+        }
     },
     props: {
         navItems: {
