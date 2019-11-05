@@ -27,10 +27,6 @@
         <div class="about-container">
             <div
               class="display-2 text-center font-weight-bold header-main"
-              data-aos="fade"
-              data-aos-mirror="true"
-              data-aos-duration="2000"
-              data-aos-once="false"
             >
               {{ t.about_company }}
             </div>
@@ -39,7 +35,7 @@
                 <div class="about-info">
                     <div class="about-align">
                         <div class="display-1">National Center for Development</div>
-                        <p v-html="aboutContent"></p>
+                        <div v-html="aboutContent"></div>
                             <v-btn
                               class="mt-4"
                               tile
@@ -145,7 +141,7 @@
                         >
                             <v-text-field
                                 color="#be993e"
-                                :label="t.name"
+                                :label="'Имя'"
                                 filled
                                 required
                                 v-model="query.name"
@@ -161,7 +157,7 @@
                             ></v-text-field>
                             <v-text-field
                                 color="#be993e"
-                                :label="t.subject"
+                                :label="'Тема'"
                                 filled
                                 v-model="query.subject"
                                 :rules="rules.subject"
@@ -172,7 +168,7 @@
                                 name="input-7-4"
                                 id="message"
                                 style="resize: none;"
-                                :label="t.message"
+                                :label="'Сообщение'"
                                 auto-grow
                                 color="#be993e"
                                 required
@@ -220,7 +216,6 @@ import vs from "~/services/VisitorService"
 
 export default {
     layout: "main",
-    middleware: "language",
     head() {
         return {
             title: "Homepage"
@@ -228,6 +223,23 @@ export default {
     },
     data () {
         return {
+            slides: [
+                {
+                    image: require("~/static/pages/slider-1.jpg"),
+                    title: "Трудоустройство за рубежом",
+                    subtitle: "Поможем найти достойную работу"
+                },
+                {
+                    image: require("~/static/pages/slider-2.jpg"),
+                    title: "Содействие в получении виз",
+                    subtitle: "Консультации по визовым вопросам"
+                },
+                {
+                    image: require("~/static/pages/slider-3.jpg"),
+                    title: "Профиль соискателя",
+                    subtitle: "Личная карточка для оценки квалификации"
+                }
+            ],
             partners: [
                 {
                     image: require("~/static/pages/interlingvo.jpg"),
@@ -349,6 +361,7 @@ export default {
             })
         },
         addressContent() {
+            return "г. Алматы, Мухамеджанова 9"
             if (this.lang == "ru") {
                 return this.addressCms[0].short_content_ru
             }
@@ -379,6 +392,7 @@ export default {
             })
         },
         employmentTitle() {
+            return "Устройство на работу"
             if (this.lang == "ru") {
                 return this.employmentCms[0].title_ru
             }
@@ -431,25 +445,6 @@ export default {
             else {
                 return this.about[0].content_ru
             }
-        },
-        slides() {
-            return [
-                {
-                    image: require("~/static/pages/slider-1.jpg"),
-                    title: this.t.employment_abroad,
-                    subtitle: this.t.employment_abroad_text
-                },
-                {
-                    image: require("~/static/pages/slider-2.jpg"),
-                    title: this.t.help_with_visa,
-                    subtitle: this.t.help_with_visa_text
-                },
-                {
-                    image: require("~/static/pages/slider-3.jpg"),
-                    title: this.t.applicant_profile,
-                    subtitle: this.t.applicant_profile_text
-                }
-            ]
         }
     },
     mounted() {

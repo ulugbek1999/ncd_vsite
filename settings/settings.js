@@ -2,7 +2,7 @@
 import Vue from 'vue'
 
 export const CMS_DOMAIN = 'https://manage.ncd.kz';
-export const AUTH_DOMAIN = 'http://127.0.0.1:8000';
+export const AUTH_DOMAIN = 'https://admin.uzncd.com';
 
 // DICTIONARY handles the website in different languages
 export const DICTIONARY = {
