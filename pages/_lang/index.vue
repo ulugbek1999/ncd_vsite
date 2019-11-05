@@ -223,23 +223,6 @@ export default {
     },
     data () {
         return {
-            slides: [
-                {
-                    image: require("~/static/pages/slider-1.jpg"),
-                    title: "Трудоустройство за рубежом",
-                    subtitle: "Поможем найти достойную работу"
-                },
-                {
-                    image: require("~/static/pages/slider-2.jpg"),
-                    title: "Содействие в получении виз",
-                    subtitle: "Консультации по визовым вопросам"
-                },
-                {
-                    image: require("~/static/pages/slider-3.jpg"),
-                    title: "Профиль соискателя",
-                    subtitle: "Личная карточка для оценки квалификации"
-                }
-            ],
             partners: [
                 {
                     image: require("~/static/pages/interlingvo.jpg"),
@@ -445,6 +428,25 @@ export default {
             else {
                 return this.about[0].content_ru
             }
+        },
+        slides() {
+            return [
+                {
+                    image: require("~/static/pages/slider-1.jpg"),
+                    title: this.t.employment_abroad,
+                    subtitle: this.t.employment_abroad_text
+                },
+                {
+                    image: require("~/static/pages/slider-2.jpg"),
+                    title: this.t.help_with_visa,
+                    subtitle: this.t.help_with_visa_text
+                },
+                {
+                    image: require("~/static/pages/slider-3.jpg"),
+                    title: this.t.applicant_profile,
+                    subtitle: this.t.applicant_profile_text
+                }
+            ]
         }
     },
     mounted() {
