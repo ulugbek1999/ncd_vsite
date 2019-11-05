@@ -1,3 +1,22 @@
 {
-    "vetur.format.defaultFormatter.html": "none"
+    "eslint.validate": [
+        {
+            "language": "vue",
+            "autoFix": true
+        },
+        {
+            "language": "javascript",
+            "autoFix": true
+        },
+        {
+            "language": "javascriptreact",
+            "autoFix": true
+        }
+    ],
+    // Ensure that VSCode will not form the code itself
+    "editor.formatOnSave": false,
+    // This option instructs the ESLint extension to try and autofix any errors upon saving
+    "eslint.autoFixOnSave": true,
+    // Turns off Vetur’s template validation which doesn’t support rule configuration
+    "vetur.validation.template": false
 }

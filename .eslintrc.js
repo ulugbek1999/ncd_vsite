@@ -1,23 +1,23 @@
+//npm install eslint babel-eslint eslint-config-prettier eslint-plugin-prettier eslint-plugin-vue eslint-loader prettier -D
+
 module.exports = {
-  'env': {
-    'browser': true,
-    'es6': true,
+  root: true,
+  env: {
+    node: true
   },
-  'extends': [
-    'plugin:vue/essential',
-    'google',
+  parserOptions: {
+    parser: 'babel-eslint'
+  },
+  extends: [
+    'plugin:vue/recommended',
+    'eslint:recommended',
+    'prettier/vue',
+    'plugin:prettier/recommended',
   ],
-  'globals': {
-    'Atomics': 'readonly',
-    'SharedArrayBuffer': 'readonly',
+  // add your custom rules here
+  rules: {
+    'vue/component-name-in-template-casing': ['error', 'PascalCase'],
+    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   },
-  'parserOptions': {
-    'ecmaVersion': 2018,
-    'sourceType': 'module',
-  },
-  'plugins': [
-    'vue',
-  ],
-  'rules': {
-  },
-};
+}
