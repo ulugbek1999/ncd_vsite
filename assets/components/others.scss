@@ -128,7 +128,7 @@ $mainColor: #be993e;
 }
 
 .documents-modal {
-    width: 460px;
+    width: 560px;
     background-color: #fff;
     min-height: 300px;
     color: #000 !important;
@@ -148,3 +148,34 @@ $mainColor: #be993e;
     color: $mainColor;
 }
 
+.document-section {
+    padding: 10px 5px;
+    margin: 10px;
+    border-bottom: 1px solid rgb(212, 209, 209);
+    position: relative;
+}
+
+.document-section:last-of-type {
+    border-bottom: none;
+}   
+
+.document-absolute {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+}
+
+.document-absolute:hover {
+    cursor: pointer;
+}
+
+.document-details {
+    margin: 0 10px;
+}
+
+.document-size {
+    color: rgb(134, 133, 133)
+}

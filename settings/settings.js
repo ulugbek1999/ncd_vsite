@@ -1,27 +1,26 @@
+import Vue from "vue";
 
-import Vue from 'vue'
-
-export const CMS_DOMAIN = 'https://manage.ncd.kz';
-export const AUTH_DOMAIN = 'https://admin.uzncd.com';
+export const CMS_DOMAIN = "https://manage.uzncd.com";
+export const AUTH_DOMAIN = "https://admin.uzncd.com";
 
 // DICTIONARY handles the website in different languages
 export const DICTIONARY = {
-  'ru': {
-    login: 'Войти',
-    registration: 'Регистрация',
-    vacancies: 'Вакансии',
-    about_company: 'О компании',
-    services: 'Услуги',
-    documents: 'Документы',
-    partners: 'Партнеры',
-    education: 'Образование',
-    faq: 'Вопросы',
-    contacts: 'Контакты',
-    our_mission: 'Наша миссия',
-    cooperation: 'Сотрудничество',
-    our_services: 'Наши услуги',
-    copyright: '2019 NCD. Все права защищены',
-    close: 'Закрыть',
+  ru: {
+    login: "Войти",
+    registration: "Регистрация",
+    vacancies: "Вакансии",
+    about_company: "О компании",
+    services: "Услуги",
+    documents: "Документы",
+    partners: "Партнеры",
+    education: "Образование",
+    faq: "Вопросы",
+    contacts: "Контакты",
+    our_mission: "Наша миссия",
+    cooperation: "Сотрудничество",
+    our_services: "Наши услуги",
+    copyright: "2019 NCD. Все права защищены",
+    close: "Закрыть",
     read_more: "Подробнее",
     candidates: "Аппликантов",
     employers: "Работодателей",
@@ -47,24 +46,25 @@ export const DICTIONARY = {
     vacancy: "Вакансия",
     country: "Страна",
     wages: "Заработная плата",
-    apply: "Подать заявку"
+    apply: "Подать заявку",
+    no_files: "Файлы не найдены."
   },
-  'kz': {
-    login: 'Kіrý',
-    registration: 'Тіркеу',
-    vacancies: 'Jumys oryndary',
-    about_company: 'Kompanııa týraly',
-    services: 'Qyzmetter',
-    documents: 'Qujattar',
-    partners: 'Serіktester',
-    education: 'Bilim',
-    faq: 'Suraqtar',
-    contacts: 'Baılanys málіmetterі',
-    our_mission: 'Bіzdіń mıssııamyz',
-    cooperation: 'Yntymaqtastyq',
-    our_services: 'Bizdiñ qızmetterimiz',
-    copyright: '2019 NCD. Barlıq quqıqtar saqtalğan',
-    close: 'Jabw',
+  kz: {
+    login: "Kіrý",
+    registration: "Тіркеу",
+    vacancies: "Jumys oryndary",
+    about_company: "Kompanııa týraly",
+    services: "Qyzmetter",
+    documents: "Qujattar",
+    partners: "Serіktester",
+    education: "Bilim",
+    faq: "Suraqtar",
+    contacts: "Baılanys málіmetterі",
+    our_mission: "Bіzdіń mıssııamyz",
+    cooperation: "Yntymaqtastyq",
+    our_services: "Bizdiñ qızmetterimiz",
+    copyright: "2019 NCD. Barlıq quqıqtar saqtalğan",
+    close: "Jabw",
     read_more: "Köbirek",
     candidates: "Kandïdattar",
     employers: "Jumıs berwşiler",
@@ -90,24 +90,25 @@ export const DICTIONARY = {
     vacancy: "Bos jumıs ornı",
     country: "El",
     wages: "Jalaqı",
-    apply: "Tapsırıs berw"
+    apply: "Tapsırıs berw",
+    no_files: "Fayldar tabılmadı."
   },
-  'en': {
-    login: 'Login',
-    registration: 'Registration',
-    vacancies: 'Vacancies',
-    about_company: 'About company',
-    services: 'Services',
-    documents: 'Documents',
-    partners: 'Partners',
-    education: 'Education',
-    faq: 'FAQ',
-    contacts: 'Contacts',
-    our_mission: 'Our mission',
-    cooperation: 'Cooperation',
-    our_services: 'Our services',
-    copyright: '2019 NCD. All rights reserved',
-    close: 'Close',
+  en: {
+    login: "Login",
+    registration: "Registration",
+    vacancies: "Vacancies",
+    about_company: "About company",
+    services: "Services",
+    documents: "Documents",
+    partners: "Partners",
+    education: "Education",
+    faq: "FAQ",
+    contacts: "Contacts",
+    our_mission: "Our mission",
+    cooperation: "Cooperation",
+    our_services: "Our services",
+    copyright: "2019 NCD. All rights reserved",
+    close: "Close",
     read_more: "Read more",
     candidates: "Candidates",
     employers: "Employers",
@@ -133,24 +134,25 @@ export const DICTIONARY = {
     vacancy: "Vacancy",
     country: "Country",
     wages: "Wages",
-    apply: "Apply"
+    apply: "Apply",
+    no_files: "No files were found."
   },
-  'uz': {
-    login: 'Kirish',
-    registration: 'Ro\'yxatdan o\'tish',
-    vacancies: 'Ish o\'rinlari',
-    about_company: 'Kompaniya haqida',
-    services: 'Xizmatlar',
-    documents: 'Hujjatlar',
-    partners: 'Hamkorlar',
-    education: 'Ta\'lim',
-    faq: 'Savollar',
-    contacts: 'Kontaktlar',
-    our_mission: 'Bizning maqsadimiz',
-    cooperation: 'Hamkorlik',
-    our_services: 'Bizning xizmatlarimiz',
-    copyright: '2019 NCD. Barcha huquqlar himoyalangan',
-    close: 'Yopish',
+  uz: {
+    login: "Kirish",
+    registration: "Ro'yxatdan o'tish",
+    vacancies: "Ish o'rinlari",
+    about_company: "Kompaniya haqida",
+    services: "Xizmatlar",
+    documents: "Hujjatlar",
+    partners: "Hamkorlar",
+    education: "Ta'lim",
+    faq: "Savollar",
+    contacts: "Kontaktlar",
+    our_mission: "Bizning maqsadimiz",
+    cooperation: "Hamkorlik",
+    our_services: "Bizning xizmatlarimiz",
+    copyright: "2019 NCD. Barcha huquqlar himoyalangan",
+    close: "Yopish",
     read_more: "Batafsil",
     candidates: "Talabgorlar",
     employers: "Ish beruvchilar",
@@ -176,8 +178,11 @@ export const DICTIONARY = {
     vacancy: "Bo'sh ish o'rni",
     country: "Mamlakati",
     wages: "Oyligi",
-    apply: "Ishga murojaat qilish"
-  },
+    apply: "Ishga murojaat qilish",
+    no_files: "Fayllar topilmadi."
+  }
 };
 
-export const eventBus = new Vue()
+export const eventBus = new Vue();
+
+export const ga_id = "UA-149343577-2";
