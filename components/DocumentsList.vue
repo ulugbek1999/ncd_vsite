@@ -42,6 +42,9 @@
             size="50px"
             >mdi-file-image</v-icon
           >
+          <v-icon v-else color="#888" size="50px">
+            mdi-file
+          </v-icon>
           <div v-if="lang == 'en'" class="document-details">
             <div class="title">{{ doc.name_en }}</div>
             <div class="document-size">
