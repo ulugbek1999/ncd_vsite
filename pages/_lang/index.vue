@@ -35,7 +35,7 @@
       <div id="about" class="about-info-container mt-10">
         <div class="about-info">
           <div class="about-align">
-            <div class="display-1">National Center for Development</div>// eslint-disable-next-line vue/no-v-html
+            <div class="display-1">National Center for Development</div>
             <div v-html="aboutContent"></div>
             <v-btn
               class="mt-4"
