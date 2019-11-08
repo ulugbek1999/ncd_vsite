@@ -86,6 +86,9 @@ export default {
         event.preventDefault();
         eventBus.$emit("overlay", true);
       }
+      if (event.target.dataset.scroll == true) {
+        location.href = event.target.dataset.url;
+      }
     },
     changeLang(event) {
       const l = event.target.dataset.lang.toLowerCase();
