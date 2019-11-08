@@ -70,11 +70,11 @@
                               dense
                               light
                               full-width
+                              v-model="email"
                               background-color="#fff"
                               width="200px"
                               color="#000"
                               class="mt-2"
-                              v-model="email"
                             ></v-text-field>
                             <div class="ml-5 pencil">
                                 <v-btn 
@@ -123,14 +123,17 @@ import vs from "~/services/VisitorService"
 import {eventBus, DICTIONARY} from "~/settings/settings"
 import {mapState} from "vuex"
 export default {
+  props: {
+    currentLocation: {
+      type: String,
+      default: "ru"
+    }
+  },
   data() {
     return {
       email: "",
       lang: this.$route.params.lang
     }
-  },
-  props: {
-    currentLocation: String
   },
   methods: {
     sendMailingQuery() {

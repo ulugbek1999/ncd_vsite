@@ -17,9 +17,10 @@
           :key="'doc-' + i"
           class="document-section d-flex"
           :data-file="domain + doc.file"
-          @click="openFile"
         >
-          <div class="document-absolute" :data-file="domain + doc.file"></div>
+          <a :href="domain + doc.file" target="_blank">
+            <div class="document-absolute" :data-file="domain + doc.file"></div>
+          </a>
           <v-icon v-if="doc.file.slice(-3) == 'pdf'" color="#ff0000" size="50px"
             >mdi-file-pdf</v-icon
           >
@@ -104,9 +105,6 @@ export default {
   methods: {
     closeOverlay() {
       eventBus.$emit("overlay", false);
-    },
-    openFile() {
-      window.open(event.target.dataset.file, "_blank");
     }
   }
 };

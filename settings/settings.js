@@ -186,3 +186,22 @@ export const DICTIONARY = {
 export const eventBus = new Vue();
 
 export const ga_id = "UA-149343577-2";
+
+export const languages = {
+  en: {
+    image: require("~/static/pages/english-icon.png"),
+    lang: "En"
+  },
+  ru: {
+    image: require("~/static/pages/russian-icon.png"),
+    lang: "Ru"
+  },
+  uz: {
+    image: require("~/static/pages/uzbek-icon.png"),
+    lang: "Uz"
+  },
+  kz: {
+    image: require("~/static/pages/kazakh-icon.png"),
+    lang: "Kz"
+  }
+};

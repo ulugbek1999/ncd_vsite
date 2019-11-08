@@ -119,7 +119,7 @@
       <div class="header-split mb-10"></div>
       <div class="google-maps-container mt-10">
         <keep-alive>
-          <component :is="'google-maps'"  :locationStr="locationStr"/>
+          <component :is="'google-maps'" :locationStr="locationStr" />
         </keep-alive>
       </div>
       <v-container class="contact-form-container">
@@ -438,7 +438,7 @@ export default {
       });
     },
     locationStr() {
-      return this.locationGmap[0].short_content_en
+      return this.locationGmap[0].short_content_en;
     },
     slides() {
       return [
