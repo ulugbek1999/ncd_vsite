@@ -92,10 +92,22 @@ export default {
     },
     changeLang(event) {
       const l = event.target.dataset.lang.toLowerCase();
-      this.$router.replace({
-        name: this.$route.name,
-        params: { lang: l }
-      });
+      if (this.$route.name == "lang-vacancy-v") {
+        this.$router.replace({
+          name: this.$route.name,
+          params: { lang: l, v: this.$route.params.v }
+        });
+      } else if (this.$route.name == "lang-services-s") {
+        this.$router.replace({
+          name: this.$route.name,
+          params: { lang: l, s: this.$route.params.s }
+        });
+      } else {
+        this.$router.replace({
+          name: this.$route.name,
+          params: { lang: l }
+        });
+      }
       this.$store.commit("CHANGE_LANGUAGE", l);
       eventBus.$emit("change-lang", l);
     },
