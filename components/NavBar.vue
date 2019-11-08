@@ -86,7 +86,7 @@ export default {
         event.preventDefault();
         eventBus.$emit("overlay", true);
       }
-      if (event.target.dataset.scroll == true) {
+      if (event.target.dataset.scroll == "true") {
         location.href = event.target.dataset.url;
       }
     },
