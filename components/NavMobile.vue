@@ -15,14 +15,8 @@
           <v-menu left bottom>
             <template v-slot:activator="{ on }">
               <v-btn text dark class="pa-0 mt-2" v-on="on">
-                <img
-                  class="lang-icon mr-1"
-                  :src="languages[currentLang].image"
-                  alt
-                />
-                <span class="upper-case">{{
-                  languages[currentLang].lang
-                }}</span>
+                <img class="lang-icon mr-1" :src="languages[lang].image" alt />
+                <span class="upper-case">{{ languages[lang].lang }}</span>
               </v-btn>
             </template>
             <v-list style="left: 10px;">
@@ -68,6 +62,7 @@
               tag="li"
               :data-overlay="l.overlay"
               :data-scroll="l.scrollable"
+              data-lang
               @click.native="sideMenuToggle"
             >
               {{ l.name }}
@@ -84,6 +79,7 @@
 
 <script>
 import { eventBus, languages } from "~/settings/settings";
+import { mapState } from "vuex";
 export default {
   props: {
     navItems: {
@@ -93,11 +89,13 @@ export default {
   },
   data() {
     return {
-      activeSideMenu: false,
-      currentLang: this.$route.params.lang
+      activeSideMenu: false
     };
   },
   computed: {
+    ...mapState({
+      lang: state => state.lang
+    }),
     languages() {
       return languages;
     }
@@ -133,12 +131,25 @@ export default {
       }
     },
     changeLang(event) {
-      this.$router.replace({
-        name: this.$route.name,
-        params: { lang: event.target.dataset.lang.toLowerCase() }
-      });
-      eventBus.$emit("change-lang", event.target.dataset.lang.toLowerCase());
-      this.currentLang = event.target.dataset.lang.toLowerCase();
+      const l = event.target.dataset.lang.toLowerCase();
+      if (this.$route.name == "lang-vacancy-v") {
+        this.$router.replace({
+          name: this.$route.name,
+          params: { lang: l, v: this.$route.params.v }
+        });
+      } else if (this.$route.name == "lang-services-s") {
+        this.$router.replace({
+          name: this.$route.name,
+          params: { lang: l, s: this.$route.params.s }
+        });
+      } else {
+        this.$router.replace({
+          name: this.$route.name,
+          params: { lang: l }
+        });
+      }
+      this.$store.commit("CHANGE_LANGUAGE", l);
+      eventBus.$emit("change-lang", l);
     }
   }
 };
