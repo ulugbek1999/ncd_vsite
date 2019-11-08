@@ -119,7 +119,7 @@
       <div class="header-split mb-10"></div>
       <div class="google-maps-container mt-10">
         <keep-alive>
-          <component :is="'google-maps'" :locationStr="locationStr" />
+          <component :is="'google-maps'" :location-str="locationStr" />
         </keep-alive>
       </div>
       <v-container class="contact-form-container">
@@ -265,15 +265,15 @@ export default {
         subject: [v => !!v || "Subject is required"],
         message: [v => !!v || "Message is required"]
       },
-      validQuery: true,
-      lang: this.$route.params.lang
+      validQuery: true
     };
   },
   computed: {
     ...mapState({
       services: state => state.cmsData.service,
       extra: state => state.cmsData.extra,
-      about: state => state.cmsData.about
+      about: state => state.cmsData.about,
+      lang: state => state.lang
     }),
     questionsCms() {
       return this.extra.filter(el => {
@@ -400,6 +400,7 @@ export default {
         return "";
       }
     },
+
     t() {
       return DICTIONARY[this.lang];
     },
@@ -478,6 +479,7 @@ export default {
 
     // Rerender google maps component every time when this page is mounted
   },
+  created() {},
   methods: {
     formatToNumber(value) {
       return value.toFixed(0);

@@ -63,6 +63,7 @@
                         <p><div class="footer-header text-uppercase">{{t.subscribe_mail}}</div></p>
                         <div class="newsletter-container">
                             <v-text-field
+                              v-model="email"
                               :label="t.your +  ' Email'"
                               required
                               rounded
@@ -70,7 +71,6 @@
                               dense
                               light
                               full-width
-                              v-model="email"
                               background-color="#fff"
                               width="200px"
                               color="#000"
@@ -135,39 +135,6 @@ export default {
       lang: this.$route.params.lang
     }
   },
-  methods: {
-    sendMailingQuery() {
-      if (!(/.+@.+\..+/.test(this.email))) {
-        eventBus.$emit("alert-error", "Please, write the email in the correct format!")
-        return
-      }
-      else {
-        this.$nuxt.$loading.start()
-        var code = location.host.slice(-2).toUpperCase()
-        vs.mailingRequest({
-          email: this.email,
-          country_code: code
-        }).then(response => {
-          if (response.status == 200) {
-            eventBus.$emit("alert-success", response.data)
-            this.email = ""
-          }
-        }).catch(error => {
-          if (error.response.status == 500) {
-            eventBus.$emit("alert-error", "Something went wrong!")
-          }
-          else {
-            eventBus.$emit("alert-error", error.response.data)
-          }
-        }).finally(() => {
-          this.$nuxt.$loading.finish()
-        })
-      }
-    },
-    navigateTo() {
-      location.href = event.target.dataset.url
-    }
-  },
   computed: {
     t() {
       return DICTIONARY[this.lang]
@@ -206,6 +173,44 @@ export default {
       else {
           return this.addressCms[0].short_content_ru
       }
+    }
+  },
+  created() {
+    eventBus.$on('change-lang', l => {
+      this.lang = l
+    })
+  },
+  methods: {
+    sendMailingQuery() {
+      if (!(/.+@.+\..+/.test(this.email))) {
+        eventBus.$emit("alert-error", "Please, write the email in the correct format!")
+        return
+      }
+      else {
+        this.$nuxt.$loading.start()
+        var code = location.host.slice(-2).toUpperCase()
+        vs.mailingRequest({
+          email: this.email,
+          country_code: code
+        }).then(response => {
+          if (response.status == 200) {
+            eventBus.$emit("alert-success", response.data)
+            this.email = ""
+          }
+        }).catch(error => {
+          if (error.response.status == 500) {
+            eventBus.$emit("alert-error", "Something went wrong!")
+          }
+          else {
+            eventBus.$emit("alert-error", error.response.data)
+          }
+        }).finally(() => {
+          this.$nuxt.$loading.finish()
+        })
+      }
+    },
+    navigateTo() {
+      location.href = event.target.dataset.url
     }
   }
 }

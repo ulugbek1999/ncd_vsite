@@ -32,12 +32,8 @@
       <v-menu>
         <template v-slot:activator="{ on }">
           <v-btn text dark class="pa-0 mt-2" v-on="on">
-            <img
-              class="lang-icon mr-1"
-              :src="languages[currentLang].image"
-              alt
-            />
-            <span class="upper-case">{{ languages[currentLang].lang }}</span>
+            <img class="lang-icon mr-1" :src="languages[lang].image" alt />
+            <span class="upper-case">{{ languages[lang].lang }}</span>
           </v-btn>
         </template>
         <v-list style="left: 10px;">
@@ -65,6 +61,7 @@
 
 <script>
 import { eventBus, languages } from "~/settings/settings";
+import { mapState } from "vuex";
 export default {
   props: {
     links: {
@@ -73,12 +70,12 @@ export default {
     }
   },
   data() {
-    return {
-      lang: this.$route.params.lang,
-      currentLang: this.$route.params.lang
-    };
+    return {};
   },
   computed: {
+    ...mapState({
+      lang: state => state.lang
+    }),
     languages() {
       return languages;
     }
@@ -94,12 +91,13 @@ export default {
       }
     },
     changeLang(event) {
+      const l = event.target.dataset.lang.toLowerCase();
       this.$router.replace({
         name: this.$route.name,
-        params: { lang: event.target.dataset.lang.toLowerCase() }
+        params: { lang: l }
       });
-      eventBus.$emit("change-lang", event.target.dataset.lang.toLowerCase());
-      this.currentLang = event.target.dataset.lang.toLowerCase();
+      this.$store.commit("CHANGE_LANGUAGE", l);
+      eventBus.$emit("change-lang", l);
     },
     showAccountInfo() {
       eventBus.$emit("alert-error", "This function is not available yet!");

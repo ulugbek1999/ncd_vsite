@@ -50,6 +50,7 @@ import NavBar from "~/components/NavBar";
 import NcdOverlay from "~/components/Overlay";
 import DocumentsList from "~/components/DocumentsList";
 import { eventBus, DICTIONARY } from "~/settings/settings";
+import { mapState } from "vuex";
 
 export default {
   middlerware: "language",
@@ -76,12 +77,16 @@ export default {
     };
   },
   computed: {
+    ...mapState({
+      lang: state => state.lang
+    }),
     t() {
-      return DICTIONARY[this.currentLanguage];
+      return DICTIONARY[this.lang];
     }
   },
   mounted() {
     this.$nextTick(() => {
+      this.$store.commit("CHANGE_LANGUAGE", this.$route.params.lang);
       this.resolveLinks().then(() => {
         this.links = [
           {
