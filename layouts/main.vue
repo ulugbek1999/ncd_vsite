@@ -142,13 +142,13 @@ export default {
       this.links = [
         {
           name: DICTIONARY[l].services,
-          link: this.currentLocation + "#services",
+          link: this.lang + "#services",
           scrollable: true,
           overlay: false
         },
         {
           name: DICTIONARY[l].about_company,
-          link: this.currentLocation + "#about",
+          link: this.lang + "#about",
           scrollable: true,
           overlay: false
         },
@@ -172,7 +172,7 @@ export default {
         },
         {
           name: DICTIONARY[l].contacts,
-          link: this.currentLocation + "#contacts",
+          link: this.lang + "#contacts",
           scrollable: true,
           overlay: false
         }
