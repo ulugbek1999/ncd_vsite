@@ -91,13 +91,13 @@ export default {
         this.links = [
           {
             name: this.t.services,
-            link: this.currentLocation + "#services",
+            link: "/" + this.lang + "#services",
             scrollable: true,
             overlay: false
           },
           {
             name: this.t.about_company,
-            link: this.currentLocation + "#about",
+            link: "/" + this.lang + "#about",
             scrollable: true,
             overlay: false
           },
@@ -121,7 +121,7 @@ export default {
           },
           {
             name: this.t.contacts,
-            link: this.currentLocation + "#contacts",
+            link: "/" + this.lang + "#contacts",
             scrollable: true,
             overlay: false
           }
@@ -142,19 +142,22 @@ export default {
       this.links = [
         {
           name: DICTIONARY[l].services,
-          link: this.lang + "#services",
+          link: "/" + this.lang + "#services",
           scrollable: true,
           overlay: false
         },
         {
           name: DICTIONARY[l].about_company,
-          link: this.lang + "#about",
+          link: "/" + this.lang + "#about",
           scrollable: true,
           overlay: false
         },
         {
           name: DICTIONARY[l].vacancies,
-          link: this.$router.resolve({ name: "lang-vacancies" }).href,
+          link: this.$router.resolve({
+            name: "lang-vacancies",
+            params: { lang: this.lang }
+          }).href,
           scrollable: false,
           overlay: false
         },
@@ -166,13 +169,16 @@ export default {
         },
         {
           name: DICTIONARY[l].faq,
-          link: this.$router.resolve({ name: "lang-questions" }).href,
+          link: this.$router.resolve({
+            name: "lang-questions",
+            params: { lang: this.lang }
+          }).href,
           scrollable: false,
           overlay: false
         },
         {
           name: DICTIONARY[l].contacts,
-          link: this.lang + "#contacts",
+          link: "/" + this.lang + "#contacts",
           scrollable: true,
           overlay: false
         }

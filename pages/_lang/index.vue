@@ -232,7 +232,7 @@ export default {
       partners: [
         {
           image: require("~/static/pages/interlingvo.jpg"),
-          title: "Учебный центр Intelingvo"
+          title: "Intelingvo Learning Center"
         },
         {
           image: require("~/static/pages/biovela.png"),
