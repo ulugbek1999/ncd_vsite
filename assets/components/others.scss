@@ -137,6 +137,8 @@ $mainColor: #be993e;
 
 .documents-list {
     min-height: 200px;
+    max-height: 350px;
+    overflow: auto;
 }
 
 .documents-list .no-files {
