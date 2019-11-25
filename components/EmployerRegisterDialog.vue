@@ -19,7 +19,7 @@
       </v-toolbar>
       <v-list three-line subheader>
         <v-container class="py-12">
-          <v-form v-model="validEmployerForm">
+          <v-form v-model="validEmployerForm" enctype="multipart/form-data">
             <v-list-item-title class="display-1 text-center font-weight-bold">{{
               t.empr_reg_form
             }}</v-list-item-title>
@@ -131,6 +131,7 @@
             <v-row class="px-12">
               <v-file-input
                 :label="t.choose_files"
+                ref="employer_files"
                 show-size
                 counter
                 color="secondary"
@@ -191,6 +192,7 @@
 
 <script>
 import { eventBus } from "~/settings/settings";
+import as from "~/services/AuthService";
 export default {
   props: {
     lang: {
@@ -262,10 +264,15 @@ export default {
     },
     acceptEmployer() {
       this.employerFormData.accepted = true;
+    },
+    send() {
+      var formData = new FormData();
+      formData.append("data", JSON.stringify(this.employerFormData));
+      console.log(this.$refs.employer_files.file);
+      // formData.append("files", this.$refs.employer_files.files[0]);
+      return
+      as.registerPartner(formData);
     }
-  },
-  send() {
-     eventBus.$emit("alert-error", "This function is not available yet!");
   }
 };
 </script>

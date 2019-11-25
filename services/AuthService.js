@@ -6,15 +6,14 @@ const authClient = axios.create({
   baseURL: AUTH_DOMAIN,
   withCredentials: false,
   headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json"
+    "Content-Type": "multipart/form-data"
   }
 });
 
 export default {
   registerPartner(data) {
     authClient
-      .post(AUTH_DOMAIN + "/api/employers/register/", data)
+      .post(AUTH_DOMAIN + "/api/v2/ncd/register/employer/", data)
       .then(response => {
         if (response.status == 201) {
           console.log("success");
