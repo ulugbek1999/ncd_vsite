@@ -136,9 +136,10 @@ $mainColor: #be993e;
 }
 
 .documents-list {
-    min-height: 200px;
+    min-height: 350px;
     max-height: 350px;
     overflow: auto;
+    border: 1px solid lightgray;
 }
 
 .documents-list .no-files {

@@ -90,7 +90,10 @@ export const DICTIONARY = {
     place_residence: "Место проживания",
     place_birth: "Место рождения",
     upload_avatar: "Загрузить аватарку",
-    confirm_password: "Подтверждение пароля"
+    confirm_password: "Подтверждение пароля",
+    for_employers: "Для работодателей",
+    for_candidates: "Для аппликантов",
+    other: "Общее"
   },
   kz: {
     log_in: "Кіру",
@@ -177,7 +180,10 @@ export const DICTIONARY = {
     place_residence: "Тұрғылықты мекенжайы",
     place_birth: "Туған жер",
     upload_avatar: "Аватарды жүктеңіз",
-    confirm_password: "Құпия сөзді растау"
+    confirm_password: "Құпия сөзді растау",
+    for_employers: "Жұмыс берушілер үшін",
+    for_candidates: "Үміткерлер үшін",
+    other: "Жалпы"
   },
   en: {
     log_in: "Log in",
@@ -258,7 +264,10 @@ export const DICTIONARY = {
     place_residence: "Place of residence",
     place_birth: "Place of birth",
     upload_avatar: "Upload your avatar",
-    confirm_password: "Confirm password"
+    confirm_password: "Confirm password",
+    for_employers: "For employers",
+    for_candidates: "For candidates",
+    other: "Other"
   },
   uz: {
     log_in: "Kirish",
@@ -345,7 +354,10 @@ export const DICTIONARY = {
     place_residence: "Yashash joyi",
     place_birth: "Tug'ilgan joyi",
     upload_avatar: "Avataringizni yuklang",
-    confirm_password: "Parolni tasdiqlang"
+    confirm_password: "Parolni tasdiqlang",
+    for_employers: "Ish beruvchilar uchun",
+    for_candidates: "Talabgorlar uchun",
+    other: "Boshqa"
   }
 };
 
