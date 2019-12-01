@@ -37,7 +37,7 @@
             <v-icon size="35px">mdi-account-circle-outline</v-icon>
           </v-btn>
         </template>
-        <v-card v-if="isAuthenticated">
+        <v-card v-if="$auth.loggedIn">
           <v-list>
             <v-list-item>
               <v-list-item-avatar>
@@ -101,11 +101,13 @@
             <v-list-item>
               <v-form style="width: 90%" class="mx-auto">
                 <v-text-field
+                  v-model="credentials.username"
                   :label="t.username"
                   prepend-icon="mdi-account-circle"
                   class="my-2"
                 ></v-text-field>
                 <v-text-field
+                  v-model="credentials.password"
                   :label="t.password"
                   prepend-icon="mdi-lock"
                   :type="showPassword ? 'text' : 'password'"
@@ -190,6 +192,7 @@
 import { eventBus, languages } from "~/settings/settings";
 import { mapState } from "vuex";
 import { DICTIONARY } from "~/settings/settings";
+// import as from "~/services/AuthService";
 export default {
   props: {
     links: {
@@ -203,7 +206,11 @@ export default {
       menu: false,
       message: false,
       hints: true,
-      showPassword: false
+      showPassword: false,
+      credentials: {
+        username: "",
+        password: ""
+      }
     };
   },
   computed: {
@@ -250,7 +257,18 @@ export default {
       eventBus.$emit("change-lang", l);
     },
     signin() {
-      eventBus.$emit("alert-error", "This function is not available yet!");
+      if (this.credentials.username == "") {
+        eventBus.$emit("alert-error", "Username cannot be empty!");
+        return;
+      }
+      if (this.credentials.password == "") {
+        eventBus.$emit("alert-error", "Password cannot be empty!");
+        return;
+      }
+      this.$nuxt.$loading.start();
+      this.$auth.loginWith("local", {
+        data: this.credentials
+      });
     },
     openOptionForm() {
       this.menu = false;

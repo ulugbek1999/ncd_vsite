@@ -549,3 +549,12 @@ section.documents-list {
     bottom: 0;
     z-index: 100;
 }
+
+.logout:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.owl-stage {
+    max-height: 350px !important;
+}

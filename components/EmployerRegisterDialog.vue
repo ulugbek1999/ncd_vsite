@@ -19,7 +19,11 @@
       </v-toolbar>
       <v-list three-line subheader>
         <v-container class="py-12">
-          <v-form v-model="validEmployerForm" enctype="multipart/form-data">
+          <v-form
+            ref="form"
+            v-model="validEmployerForm"
+            enctype="multipart/form-data"
+          >
             <v-list-item-title class="display-1 text-center font-weight-bold">{{
               t.empr_reg_form
             }}</v-list-item-title>
@@ -130,8 +134,8 @@
             </v-row>
             <v-row class="px-12">
               <v-file-input
+                ref="empfiles"
                 :label="t.choose_files"
-                ref="employer_files"
                 show-size
                 counter
                 color="secondary"
@@ -139,6 +143,7 @@
                 chips
                 :rules="rules.file"
                 multiple=""
+                @change="selectFiles"
               >
               </v-file-input>
             </v-row>
@@ -229,7 +234,8 @@ export default {
         workers_amount: "",
         accepted: false
       },
-      validEmployerForm: false
+      validEmployerForm: false,
+      files: []
     };
   },
   computed: {
@@ -265,13 +271,54 @@ export default {
     acceptEmployer() {
       this.employerFormData.accepted = true;
     },
+    selectFiles(event) {
+      this.files = [];
+      const files = event;
+      this.files = [...this.files, ...files];
+    },
+    resetValidation() {
+      this.$refs.form.resetValidation();
+    },
     send() {
+      this.$nuxt.$loading.start();
       var formData = new FormData();
-      formData.append("data", JSON.stringify(this.employerFormData));
-      console.log(this.$refs.employer_files.file);
-      // formData.append("files", this.$refs.employer_files.files[0]);
-      return
-      as.registerPartner(formData);
+      for (const key in this.employerFormData) {
+        formData.append(key, this.employerFormData[key]);
+      }
+      if (this.files.length > 0) {
+        this.files.forEach(element => {
+          formData.append("files", element);
+        });
+      }
+      as.registerEmployer(formData)
+        .then(response => {
+          if (response.status == 201) {
+            var message =
+              "Thank you! We will soon send your credentials to your email.";
+            eventBus.$emit("alert-success", message);
+            this.employerFormData = {
+              company_name: "",
+              boss_fullname: "",
+              email: "",
+              legal_address: "",
+              register_number: "",
+              person_fullname_for_hiring: "",
+              phone: "",
+              workers_amount: "",
+              accepted: false
+            };
+            this.files = [];
+            localStorage.removeItem("employer-form");
+            eventBus.$emit("close-employer-form");
+            this.resetValidation();
+          }
+        })
+        .catch(error => {
+          eventBus.$emit("alert-error", error);
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish();
+        });
     }
   }
 };

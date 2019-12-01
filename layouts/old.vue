@@ -23,11 +23,11 @@
         <v-col cols="12" lg="4" md="4" sm="4" align-self="center">
           <v-item-group class="lang-change">
             <span
-              @click="changeLang"
-              class="link"
               v-for="(lang, index) in languages"
               :key="'lang-desktop-' + index"
+              class="link"
               :data-lang="lang"
+              @click="changeLang"
               >{{ lang }}</span
             >
           </v-item-group>
@@ -35,9 +35,9 @@
       </v-row>
       <v-row justify="space-around" class="nav-desktop">
         <v-badge
-          class="link"
           v-for="(n, i) in navItems"
           :key="'nav-item-desktop-' + i"
+          class="link"
           >{{ n.name }}</v-badge
         >
       </v-row>
@@ -62,11 +62,11 @@
 
               <v-list style="left: 10px;">
                 <v-list-item
+                  v-for="n in languages"
+                  :key="n"
                   class="mobile-lang"
                   :data-lang="n"
                   @click="changeLang"
-                  v-for="n in languages"
-                  :key="n"
                 >
                   <v-list-item-title>{{ n }}</v-list-item-title>
                 </v-list-item>
@@ -77,7 +77,7 @@
       </v-row>
     </v-container>
     <v-row>
-      <Carousel :slides="this.slides" :language="language" />
+      <Carousel :slides="slides" :language="language" />
     </v-row>
     <nuxt />
     <div v-show="activeSideMenu" class="side-menu-overlay">
@@ -106,11 +106,11 @@
         <!-- "Our services (russian version)" -->
         <v-row v-if="language == 'ru'" class="services-container mx-auto mb-10">
           <v-col
+            v-for="(service, index) in services"
+            :key="'service-' + index"
             cols="12"
             lg="3"
             md="3"
-            v-for="(service, index) in services"
-            :key="'service-' + index"
           >
             <div class="service-container">
               <div class="service-image-container">
@@ -131,11 +131,11 @@
         <!-- "Our services (english version)" -->
         <v-row v-if="language == 'en'" class="services-container mx-auto mb-10">
           <v-col
+            v-for="(service, index) in services"
+            :key="'service-' + index"
             cols="12"
             lg="3"
             md="3"
-            v-for="(service, index) in services"
-            :key="'service-' + index"
           >
             <div class="service-container">
               <div class="service-image-container">
@@ -156,11 +156,11 @@
         <!-- "Our services (kazakh version)" -->
         <v-row v-if="language == 'kz'" class="services-container mx-auto mb-10">
           <v-col
+            v-for="(service, index) in services"
+            :key="'service-' + index"
             cols="12"
             lg="3"
             md="3"
-            v-for="(service, index) in services"
-            :key="'service-' + index"
           >
             <div class="service-container">
               <div class="service-image-container">
@@ -181,11 +181,11 @@
         <!-- "Our services (russian version)" -->
         <v-row v-if="language == 'uz'" class="services-container mx-auto mb-10">
           <v-col
+            v-for="(service, index) in services"
+            :key="'service-' + index"
             cols="12"
             lg="3"
             md="3"
-            v-for="(service, index) in services"
-            :key="'service-' + index"
           >
             <div class="service-container">
               <div class="service-image-container">
@@ -205,7 +205,7 @@
 
         <v-row justify="space-around" class="copyright-container">
           <div class="logo-footer-container">
-            <img src="~/static/logo_login.svg" alt="Logo" id="logo-footer" />
+            <img id="logo-footer" src="~/static/logo_login.svg" alt="Logo" />
             <p class="mt-5">&copy; {{ translation.copyright }}</p>
           </div>
           <div class="contacts">
@@ -230,7 +230,7 @@ export default {
   components: {
     Carousel
   },
-  data () {
+  data() {
     return {
       navItems: [],
       // services: [
@@ -257,54 +257,63 @@ export default {
       // ],
       languages: ["ru", "en", "kz", "uz"],
       activeSideMenu: false
-    }
+    };
   },
   computed: {
-    language () {
-      return this.$route.params.lang
+    language() {
+      return this.$route.params.lang;
     },
-    slider () {
-      return this.$store.state.cmsData.slider
+    slider() {
+      return this.$store.state.cmsData.slider;
     },
     slides: {
       get() {
-        return this.$store.state.slides
+        return this.$store.state.slides;
       },
-      set(array) {
-        // this.$store.commit("RESET_SLIDER", array)  
+      set() {
+        // this.$store.commit("RESET_SLIDER", array)
       }
     },
     translation() {
-      return DICTIONARY[this.language]
+      return DICTIONARY[this.language];
     },
     services() {
-      return this.$store.state.cmsData.service
+      return this.$store.state.cmsData.service;
     },
     domain() {
-      return CMS_DOMAIN
+      return CMS_DOMAIN;
     }
+  },
+  created() {
+    this.slidesHandler();
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.navLang();
+    });
   },
   methods: {
     sideMenuToggle() {
       if (!this.activeSideMenu) {
-        
-        this.activeSideMenu = true
+        this.activeSideMenu = true;
         setTimeout(() => {
-          document.querySelector("#side").style.transform = "translateX(300px)"
-        }, 700)
-      }
-      else {
-        document.querySelector("#side").style.transform = "translateX(0px)"
+          document.querySelector("#side").style.transform = "translateX(300px)";
+        }, 700);
+      } else {
+        document.querySelector("#side").style.transform = "translateX(0px)";
         setTimeout(() => {
-          this.activeSideMenu = false
-        }, 700)
+          this.activeSideMenu = false;
+        }, 700);
       }
     },
     changeLang(event) {
-      this.$router.replace({name: this.$route.name, params: {lang: event.target.dataset.lang}})
+      this.$router.replace({
+        name: this.$route.name,
+        params: { lang: event.target.dataset.lang }
+      });
       setTimeout(() => {
-        this.navLang()
-      }, 200)
+        this.navLang();
+      }, 200);
     },
     navLang() {
       this.navItems = [
@@ -332,7 +341,7 @@ export default {
         {
           name: this.translation.contacts
         }
-      ]
+      ];
     },
     slidesHandler() {
       /* Push objects to the "slides" data, 
@@ -361,22 +370,12 @@ export default {
                 uz: slide.action_name_uz
               },
               action: slide.action
-            })
-          } 
+            });
+          }
         }
       }
     },
-    changeSlidesText() {
-
-    }
-  },
-  created() {
-    this.slidesHandler();
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.navLang();
-    });
+    changeSlidesText() {}
   }
 };
 </script>

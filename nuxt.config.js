@@ -30,12 +30,10 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    "@nuxtjs/axios"
-    // ["nuxt-gmaps", {
-    //   key: "AIzaSyCkZeTnnzUkywiK6MPqHJZkQvAi7BkEmsM"
-    // }]
-  ],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
+  axios: {
+    baseURL: "http://127.0.0.1:8000"
+  }
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -53,10 +51,12 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
+          success: colors.green.accent3,
+          background: "#fafafa"
         },
         light: {
-          secondary: "#be993e"
+          secondary: "#be993e",
+          background: "#fafafa"
         }
       }
     }
@@ -73,5 +73,22 @@ export default {
     { src: "~/plugins/vue2-google-maps.js" },
     { src: "~/plugins/ga.js", mode: "client" }
   ],
-  css: ["aos/dist/aos.css"]
+  css: ["aos/dist/aos.css"],
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: "/api/v2/ncd/authenticate/employer/",
+            method: "post",
+            propertyName: "token"
+          },
+          logout: { url: "/api/auth/logout", method: "post" },
+          user: { url: "/api/auth/user", method: "get", propertyName: "user" }
+        }
+        // tokenRequired: true,
+        // tokenType: 'bearer'
+      }
+    }
+  }
 };

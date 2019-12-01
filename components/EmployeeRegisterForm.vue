@@ -43,7 +43,7 @@
                   color="secondary"
                   required
                   type="password"
-                  :rules="rules.common"
+                  :rules="passwordRule"
                 ></v-text-field>
                 <v-text-field
                   :label="t.confirm_password + ' *'"
@@ -52,14 +52,6 @@
                   type="password"
                   :rules="passwordConfRule"
                 ></v-text-field>
-                <v-text-field
-                  v-model="employeeFormData.username"
-                  :label="t.username + ' *'"
-                  color="secondary"
-                  required
-                  :rules="rules.common"
-                >
-                </v-text-field>
                 <v-text-field
                   v-model="employeeFormData.fullname"
                   :label="t.fullname + ' *'"
@@ -283,6 +275,7 @@ export default {
         v => v == this.employeeFormData.password || "Passwords do not match",
         v => !!v || "This is field is required"
       ],
+      passwordRule: [v => v.length > 8 || "Length should be more than 8!"],
       formatedDate: this.formatDate(new Date().toISOString().substr(0, 10)),
       date: "",
       menu1: false,

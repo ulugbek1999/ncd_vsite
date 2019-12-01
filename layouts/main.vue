@@ -139,7 +139,10 @@ export default {
           v => /.+@.+\..+/.test(v) || "E-mail must be valid"
         ],
         checkbox: [v => !!v || "You must agree to continue!"],
-        number: [v => !!v || "Please, specify a valid number"],
+        number: [
+          v => !!v || "Please, specify a valid number",
+          v => v > 0 || "Number of workers should be more than 0!"
+        ],
         file: [
           value =>
             !value ||
@@ -197,7 +200,7 @@ export default {
           },
           {
             name: this.t.vacancies,
-            link: this.$router.resolve({ name: "lang-vacancies" }).href,
+            link: `/${this.lang}/vacancies`,
             scrollable: false,
             overlay: false
           },
@@ -209,7 +212,7 @@ export default {
           },
           {
             name: this.t.faq,
-            link: this.$router.resolve({ name: "lang-questions" }).href,
+            link: `/${this.lang}/questions`,
             scrollable: false,
             overlay: false
           },
@@ -248,10 +251,7 @@ export default {
         },
         {
           name: DICTIONARY[l].vacancies,
-          link: this.$router.resolve({
-            name: "lang-vacancies",
-            params: { lang: this.lang }
-          }).href,
+          link: `/${this.lang}/vacancies`,
           scrollable: false,
           overlay: false
         },
@@ -263,10 +263,7 @@ export default {
         },
         {
           name: DICTIONARY[l].faq,
-          link: this.$router.resolve({
-            name: "lang-questions",
-            params: { lang: this.lang }
-          }).href,
+          link: `/${this.lang}/questions`,
           scrollable: false,
           overlay: false
         },
@@ -280,6 +277,9 @@ export default {
     });
     eventBus.$on("show-role-dialog", () => {
       this.dialogs.selectRoleDialog = true;
+    });
+    eventBus.$on("close-employer-form", () => {
+      this.closeEmployerDialog();
     });
   },
   methods: {
@@ -326,6 +326,9 @@ export default {
         eventBus.$emit("employerFormAccepted");
       else eventBus.$emit("employeeFormAccepted");
       this.dialogs.termsOfUseDialog = false;
+    },
+    resetValidation() {
+      this.$refs.form.resetValidation();
     }
   }
 };

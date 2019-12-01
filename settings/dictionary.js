@@ -89,7 +89,15 @@ export default {
     confirm_password: "Подтверждение пароля",
     for_employers: "Для работодателей",
     for_candidates: "Для аппликантов",
-    other: "Общее"
+    other: "Общее",
+    personal_cabinet: "Личный кабинет",
+    my_profile: "Мой профиль",
+    list_of_applicants: "Список апликантов",
+    my_list: "Мой список",
+    logout: "Выйти",
+    change_password: "Изменить пароль",
+    empr_personal_area: "Личный кабинет работодателя",
+    personal_info: "Личные данные"
   },
   kz: {
     log_in: "Кіру",
@@ -179,7 +187,15 @@ export default {
     confirm_password: "Құпия сөзді растау",
     for_employers: "Жұмыс берушілер үшін",
     for_candidates: "Үміткерлер үшін",
-    other: "Жалпы"
+    other: "Жалпы",
+    personal_cabinet: "Жеке кабинет",
+    my_profile: "Менің профилім",
+    list_of_applicants: "Үміткерлердің тізімі",
+    my_list: "Менің тізімім",
+    logout: "Шығу",
+    change_password: "Құпия сөзді өзгерту",
+    empr_personal_area: "Жұмыс берушінің жеке кабинеты",
+    personal_info: "Жеке мәліметтер"
   },
   en: {
     log_in: "Log in",
@@ -263,7 +279,15 @@ export default {
     confirm_password: "Confirm password",
     for_employers: "For employers",
     for_candidates: "For candidates",
-    other: "Other"
+    other: "Other",
+    personal_cabinet: "Personal cabinet",
+    my_profile: "My profile",
+    list_of_applicants: "List of applicants",
+    my_list: "My list",
+    logout: "Logout",
+    change_password: "Change password",
+    empr_personal_area: "Employer's personal area",
+    personal_info: "Personal information"
   },
   uz: {
     log_in: "Kirish",
@@ -353,6 +377,14 @@ export default {
     confirm_password: "Parolni tasdiqlang",
     for_employers: "Ish beruvchilar uchun",
     for_candidates: "Talabgorlar uchun",
-    other: "Boshqa"
+    other: "Boshqa",
+    personal_cabinet: "Personal cabinet",
+    my_profile: "Profilim",
+    list_of_applicants: "Applikantlar",
+    my_list: "Ro'yxatim",
+    logout: "Chiqish",
+    change_password: "Parolni o'zgartirish",
+    empr_personal_area: "Ish beruvchining shaxsiy bo'limi",
+    personal_info: "Shaxsiy ma'lumotlar"
   }
 };

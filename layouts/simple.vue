@@ -1,11 +1,11 @@
 <template>
-    <div>
-        <nuxt/>
-    </div>
+  <v-app>
+    <nuxt />
+  </v-app>
 </template>
 
 <script>
 export default {
-    middleware: "routes"
-}
+  middleware: "routes"
+};
 </script>
