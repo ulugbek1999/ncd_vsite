@@ -1604,11 +1604,11 @@ export const mutations = {
 };
 
 export const actions = {
-//   nuxtServerInit({ commit, error }, { req }) {
-//     console.log(error);
-//     console.log(req);
-//     return CMSService.getAPI().then(response => {
-//       commit("SET_CMS_DATA", response.data);
-//     });
-//   }
+  nuxtServerInit({ commit, error }, { req }) {
+    console.log(error);
+    console.log(req);
+    return CMSService.getAPI().then(response => {
+      commit("SET_CMS_DATA", response.data);
+    });
+  }
 };
