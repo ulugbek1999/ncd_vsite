@@ -30,5 +30,11 @@ export default {
       AUTH_DOMAIN + "/api/v2/ncd/authenticate/employer/",
       data
     );
+  },
+  getUserInformation(id) {
+    return axios.get(AUTH_DOMAIN + "/api/v2/ncd/get/user/information/" + id, {
+      params: {},
+      headers: { Authorization: localStorage.getItem("auth._token.local") }
+    });
   }
 };

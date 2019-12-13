@@ -14,7 +14,7 @@
             </nuxt-link>
           </section>
         </v-list-item-title>
-        <v-list-item-subtitle>
+        <v-list-item-subtitle v-if="!mini">
           {{ t.personal_cabinet }}
         </v-list-item-subtitle>
       </v-list-item-content>

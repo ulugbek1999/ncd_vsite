@@ -67,7 +67,7 @@
                 :duration="2000"
               ></AnimatedNumber>
             </h2>
-            <p>{{ t.employers }}</p>
+            <p>{{ t.of_employers }}</p>
           </div>
           <div class="stat">
             <h2>
@@ -77,7 +77,7 @@
                 :duration="3000"
               ></AnimatedNumber>
             </h2>
-            <p>{{ t.candidates }}</p>
+            <p>{{ t.of_candidates }}</p>
           </div>
           <div class="stat">
             <h2>

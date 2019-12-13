@@ -5,9 +5,68 @@
     </div>
     <v-card>
       <v-card-title>{{ t.personal_info }}</v-card-title>
-      <v-badge class="change-password"
-        ><a href="#">{{ t.change_password }}</a></v-badge
-      >
+      <v-dialog v-model="passwordDialog" max-width="20%">
+        <template v-slot:activator="{ on }">
+          <v-badge class="change-password"
+            ><a href="#" v-on="on">{{ t.change_password }}</a></v-badge
+          >
+        </template>
+        <v-card>
+          <v-form ref="passFormRef" v-model="passForm">
+            <v-card-title>{{ t.change_password }}</v-card-title>
+            <v-card-text>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    v-model="passwordFormData.old_password"
+                    :rules="rules.common"
+                    type="password"
+                    label="Old password"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    v-model="passwordFormData.new_password"
+                    label="New password"
+                    :rules="rules.password"
+                    type="password"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col>
+                  <v-text-field
+                    v-model="matchPassword"
+                    label="Confirm password"
+                    :rules="rules.match_password"
+                    required
+                    type="password"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="passwordDialog = false">
+                {{ t.close }}</v-btn
+              >
+              <v-btn
+                color="blue darken-1"
+                text
+                :disabled="!passForm"
+                @click="saveNewPassword"
+              >
+                {{ t.save }}</v-btn
+              >
+            </v-card-actions>
+          </v-form>
+        </v-card>
+      </v-dialog>
+
       <v-form
         ref="form"
         v-model="validEmployerForm"
@@ -99,10 +158,17 @@
 
 <script>
 import { mapState } from "vuex";
-import { DICTIONARY } from "~/settings/settings";
+import { DICTIONARY, eventBus } from "~/settings/settings";
+// import as from "~/services/AuthService";
+// import es from "~/services/EmployerService";
 export default {
-  layout: "dashboard1",
+  layout: "dashboard",
   middleware: "auth",
+  head() {
+    return {
+      title: "Dashboard"
+    };
+  },
   data() {
     return {
       id: this.$route.params.id,
@@ -118,6 +184,7 @@ export default {
         accepted: false
       },
       validEmployerForm: false,
+      passForm: false,
       rules: {
         common: [v => !!v || "This field is required"],
         email: [
@@ -125,8 +192,23 @@ export default {
           v => /.+@.+\..+/.test(v) || "E-mail must be valid"
         ],
         checkbox: [v => !!v || "You must agree to continue!"],
-        number: [v => !!v || "Please, specify a valid number"]
-      }
+        number: [v => !!v || "Please, specify a valid number"],
+        password: [
+          v => v.length > 8 || "Password should contain more that 8 symbols"
+        ],
+        match_password: [
+          v =>
+            v == this.passwordFormData.new_password ||
+            "Passwords do not match!",
+          v => !!v || "This field is required"
+        ]
+      },
+      passwordFormData: {
+        old_password: "",
+        new_password: ""
+      },
+      matchPassword: "",
+      passwordDialog: false
     };
   },
   computed: {
@@ -143,8 +225,81 @@ export default {
       return true;
     }
   },
+  async asyncData({ $axios, params, redirect }) {
+    try {
+      const response = await $axios.get(
+        "/api/v2/ncd/get/user/information/" + params.id
+      );
+      return {
+        employerFormData: response.data
+      };
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status == 403) {
+          redirect("/" + params.lang);
+        }
+      }
+    }
+  },
+  created() {
+    if (this.$route.params.id != this.$auth.user.id) {
+      this.$router.push({
+        name: "/" + this.$route.params.lang
+      });
+    }
+  },
   methods: {
-    save() {}
+    save() {
+      this.$nuxt.$loading.start();
+      this.$axios
+        .put(
+          `/api/v2/admin/employer/update/${this.$route.params.id}`,
+          this.employerFormData
+        )
+        .then(response => {
+          if (response.status == 200) {
+            eventBus.$emit(
+              "alert-success",
+              "Your information has successfully been changed"
+            );
+          }
+        })
+        .catch(error => {
+          eventBus.$emit("alert-error", error.message);
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish();
+        });
+    },
+    saveNewPassword() {
+      this.$nuxt.$loading.start();
+      this.$axios
+        .put(
+          `/api/v2/ncd/change/password/${this.$route.params.id}`,
+          this.passwordFormData
+        )
+        .then(response => {
+          if (response.status == 200) {
+            eventBus.$emit(
+              "alert-success",
+              "Your password has successfully been changed"
+            );
+            this.passwordFormData = {
+              old_password: "",
+              new_password: ""
+            };
+            this.match_password = "";
+            this.$refs.passFormRef.resetValidation();
+            this.passwordDialog = false;
+          }
+        })
+        .catch(error => {
+          eventBus.$emit("alert-error", error.message);
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish();
+        });
+    }
   }
 };
 </script>

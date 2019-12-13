@@ -6,8 +6,13 @@
 
 <script>
 export default {
-  layout: "dashboard1",
-  middleware: "authenticated"
+  layout: "dashboard",
+  middleware: "auth",
+  head() {
+    return {
+      title: "My list"
+    };
+  }
 };
 </script>
 

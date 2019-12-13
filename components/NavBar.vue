@@ -41,24 +41,19 @@
           <v-list>
             <v-list-item>
               <v-list-item-avatar>
-                <img
-                  src="https://cdn.vuetifyjs.com/images/john.jpg"
-                  alt="John"
-                />
+                <img :src="require('~/static/icons/user.png')" alt="" />
               </v-list-item-avatar>
 
               <v-list-item-content>
-                <v-list-item-title>John Leider</v-list-item-title>
-                <v-list-item-subtitle
-                  >Founder of Vuetify.js</v-list-item-subtitle
+                <v-list-item-title class="mb-3"
+                  ><strong>{{ t.username }}: </strong
+                  >{{ $auth.user.username }}</v-list-item-title
+                >
+                <v-list-item-subtitle>
+                  <strong>{{ t.role }}: </strong
+                  >{{ userRole }}</v-list-item-subtitle
                 >
               </v-list-item-content>
-
-              <v-list-item-action>
-                <v-btn :class="fav ? 'red--text' : ''" icon @click="fav = !fav">
-                  <v-icon>mdi-heart</v-icon>
-                </v-btn>
-              </v-list-item-action>
             </v-list-item>
           </v-list>
 
@@ -81,10 +76,11 @@
           </v-list>
 
           <v-card-actions>
+            <v-btn color="primary" text @click="navigateToDashboard">{{
+              t.my_profile
+            }}</v-btn>
             <v-spacer></v-spacer>
-
-            <v-btn text @click="menu = false">Cancel</v-btn>
-            <v-btn color="primary" text @click="menu = false">Save</v-btn>
+            <v-btn text @click="logout">{{ t.logout }}</v-btn>
           </v-card-actions>
         </v-card>
         <v-card v-else max-width="350px">
@@ -223,6 +219,15 @@ export default {
     },
     t() {
       return DICTIONARY[this.lang];
+    },
+    userRole() {
+      if (this.$auth.user.role == "employer") {
+        return this.t.employer;
+      } else if (this.$auth.user.role == "employee") {
+        return this.t.employee;
+      } else {
+        return this.t.student;
+      }
     }
   },
   methods: {
@@ -256,7 +261,7 @@ export default {
       this.$store.commit("CHANGE_LANGUAGE", l);
       eventBus.$emit("change-lang", l);
     },
-    signin() {
+    async signin() {
       if (this.credentials.username == "") {
         eventBus.$emit("alert-error", "Username cannot be empty!");
         return;
@@ -266,13 +271,44 @@ export default {
         return;
       }
       this.$nuxt.$loading.start();
-      this.$auth.loginWith("local", {
-        data: this.credentials
-      });
+      try {
+        await this.$auth.loginWith("local", {
+          data: this.credentials
+        });
+        this.navigateToDashboard();
+        this.menu = false;
+      } catch (error) {
+        if (error.response) {
+          if (error.response.data) {
+            eventBus.$emit("alert-error", error.response.data);
+          } else {
+            eventBus.$emit("alert-error", error);
+          }
+        } else {
+          eventBus.$emit("alert-error", "Something went wrong!");
+        }
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
     },
     openOptionForm() {
       this.menu = false;
       eventBus.$emit("show-role-dialog");
+    },
+    navigateToDashboard() {
+      if (this.$auth.user.role == "employer") {
+        this.$router.push({
+          name: "lang-employer-dashboard-id-cabinet",
+          params: {
+            lang: this.lang,
+            id: this.$auth.user.id
+          }
+        });
+      }
+    },
+    logout() {
+      this.$auth.logout();
+      this.menu = false;
     }
   }
 };

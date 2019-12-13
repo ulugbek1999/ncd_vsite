@@ -32,8 +32,9 @@ export default {
    */
   modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
   axios: {
-    baseURL: "http://127.0.0.1:8000"
-  }
+    baseURL: "http://127.0.0.1:8000",
+    credentials: false
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
@@ -79,15 +80,19 @@ export default {
       local: {
         endpoints: {
           login: {
-            url: "/api/v2/ncd/authenticate/employer/",
+            url: "/api/v2/ncd/authenticate/user/",
             method: "post",
             propertyName: "token"
           },
           logout: { url: "/api/auth/logout", method: "post" },
-          user: { url: "/api/auth/user", method: "get", propertyName: "user" }
-        }
-        // tokenRequired: true,
-        // tokenType: 'bearer'
+          user: {
+            url: "/api/v2/ncd/get/user/",
+            method: "get",
+            propertyName: "user"
+          }
+        },
+        tokenRequired: true,
+        tokenType: "JWT"
       }
     }
   }

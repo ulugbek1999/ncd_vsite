@@ -1,33 +1,33 @@
 // Making the position of navbar-desktop fixed
-.nav-fix {
-    -webkit-animation-name: nav-fix;
-    animation-name: nav-fix;
-    -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-    transition: all 1s ease;
-    animation-direction: alternate-reverse
-}
+// .nav-fix {
+//     -webkit-animation-name: nav-fix;
+//     animation-name: nav-fix;
+//     -webkit-animation-duration: 1s;
+//     animation-duration: 1s;
+//     -webkit-animation-fill-mode: forwards;
+//     animation-fill-mode: forwards;
+//     transition: all 1s ease;
+//     animation-direction: alternate-reverse
+// }
 
-@-webkit-keyframes nav-fix {
-    from {
-        top: 0;
-        background-color: rgba(0, 0, 0, 0);
-    }
-    to {
-        top: -100px;
-        background-color: rgba(0, 0, 0, 0.397)
-    }
-}
+// @-webkit-keyframes nav-fix {
+//     from {
+//         top: 0;
+//         background-color: rgba(0, 0, 0, 0);
+//     }
+//     to {
+//         top: -100px;
+//         background-color: rgba(0, 0, 0, 0.397)
+//     }
+// }
 
-@keyframes nav-fix {
-    from {
-        top: 0;
-        background-color: rgba(0, 0, 0, 0);
-    }
-    to {
-        top: -100px;
-        background-color: rgba(0, 0, 0, 0.397)
-    }
-}
+// @keyframes nav-fix {
+//     from {
+//         top: 0;
+//         background-color: rgba(0, 0, 0, 0);
+//     }
+//     to {
+//         top: -100px;
+//         background-color: rgba(0, 0, 0, 0.397)
+//     }
+// }

@@ -1,5 +1,31 @@
 <template>
   <v-app>
+    <div class="alert-container">
+      <v-snackbar
+        v-model="alert.error"
+        color="error"
+        class="alert"
+        :timeout="3000"
+        top
+      >
+        {{ alert.errorMessage }}
+        <v-btn color="white" text @click="alert.error = false">
+          Close
+        </v-btn>
+      </v-snackbar>
+      <v-snackbar
+        v-model="alert.success"
+        color="success"
+        class="alert"
+        :timeout="3000"
+        top
+      >
+        {{ alert.successMessage }}
+        <v-btn color="white" text @click="alert.success = false">
+          Close
+        </v-btn>
+      </v-snackbar>
+    </div>
     <NavigationDrawer :lang="lang" :t="t" :items="items" />
     <v-content>
       <v-toolbar flat color="background">
@@ -61,7 +87,13 @@ export default {
   },
   data() {
     return {
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      alert: {
+        success: false,
+        successMessage: "Success",
+        error: false,
+        errorMessage: "Error"
+      }
     };
   },
   computed: {
@@ -95,7 +127,16 @@ export default {
       return languages;
     }
   },
-  created() {},
+  created() {
+    eventBus.$on("alert-success", message => {
+      this.alert.successMessage = message;
+      this.alert.success = true;
+    });
+    eventBus.$on("alert-error", message => {
+      this.alert.errorMessage = message;
+      this.alert.error = true;
+    });
+  },
   methods: {
     toggleDrawer() {
       eventBus.$emit("toggle-nav-drawer");
@@ -109,10 +150,7 @@ export default {
       this.$store.commit("CHANGE_LANGUAGE", l);
     },
     logout() {
-      this.$router.push({
-        name: "lang",
-        params: { lang: this.lang }
-      });
+      this.$auth.logout();
     }
   }
 };

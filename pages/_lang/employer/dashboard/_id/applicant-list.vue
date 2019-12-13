@@ -1,12 +1,235 @@
 <template>
   <div>
-    List
+    <div class="display-1 text-center mb-5 font-weight-bold">
+      {{ t.list_of_applicants }}
+    </div>
+    <v-card class="px-2">
+      <v-card-title>
+        {{ t.filter }}
+      </v-card-title>
+      <v-card-text>
+        <v-row>
+          <v-col>
+            <v-text-field :label="t.age" color="secondary"></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field :label="t.gender" color="secondary"></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field :label="t.height" color="secondary"></v-text-field>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col>
+            <v-text-field :label="t.education" color="secondary"></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              :label="t.language_know"
+              color="secondary"
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-btn tile color="secondary mt-3">{{ t.search }}</v-btn>
+          </v-col>
+        </v-row>
+      </v-card-text>
+    </v-card>
+    <v-card class="mt-10 pa-3">
+      <v-card-title>
+        {{ t.candidates }}
+      </v-card-title>
+      <v-card-text class="mt-5">
+        <div v-if="paginatedData.length == 0" class="subtitle-2">
+          {{ t.list_empty }}...
+        </div>
+        <section v-else class="d-flex justify-space-between flex-wrap">
+          <div
+            v-for="(employee, index) in paginatedData"
+            :key="'employee-' + index"
+            class="employee mb-5"
+          >
+            <div class="img-container">
+              <v-img
+                v-if="!employee.photo_1"
+                class="profile-avatar"
+                :src="require('~/static/pages/avatar_man.png')"
+              ></v-img>
+              <v-img
+                v-else
+                class="profile-avatar"
+                :src="employee.photo_1"
+              ></v-img>
+            </div>
+
+            <div v-if="employee.full_name_en != ''" class="title fullname my-2">
+              {{ employee.full_name_en }}
+            </div>
+            <div v-else class="title fullname my-2">
+              {{ employee.full_name_ru }}
+            </div>
+            <div class="subtitle-1">
+              <strong> {{ t.age }}: </strong
+              ><v-badge v-if="employee.birth_date != null" class="body-2">{{
+                new Date().getFullYear() - employee.birth_date.split("-")[0]
+              }}</v-badge>
+              <v-badge v-else class="body-2">{{ t.undef }}</v-badge>
+            </div>
+            <div class="subtitle-1">
+              <strong> {{ t.height }}: </strong
+              ><v-badge v-if="employee.height" class="body-2">{{
+                employee.height
+              }}</v-badge>
+              <v-badge v-else class="body-2">{{ t.undef }}</v-badge>
+            </div>
+            <div class="subtitle-1 mb-4">
+              <strong> {{ t.gender }}: </strong
+              ><v-badge v-if="employee.gender == 'f'" class="body-2">{{
+                t.g_female
+              }}</v-badge>
+              <v-badge v-else class="body-2">{{ t.g_male }}</v-badge>
+            </div>
+            <v-btn
+              class="mb-4"
+              color="secondary"
+              outlined
+              tile
+              :data-empid="employee.id"
+              :to="{
+                name: 'lang-employer-dashboard-id-employee-empid',
+                params: {
+                  lang: lang,
+                  id: $route.params.id,
+                  empid: employee.id
+                }
+              }"
+            >
+              {{ t.read_more }}
+            </v-btn>
+          </div>
+        </section>
+        <div class="text-center">
+          <v-container>
+            <v-row justify="center">
+              <v-col cols="8">
+                <v-container class="max-width">
+                  <v-pagination
+                    v-if="pageCount != 0"
+                    v-model="page"
+                    class="my-4"
+                    :length="pageCount"
+                    color="#be993e"
+                  ></v-pagination>
+                </v-container>
+              </v-col>
+            </v-row>
+          </v-container>
+        </div>
+      </v-card-text>
+    </v-card>
   </div>
 </template>
 
 <script>
+import { DICTIONARY, eventBus } from "~/settings/settings";
+import { mapState } from "vuex";
 export default {
-  layout: "dashboard1",
-  middleware: "authenticated"
+  layout: "dashboard",
+  middleware: "auth",
+  head() {
+    return {
+      title: "List of applicants"
+    };
+  },
+  data() {
+    return {
+      size: 10,
+      page: 1
+    };
+  },
+  computed: {
+    ...mapState({
+      lang: state => state.lang,
+      employees: state => state.employees.employees
+    }),
+    t() {
+      return DICTIONARY[this.lang];
+    },
+    pageCount() {
+      if (this.employees != null) {
+        return Math.ceil(this.employees.length / this.size);
+      }
+      return 0;
+    },
+    paginatedData() {
+      const start = (this.page - 1) * this.size;
+      const end = start + this.size;
+
+      if (this.employees != null) {
+        return this.employees.slice(start, end);
+      }
+      return [];
+    }
+  },
+  watch: {
+    page() {
+      window.history.pushState({ query: "a" }, null);
+    }
+  },
+  async fetch({ $axios, store }) {
+    if (store.state.employees.employees != null) {
+      return;
+    }
+    await $axios
+      .get("/api/v2/employees/list")
+      .then(response => {
+        if (response.status == 200) {
+          store.commit("employees/SET_EMPLOYEES_DATA", response.data);
+        }
+      })
+      .catch(error => {
+        eventBus.$emit("alert-error", error.response.data);
+      });
+  },
+  created() {
+    this.setPage();
+  },
+  beforeDestroy() {
+    this.$store.commit("CHANGE_APPLICANT_LIST_LP", this.page);
+  },
+  methods: {
+    setPage() {
+      this.page = this.$store.state.lastPage.applicantList;
+    }
+  }
 };
 </script>
+
+<style lang="scss" scoped>
+$mainColor: #be993e;
+
+.employee {
+  border: 1px solid rgb(223, 222, 222);
+  min-height: 200px;
+}
+
+.profile-avatar {
+  max-width: 200px;
+  max-height: 200px;
+  margin-right: 20px;
+}
+
+.employee {
+  color: #333333;
+  width: 48%;
+}
+
+.fullname {
+  font-weight: bold;
+}
+
+.img-container {
+  height: 200px;
+  float: left;
+}
+</style>

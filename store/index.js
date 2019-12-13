@@ -1544,10 +1544,51 @@ export const state = () => ({
             "created": "2019-08-26T17:05:11.507188",
             "status": true
         }
-    ]
+    ],
+    countries: {
+        "9c": {
+            "name_en": "Russia",
+            "name_ru": "Россия"
+        },
+        "8c": {
+            "name_en": "Any",
+            "name_ru": "Любые"
+        },
+        "7c": {
+            "name_en": "Canada",
+            "name_ru": "Канада"
+        },
+        "6c": {
+            "name_en": "Western Europe",
+            "name_ru": "Западная Европа"
+        },
+        "5c": {
+            "name_en": "Eastern Europe",
+            "name_ru": "Восточная Европа"
+        },
+        "4c": {
+            "name_en": "Great Britain",
+            "name_ru": "Великобритания"
+        },
+        "3c": {
+            "name_en": "UAE",
+            "name_ru": "ОАЭ"
+        },
+        "2c": {
+            "name_en": "Korea",
+            "name_ru": "Корея"
+        },
+        "1c": {
+            "name_en": "USA",
+            "name_ru": "США"
+        }
+    }
 },
   slides: [],
-  lang: "ru"
+  lang: "ru",
+  lastPage: {
+    applicantList: 1
+  }
 });
 
 export const mutations = {
@@ -1556,13 +1597,18 @@ export const mutations = {
   },
   CHANGE_LANGUAGE(state, language) {
     state.lang = language;
+  },
+  CHANGE_APPLICANT_LIST_LP(state, page) {
+      state.lastPage.applicantList = page;
   }
 };
 
 export const actions = {
-  nuxtServerInit({ commit, error }, { req }) {
-    return CMSService.getAPI().then(response => {
-      commit("SET_CMS_DATA", response.data);
-    });
-  }
+//   nuxtServerInit({ commit, error }, { req }) {
+//     console.log(error);
+//     console.log(req);
+//     return CMSService.getAPI().then(response => {
+//       commit("SET_CMS_DATA", response.data);
+//     });
+//   }
 };

@@ -4,10 +4,10 @@
     "reportVersion": 1,
     "event": "Allocation failed - JavaScript heap out of memory",
     "trigger": "FatalError",
-    "filename": "report.20191109.115357.6697.0.001.json",
-    "dumpEventTime": "2019-11-09T11:53:57Z",
-    "dumpEventTimeStamp": "1573282437115",
-    "processId": 6697,
+    "filename": "report.20191213.165205.3777.0.001.json",
+    "dumpEventTime": "2019-12-13T16:52:05Z",
+    "dumpEventTimeStamp": "1576237925080",
+    "processId": 3777,
     "cwd": "/home/ulugbek/Desktop/ncd_international/vue/ncd_vsite",
     "commandLine": [
       "node",
@@ -49,75 +49,75 @@
     "cpus": [
       {
         "model": "Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz",
-        "speed": 869,
-        "user": 31489500,
-        "nice": 84300,
-        "sys": 9836400,
-        "idle": 314319400,
-        "irq": 3328400
+        "speed": 1319,
+        "user": 9441900,
+        "nice": 14300,
+        "sys": 2786600,
+        "idle": 86077400,
+        "irq": 835400
       },
       {
         "model": "Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz",
-        "speed": 834,
-        "user": 33554900,
-        "nice": 82100,
-        "sys": 9566600,
-        "idle": 45994600,
-        "irq": 1007600
+        "speed": 1567,
+        "user": 10093800,
+        "nice": 5000,
+        "sys": 2774300,
+        "idle": 83273100,
+        "irq": 273000
       },
       {
         "model": "Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz",
-        "speed": 860,
-        "user": 33494900,
-        "nice": 86700,
-        "sys": 9508200,
-        "idle": 45971100,
-        "irq": 1118200
+        "speed": 1513,
+        "user": 9969500,
+        "nice": 5800,
+        "sys": 2697500,
+        "idle": 83995800,
+        "irq": 294300
       },
       {
         "model": "Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz",
-        "speed": 897,
-        "user": 34196300,
-        "nice": 100100,
-        "sys": 9623300,
-        "idle": 45847700,
-        "irq": 1416800
+        "speed": 1435,
+        "user": 10160500,
+        "nice": 26700,
+        "sys": 2759200,
+        "idle": 83753700,
+        "irq": 509100
       },
       {
         "model": "Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz",
-        "speed": 887,
-        "user": 33228300,
-        "nice": 98100,
-        "sys": 9418900,
-        "idle": 46437200,
-        "irq": 1051000
+        "speed": 1283,
+        "user": 9936100,
+        "nice": 10500,
+        "sys": 2722400,
+        "idle": 84580700,
+        "irq": 265500
       },
       {
         "model": "Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz",
-        "speed": 840,
-        "user": 33291900,
-        "nice": 81600,
-        "sys": 9386300,
-        "idle": 46325800,
-        "irq": 981600
+        "speed": 1478,
+        "user": 9630600,
+        "nice": 6000,
+        "sys": 2670600,
+        "idle": 84913700,
+        "irq": 274400
       },
       {
         "model": "Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz",
-        "speed": 848,
-        "user": 32973000,
-        "nice": 97900,
-        "sys": 9405400,
-        "idle": 46456100,
-        "irq": 972500
+        "speed": 1682,
+        "user": 9825100,
+        "nice": 11200,
+        "sys": 2651000,
+        "idle": 84807100,
+        "irq": 299600
       },
       {
         "model": "Intel(R) Core(TM) i5-8250U CPU @ 1.60GHz",
-        "speed": 848,
-        "user": 33126500,
-        "nice": 70500,
-        "sys": 9389700,
-        "idle": 46551500,
-        "irq": 940100
+        "speed": 1369,
+        "user": 9815900,
+        "nice": 8700,
+        "sys": 2674400,
+        "idle": 84941500,
+        "irq": 277300
       }
     ],
     "networkInterfaces": [
@@ -133,8 +133,16 @@
         "name": "wlp3s0",
         "internal": false,
         "mac": "1c:1b:b5:13:0d:a3",
-        "address": "192.168.0.123",
+        "address": "192.168.3.9",
         "netmask": "255.255.255.0",
+        "family": "IPv4"
+      },
+      {
+        "name": "br-99369622bffc",
+        "internal": false,
+        "mac": "02:42:71:51:47:76",
+        "address": "172.18.0.1",
+        "netmask": "255.255.0.0",
         "family": "IPv4"
       },
       {
@@ -150,10 +158,28 @@
         "name": "wlp3s0",
         "internal": false,
         "mac": "1c:1b:b5:13:0d:a3",
-        "address": "fe80::1958:2dd5:523a:8d83",
+        "address": "fe80::fddb:68b2:e63:f78a",
         "netmask": "ffff:ffff:ffff:ffff::",
         "family": "IPv6",
         "scopeid": 3
+      },
+      {
+        "name": "br-99369622bffc",
+        "internal": false,
+        "mac": "02:42:71:51:47:76",
+        "address": "fe80::42:71ff:fe51:4776",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 5
+      },
+      {
+        "name": "veth2a69890",
+        "internal": false,
+        "mac": "da:14:9f:53:58:cd",
+        "address": "fe80::d814:9fff:fe53:58cd",
+        "netmask": "ffff:ffff:ffff:ffff::",
+        "family": "IPv6",
+        "scopeid": 7
       }
     ],
     "host": "ulugbek-pc"
@@ -166,63 +192,71 @@
   },
   "nativeStack": [
     {
-      "pc": "0x000055cc6053b07a",
+      "pc": "0x000055b575c2a07a",
       "symbol": "report::TriggerNodeReport(v8::Isolate*, node::Environment*, char const*, char const*, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, v8::Local<v8::String>) [node]"
     },
     {
-      "pc": "0x000055cc604096e8",
+      "pc": "0x000055b575af86e8",
       "symbol": "node::OnFatalError(char const*, char const*) [node]"
     },
     {
-      "pc": "0x000055cc6056db12",
+      "pc": "0x000055b575c5cb12",
       "symbol": "v8::Utils::ReportOOMFailure(v8::internal::Isolate*, char const*, bool) [node]"
     },
     {
-      "pc": "0x000055cc6056dd78",
+      "pc": "0x000055b575c5cd78",
       "symbol": "v8::internal::V8::FatalProcessOutOfMemory(v8::internal::Isolate*, char const*, bool) [node]"
     },
     {
-      "pc": "0x000055cc606eff56",
+      "pc": "0x000055b575ddef56",
       "symbol": " [node]"
     },
     {
-      "pc": "0x000055cc606f0099",
+      "pc": "0x000055b575ddf099",
       "symbol": " [node]"
     },
     {
-      "pc": "0x000055cc60700b8f",
+      "pc": "0x000055b575defb8f",
       "symbol": "v8::internal::Heap::PerformGarbageCollection(v8::internal::GarbageCollector, v8::GCCallbackFlags) [node]"
     },
     {
-      "pc": "0x000055cc60701868",
+      "pc": "0x000055b575df0868",
       "symbol": "v8::internal::Heap::CollectGarbage(v8::internal::AllocationSpace, v8::internal::GarbageCollectionReason, v8::GCCallbackFlags) [node]"
     },
     {
-      "pc": "0x000055cc60703d9c",
-      "symbol": "v8::internal::Heap::AllocateRawWithLightRetry(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [node]"
+      "pc": "0x000055b575df1e62",
+      "symbol": "v8::internal::Heap::CollectAllAvailableGarbage(v8::internal::GarbageCollectionReason) [node]"
     },
     {
-      "pc": "0x000055cc607040a1",
+      "pc": "0x000055b575df30f4",
       "symbol": "v8::internal::Heap::AllocateRawWithRetryOrFail(int, v8::internal::AllocationType, v8::internal::AllocationAlignment) [node]"
     },
     {
-      "pc": "0x000055cc606cc15a",
-      "symbol": "v8::internal::Factory::NewFillerObject(int, bool, v8::internal::AllocationType) [node]"
+      "pc": "0x000055b575dbaeea",
+      "symbol": "v8::internal::Factory::AllocateRawArray(int, v8::internal::AllocationType) [node]"
     },
     {
-      "pc": "0x000055cc609dcf89",
-      "symbol": "v8::internal::Runtime_AllocateInYoungGeneration(int, unsigned long*, v8::internal::Isolate*) [node]"
+      "pc": "0x000055b575dbb415",
+      "symbol": "v8::internal::Factory::NewFixedArrayWithFiller(v8::internal::RootIndex, int, v8::internal::Object, v8::internal::AllocationType) [node]"
     },
     {
-      "pc": "0x000055cc60d2d6d9",
+      "pc": "0x000055b575f2a062",
+      "symbol": " [node]"
+    },
+    {
+      "pc": "0x000055b5760a0731",
+      "symbol": "v8::internal::Runtime_GrowArrayElements(int, unsigned long*, v8::internal::Isolate*) [node]"
+    },
+    {
+      "pc": "0x000055b57641c6d9",
       "symbol": " [node]"
     }
   ],
   "javascriptHeap": {
-    "totalMemory": 2156191744,
-    "totalCommittedMemory": 2152385304,
-    "usedMemory": 2129959016,
-    "availableMemory": 47198456,
+    "totalMemory": 2158227456,
+    "totalCommittedMemory": 2155308488,
+    "usedMemory": 2136610920,
+    "availableMemory": 46372608,
     "memoryLimit": 2197815296,
     "heapSpaces": {
       "read_only_space": {
@@ -233,38 +267,38 @@
         "available": 230400
       },
       "new_space": {
-        "memorySize": 4194304,
-        "committedMemory": 1369336,
-        "capacity": 2094656,
-        "used": 411712,
-        "available": 1682944
+        "memorySize": 2097152,
+        "committedMemory": 2496,
+        "capacity": 1047328,
+        "used": 0,
+        "available": 1047328
       },
       "old_space": {
-        "memorySize": 1967763456,
-        "committedMemory": 1967237448,
-        "capacity": 1950802200,
-        "used": 1949235296,
-        "available": 1566904
+        "memorySize": 1924247552,
+        "committedMemory": 1923952000,
+        "capacity": 1914295048,
+        "used": 1909835336,
+        "available": 4459712
       },
       "code_space": {
-        "memorySize": 3309568,
-        "committedMemory": 3236608,
-        "capacity": 2839072,
-        "used": 2839072,
+        "memorySize": 4096000,
+        "committedMemory": 3801120,
+        "capacity": 3331456,
+        "used": 3331456,
         "available": 0
       },
       "map_space": {
-        "memorySize": 10489856,
-        "committedMemory": 10337752,
-        "capacity": 7969440,
-        "used": 7969440,
+        "memorySize": 12587008,
+        "committedMemory": 12583528,
+        "capacity": 9287360,
+        "used": 9287360,
         "available": 0
       },
       "large_object_space": {
-        "memorySize": 168968192,
-        "committedMemory": 168968192,
-        "capacity": 168371424,
-        "used": 168371424,
+        "memorySize": 213733376,
+        "committedMemory": 213733376,
+        "capacity": 213024696,
+        "used": 213024696,
         "available": 0
       },
       "code_large_object_space": {
@@ -277,33 +311,33 @@
       "new_large_object_space": {
         "memorySize": 0,
         "committedMemory": 0,
-        "capacity": 2094656,
+        "capacity": 1047328,
         "used": 0,
-        "available": 2094656
+        "available": 1047328
       }
     }
   },
   "resourceUsage": {
-    "userCpuSeconds": 533.667,
-    "kernelCpuSeconds": 10.7226,
-    "cpuConsumptionPercent": 10.54,
-    "maxRss": 2366222336,
+    "userCpuSeconds": 546.605,
+    "kernelCpuSeconds": 15.0603,
+    "cpuConsumptionPercent": 5.93413,
+    "maxRss": 2373165056,
     "pageFaults": {
-      "IORequired": 54,
-      "IONotRequired": 2447621
+      "IORequired": 58,
+      "IONotRequired": 2910017
     },
     "fsActivity": {
-      "reads": 12712,
-      "writes": 1608
+      "reads": 90488,
+      "writes": 4760
     }
   },
   "uvthreadResourceUsage": {
-    "userCpuSeconds": 180.88,
-    "kernelCpuSeconds": 5.66699,
-    "cpuConsumptionPercent": 3.61174,
+    "userCpuSeconds": 244.242,
+    "kernelCpuSeconds": 8.33471,
+    "cpuConsumptionPercent": 2.66854,
     "fsActivity": {
-      "reads": 12704,
-      "writes": 16
+      "reads": 74648,
+      "writes": 24
     }
   },
   "libuv": [
@@ -314,7 +348,8 @@
     "npm_config_timing": "",
     "npm_config_access": "",
     "npm_config_save_dev": "",
-    "WINDOWID": "67108871",
+    "WINDOWID": "54525959",
+    "npm_package_dependencies__nuxtjs_auth": "^4.8.4",
     "npm_config_sign_git_tag": "",
     "npm_config_before": "",
     "KDED_STARTED_BY_KDEINIT": "1",
@@ -348,7 +383,7 @@
     "npm_config_browser": "",
     "npm_config_maxsockets": "50",
     "npm_package_private": "true",
-    "SHELL_SESSION_ID": "db4ae292b1214610bceb218d664dd8de",
+    "SHELL_SESSION_ID": "0f98e67ce86842439f04f388d788cabd",
     "npm_config_argv": "{\"remain\":[],\"cooked\":[\"run\",\"dev\"],\"original\":[\"run\",\"dev\"]}",
     "npm_config_ham_it_up": "",
     "npm_config_bin_links": "true",
@@ -401,7 +436,7 @@
     "XDG_CURRENT_DESKTOP": "KDE",
     "npm_config_globalignorefile": "/usr/etc/npmignore",
     "npm_config_init_license": "ISC",
-    "KONSOLE_DBUS_SERVICE": ":1.303",
+    "KONSOLE_DBUS_SERVICE": ":1.40",
     "npm_package_version": "1.0.0",
     "npm_config_cache_lock_stale": "60000",
     "npm_package_dependencies_sass_loader": "^8.0.0",
@@ -516,7 +551,7 @@
     "KONSOLE_PROFILE_NAME": "Shell",
     "npm_package_author_name": "Ulugbek",
     "DBUS_SESSION_BUS_ADDRESS": "unix:path=/run/user/1000/bus",
-    "npm_package_gitHead": "f957e5e90516d12e004b739a612da6e31acab918",
+    "npm_package_gitHead": "f5d6c470aaf7f972222e1b49536c1954e70ad0f8",
     "npm_config_update_notifier": "true",
     "HG": "/usr/bin/hg",
     "MAIL": "/var/spool/mail/ulugbek",
@@ -533,6 +568,7 @@
     "npm_package_scripts_generate": "nuxt generate",
     "LC_NUMERIC": "en_GB.UTF-8",
     "OLDPWD": "/home/ulugbek/Desktop/ncd_international/vue",
+    "GOPATH": "/home/ulugbek/go",
     "npm_package_devDependencies_jest": "^24.1.0",
     "npm_config_scope": "",
     "npm_config_package_lock": "true",
@@ -540,7 +576,7 @@
     "npm_config_parseable": "",
     "npm_config_init_version": "1.0.0",
     "NODE_ENV": "development",
-    "_AXIOS_BASE_URL_": "http://127.0.0.1:3000/",
+    "_AXIOS_BASE_URL_": "http://127.0.0.1:8000",
     "VUE_ENV": "server"
   },
   "userLimits": {
@@ -577,8 +613,8 @@
       "hard": "unlimited"
     },
     "max_user_processes": {
-      "soft": 30881,
-      "hard": 30881
+      "soft": 31026,
+      "hard": 31026
     },
     "virtual_memory_kbytes": {
       "soft": "unlimited",
@@ -613,11 +649,6 @@
     "/usr/lib/libkrb5support.so.0",
     "/usr/lib/libkeyutils.so.1",
     "/usr/lib/libresolv.so.2",
-    "/home/ulugbek/Desktop/ncd_international/vue/ncd_vsite/node_modules/fibers/bin/linux-x64-72-glibc/fibers.node",
-    "/usr/lib/libnss_files.so.2",
-    "/usr/lib/libnss_mymachines.so.2",
-    "/usr/lib/libnss_mdns4_minimal.so.2",
-    "/usr/lib/libnss_resolve.so.2",
-    "/usr/lib/libnss_dns.so.2"
+    "/home/ulugbek/Desktop/ncd_international/vue/ncd_vsite/node_modules/fibers/bin/linux-x64-72-glibc/fibers.node"
   ]
 }
