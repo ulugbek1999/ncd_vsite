@@ -26,7 +26,16 @@
             <p>
               <strong> {{ t.military_date_started }}: </strong>
               <span v-if="a.date_started">
-                <span>{{ a.date_started }}</span>
+                <span v-if="lang == 'en'"
+                  >{{ a.date_started.split("-")[1] }}/{{
+                    a.date_started.split("-")[2]
+                  }}/{{ a.date_started.split("-")[0] }}</span
+                >
+                <span v-else
+                  >{{ a.date_started.split("-")[2] }}/{{
+                    a.date_started.split("-")[1]
+                  }}/{{ a.date_started.split("-")[0] }}</span
+                >
               </span>
               <span v-else>
                 {{ t.undef }}
@@ -44,7 +53,16 @@
             <p>
               <strong> {{ t.military_date_finished }}: </strong>
               <span v-if="a.date_finished">
-                <span>{{ a.date_finished }}</span>
+                <span v-if="lang == 'en'"
+                  >{{ a.date_finished.split("-")[1] }}/{{
+                    a.date_finished.split("-")[2]
+                  }}/{{ a.date_finished.split("-")[0] }}</span
+                >
+                <span v-else
+                  >{{ a.date_finished.split("-")[2] }}/{{
+                    a.date_finished.split("-")[1]
+                  }}/{{ a.date_finished.split("-")[0] }}</span
+                >
               </span>
               <span v-else>
                 {{ t.undef }}
@@ -61,10 +79,12 @@
             </p>
             <div class="files-container">
               <p v-for="(file, ind) in a.army_file" :key="'a-file-' + ind">
-                <v-icon>
-                  mdi-file
-                </v-icon>
-                <a :href="file.file">{{ t.file }} + {{ ind + 1 }}</a>
+                <a :href="file.file">
+                  <v-icon>
+                    mdi-file
+                  </v-icon>
+                  {{ t.file }} - {{ ind + 1 }}</a
+                >
               </p>
             </div>
           </v-card-text>

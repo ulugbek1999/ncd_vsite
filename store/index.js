@@ -1582,6 +1582,46 @@ export const state = () => ({
             "name_en": "USA",
             "name_ru": "США"
         }
+    },
+    edu_types: {
+        "5et": {
+            "name_en": "Master's degree and Higher",
+            "name_ru": "Магистратура и выше"
+        },
+        "4et": {
+            "name_en": "Bachelor",
+            "name_ru": "Бакалавриат"
+        },
+        "2et": {
+            "name_en": "Vocational College/Lyceum",
+            "name_ru": "Лицей/Техникум/Колледж"
+        },
+        "1et": {
+            "name_en": "High school",
+            "name_ru": "Средняя школа"
+        }
+    },
+    languages: {
+        "5l": {
+            "name_ru": "Третий Иностранный Язык",
+            "name_en": "Third Foreign Language"
+        },
+        "4l": {
+            "name_ru": "Корейский",
+            "name_en": "Korean"
+        },
+        "3l": {
+            "name_ru": "Узбекский",
+            "name_en": "Uzbek"
+        },
+        "2l": {
+            "name_ru": "Русский",
+            "name_en": "Russian"
+        },
+        "1l": {
+            "name_ru": "Английский",
+            "name_en": "English"
+        }
     }
 },
   slides: [],

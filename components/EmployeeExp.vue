@@ -30,7 +30,16 @@
             <p>
               <strong> {{ t.work_date_started }}: </strong>
               <span v-if="exp.date_started">
-                <span>{{ exp.date_started }}</span>
+                <span v-if="lang == 'en'"
+                  >{{ exp.date_started.split("-")[1] }}/{{
+                    exp.date_started.split("-")[2]
+                  }}/{{ exp.date_started.split("-")[0] }}</span
+                >
+                <span v-else
+                  >{{ exp.date_started.split("-")[2] }}/{{
+                    exp.date_started.split("-")[1]
+                  }}/{{ exp.date_started.split("-")[0] }}</span
+                >
               </span>
               <span v-else>
                 {{ t.undef }}
@@ -39,7 +48,16 @@
             <p>
               <strong> {{ t.work_date_finished }}: </strong>
               <span v-if="exp.date_finished">
-                <span>{{ exp.date_finished }}</span>
+                <span v-if="lang == 'en'"
+                  >{{ exp.date_finished.split("-")[1] }}/{{
+                    exp.date_started.split("-")[2]
+                  }}/{{ exp.date_started.split("-")[0] }}</span
+                >
+                <span v-else
+                  >{{ exp.date_finished.split("-")[2] }}/{{
+                    exp.date_started.split("-")[1]
+                  }}/{{ exp.date_started.split("-")[0] }}</span
+                >
               </span>
               <span v-else>
                 {{ t.undef }}
@@ -86,7 +104,12 @@
                 <v-icon>
                   mdi-file
                 </v-icon>
-                <exp :href="file.file">{{ t.file }} + {{ ind + 1 }}</exp>
+                <a :href="file.file">
+                  <v-icon>
+                    mdi-file
+                  </v-icon>
+                  {{ t.file }} - {{ ind + 1 }}
+                </a>
               </p>
             </div>
           </v-card-text>

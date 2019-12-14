@@ -23,10 +23,7 @@
               <span v-if="e.education.length != 0">
                 <span v-if="lang == 'en'">
                   <span v-if="edu.type">
-                    {{ edu.type }}
-                  </span>
-                  <span v-else-if="edu.type">
-                    {{ edu.type }}
+                    {{ edu_types[edu.type + "et"].name_en }}
                   </span>
                   <span v-else>
                     {{ t.undef }}
@@ -34,10 +31,7 @@
                 </span>
                 <span v-else>
                   <span v-if="edu.type">
-                    {{ edu.type }}
-                  </span>
-                  <span v-else-if="edu.type">
-                    {{ edu.type }}
+                    {{ edu_types[edu.type + "et"].name_ru }}
                   </span>
                   <span v-else>
                     {{ t.undef }}
@@ -78,7 +72,16 @@
             <p>
               <strong> {{ t.date_started_edu }}: </strong>
               <span v-if="edu.date_started">
-                <span>{{ edu.date_started }}</span>
+                <span v-if="lang == 'en'"
+                  >{{ edu.date_started.split("-")[1] }}/{{
+                    edu.date_started.split("-")[2]
+                  }}/{{ edu.date_started.split("-")[0] }}</span
+                >
+                <span v-else
+                  >{{ edu.date_started.split("-")[2] }}/{{
+                    edu.date_started.split("-")[1]
+                  }}/{{ edu.date_started.split("-")[0] }}</span
+                >
               </span>
               <span v-else>
                 {{ t.undef }}
@@ -87,7 +90,16 @@
             <p>
               <strong> {{ t.date_finished_edu }}: </strong>
               <span v-if="edu.date_finished">
-                <span>{{ edu.date_finished }}</span>
+                <span v-if="lang == 'en'"
+                  >{{ edu.date_finished.split("-")[1] }}/{{
+                    edu.date_finished.split("-")[2]
+                  }}/{{ edu.date_finished.split("-")[0] }}</span
+                >
+                <span v-else>
+                  {{ edu.date_finished.split("-")[2] }}/{{
+                    edu.date_finished.split("-")[1]
+                  }}/{{ edu.date_finished.split("-")[0] }}
+                </span>
               </span>
               <span v-else>
                 {{ t.undef }}
@@ -104,10 +116,12 @@
             </p>
             <div class="files-container">
               <p v-for="(file, ind) in edu.edu_file" :key="'edu-file-' + ind">
-                <v-icon>
-                  mdi-file
-                </v-icon>
-                <a :href="file.file">{{ t.file }} + {{ ind + 1 }}</a>
+                <a :href="file.file">
+                  <v-icon>
+                    mdi-file
+                  </v-icon>
+                  {{ t.file }} - {{ ind + 1 }}
+                </a>
               </p>
             </div>
           </v-card-text>
@@ -197,7 +211,8 @@ export default {
   computed: {
     ...mapState({
       lang: state => state.lang,
-      countries: state => state.cmsData.countries
+      countries: state => state.cmsData.countries,
+      edu_types: state => state.cmsData.edu_types
     }),
     t() {
       return DICTIONARY[this.lang];

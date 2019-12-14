@@ -11,7 +11,7 @@
             <v-img
               v-if="e.photo_1"
               width="40%"
-              :src="e.photo_1"
+              :src="domain + e.photo_1"
               aspect-ratio="0.75"
               alt="Photo 1"
             />
@@ -26,7 +26,7 @@
             <v-img
               v-if="e.photo_2"
               width="40%"
-              :src="e.photo_2"
+              :src="domain + e.photo_2"
               aspect-ratio="0.75"
               alt="Photo 2"
             />
@@ -42,7 +42,7 @@
             <v-img
               v-if="e.photo_3"
               width="40%"
-              :src="e.photo_3"
+              :src="domain + e.photo_3"
               aspect-ratio="0.75"
               alt="Photo 3"
             />
@@ -57,7 +57,7 @@
             <v-img
               v-if="e.photo_4"
               width="40%"
-              :src="e.photo_4"
+              :src="domain + e.photo_4"
               aspect-ratio="1.3334"
               alt="Photo 4"
             />
@@ -361,6 +361,14 @@
           <EmployeeReward :e="e" class="mb-5" />
           <EmployeeExp :e="e" class="mb-5" />
         </div>
+        <div class="text-center">
+          <v-btn v-if="!requested" color="secondary" tile @click="employ">
+            {{ t.employ }}
+          </v-btn>
+          <v-btn v-else tile @click="cancelRequest">
+            {{ t.cancel_request }}
+          </v-btn>
+        </div>
       </div>
     </v-card>
   </div>
@@ -368,7 +376,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { DICTIONARY, eventBus } from "~/settings/settings";
+import { DICTIONARY, eventBus, AUTH_DOMAIN } from "~/settings/settings";
 import EmployeeEdu from "~/components/EmployeeEdu";
 import EmployeeLang from "~/components/EmployeeLang";
 import EmployeeArmy from "~/components/EmployeeArmy";
@@ -379,7 +387,7 @@ export default {
   middleware: "auth",
   head() {
     return {
-      title: "Applicant's data"
+      title: "Candidate's data"
     };
   },
   components: {
@@ -391,7 +399,8 @@ export default {
   },
   data() {
     return {
-      e: {}
+      e: {},
+      requested: false
     };
   },
   computed: {
@@ -401,20 +410,86 @@ export default {
     }),
     t() {
       return DICTIONARY[this.lang];
+    },
+    domain() {
+      return AUTH_DOMAIN;
     }
   },
   async asyncData({ $axios, params, redirect }) {
     try {
       const response = await $axios.get("/api/v2/employees/" + params.empid);
-      return {
-        e: response.data
-      };
+      if (response.status == 206) {
+        return {
+          e: response.data,
+          requested: false
+        };
+      } else {
+        return {
+          e: response.data,
+          requested: true
+        };
+      }
     } catch (error) {
       if (error.response) {
         if (error.response.status == 403) {
           redirect("/" + params.lang);
         }
       }
+    }
+  },
+  methods: {
+    employ() {
+      this.$nuxt.$loading.start();
+      this.$axios
+        .post("/api/v2/ncd/employer/request/employee", {
+          employee_id: this.$route.params.empid
+        })
+        .then(response => {
+          if (response.status == 200) {
+            eventBus.$emit(
+              "alert-success",
+              "You have requested this employee! We will contact you soon!"
+            );
+            this.requested = true;
+          }
+        })
+        .catch(error => {
+          if (error.response.status == 400) {
+            eventBus.$emit("alert-error", error.response.data);
+          } else {
+            eventBus.$emit("alert-error", "Something went wrong!");
+          }
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish();
+        });
+    },
+    cancelRequest() {
+      this.$nuxt.$loading.start();
+      this.$axios
+        .delete(
+          "/api/v2/ncd/employer/request/employee/delete/" +
+            this.$route.params.empid
+        )
+        .then(response => {
+          if (response.status == 200) {
+            eventBus.$emit(
+              "alert-success",
+              "You have successfully canceled your request!"
+            );
+          }
+        })
+        .catch(error => {
+          if (error.response.status == 400) {
+            eventBus.$emit("alert-error", error.response.data);
+          } else {
+            eventBus.$emit("alert-error", "Something went wrong!");
+          }
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish();
+          this.requested = false;
+        });
     }
   }
 };

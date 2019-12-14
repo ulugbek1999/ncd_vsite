@@ -13,16 +13,19 @@
     <v-window v-model="step">
       <div v-if="e.language.length != 0">
         <v-window-item
-          v-for="(lang, i) in e.language"
-          :key="'lang-' + i"
+          v-for="(l, i) in e.language"
+          :key="'language-' + i"
           :value="i + 1"
-          :class="'lang-' + i"
+          :class="'language-' + i"
         >
           <v-card-text>
             <p>
               <strong> {{ t.lang_name }}: </strong>
-              <span v-if="lang.language">
-                <span>{{ lang.language }}</span>
+              <span v-if="l.language">
+                <span v-if="lang == 'ru'">{{
+                  language_cms[l.language + "l"].name_ru
+                }}</span>
+                <span v-else>{{ language_cms[l.language + "l"].name_en }}</span>
               </span>
               <span v-else>
                 {{ t.undef }}
@@ -30,8 +33,14 @@
             </p>
             <p>
               <strong> {{ t.lang_level }}: </strong>
-              <span v-if="lang.level">
-                <span>{{ lang.level }}</span>
+              <span v-if="l.level == 1">
+                <span>{{ t.excellent }}</span>
+              </span>
+              <span v-else-if="l.level == 2">
+                <span>{{ t.good }}</span>
+              </span>
+              <span v-else-if="l.level == 3">
+                <span>{{ t.not_bad }}</span>
               </span>
               <span v-else>
                 {{ t.undef }}
@@ -39,13 +48,15 @@
             </p>
             <div class="files-container">
               <p
-                v-for="(file, ind) in lang.lang_file"
-                :key="'lang-file-' + ind"
+                v-for="(file, ind) in l.lang_file"
+                :key="'language-file-' + ind"
               >
-                <v-icon>
-                  mdi-file
-                </v-icon>
-                <a :href="file.file">{{ t.file }} + {{ ind + 1 }}</a>
+                <a :href="file.file">
+                  <v-icon>
+                    mdi-file
+                  </v-icon>
+                  {{ t.file }} + {{ ind + 1 }}
+                </a>
               </p>
             </div>
           </v-card-text>
@@ -105,11 +116,15 @@ export default {
   computed: {
     ...mapState({
       lang: state => state.lang,
-      countries: state => state.cmsData.countries
+      countries: state => state.cmsData.countries,
+      language_cms: state => state.cmsData.languages
     }),
     t() {
       return DICTIONARY[this.lang];
     }
+  },
+  mounted() {
+    console.log(this.language_cms[1 + "l"].name_ru);
   }
 };
 </script>
