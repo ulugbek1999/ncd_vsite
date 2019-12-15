@@ -157,7 +157,10 @@ export default {
     good: "Хорошо",
     not_bad: "Неплохо",
     cancel_request: "Отменить запрос",
-    all: "Все"
+    all: "Все",
+    employee: "Работник",
+    change: "Изменить",
+    delete: "Удалить"
   },
   kz: {
     log_in: "Кіру",
@@ -315,7 +318,8 @@ export default {
     good: "Жақсы",
     not_bad: "Жаман емес",
     cancel_request: "Болдырмау",
-    all: "Барлығы"
+    all: "Барлығы",
+    employee: "Қызметкер"
   },
   en: {
     log_in: "Log in",
@@ -397,8 +401,8 @@ export default {
     place_birth: "Place of birth",
     upload_avatar: "Upload your avatar",
     confirm_password: "Confirm password",
-    for_employers: "For of_employers",
-    for_candidates: "For of_candidates",
+    for_employers: "For employers",
+    for_candidates: "For candidates",
     other: "Other",
     personal_cabinet: "Personal cabinet",
     my_profile: "My profile",
@@ -467,7 +471,8 @@ export default {
     good: "Intermediate",
     not_bad: "Pre-intermediate",
     cancel_request: "Cancel",
-    all: "All"
+    all: "All",
+    employee: "Employee"
   },
   uz: {
     log_in: "Kirish",
@@ -625,6 +630,7 @@ export default {
     good: "Yaxshi",
     not_bad: "Yomon emas",
     cancel_request: "Bekor qilish",
-    all: "Hammasi"
+    all: "Hammasi",
+    employee: "Hodim"
   }
 };

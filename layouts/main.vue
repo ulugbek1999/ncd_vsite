@@ -276,7 +276,7 @@ export default {
       ];
     });
     eventBus.$on("show-role-dialog", () => {
-      this.dialogs.selectRoleDialog = true;
+      this.dialogs.selectRoleDialog = !this.dialogs.selectRoleDialog;
     });
     eventBus.$on("close-employer-form", () => {
       this.closeEmployerDialog();
@@ -314,9 +314,20 @@ export default {
     },
     validateFileInput(value) {
       var fileSize = 0;
-      value.forEach(el => {
-        fileSize += el.size;
-      });
+      if (value.length) {
+        value.forEach(el => {
+          fileSize += el.size;
+        });
+      } else {
+        fileSize = value.size;
+        if (value.size) {
+          if (fileSize < 5000000) {
+            return true;
+          }
+        } else {
+          return true;
+        }
+      }
       if (fileSize < 5000000) {
         return true;
       } else return false;

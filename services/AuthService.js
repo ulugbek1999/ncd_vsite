@@ -36,5 +36,11 @@ export default {
       params: {},
       headers: { Authorization: localStorage.getItem("auth._token.local") }
     });
+  },
+  registerEmployee(data) {
+    return authClient.post(
+      AUTH_DOMAIN + "/api/v2/ncd/register/employee/",
+      data
+    )
   }
 };

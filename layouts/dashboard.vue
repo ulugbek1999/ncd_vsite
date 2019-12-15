@@ -105,23 +105,33 @@ export default {
       return DICTIONARY[this.lang];
     },
     items() {
-      return [
-        {
-          title: this.t.my_profile,
-          icon: "mdi-view-dashboard",
-          link: `/ru/employer/dashboard/${this.id}/cabinet`
-        },
-        {
-          title: this.t.list_of_applicants,
-          icon: "mdi-format-list-bulleted",
-          link: `/ru/employer/dashboard/${this.id}/applicant-list`
-        },
-        {
-          title: this.t.my_list,
-          icon: "mdi-star",
-          link: `/ru/employer/dashboard/${this.id}/my-list`
-        }
-      ];
+      if (this.$auth.user.role == "employer") {
+        return [
+          {
+            title: this.t.my_profile,
+            icon: "mdi-view-dashboard",
+            link: `/ru/employer/dashboard/${this.id}/cabinet`
+          },
+          {
+            title: this.t.list_of_applicants,
+            icon: "mdi-format-list-bulleted",
+            link: `/ru/employer/dashboard/${this.id}/applicant-list`
+          },
+          {
+            title: this.t.my_list,
+            icon: "mdi-star",
+            link: `/ru/employer/dashboard/${this.id}/my-list`
+          }
+        ];
+      } else {
+        return [
+          {
+            title: this.t.my_profile,
+            icon: "mdi-view-dashboard",
+            link: `/ru/employee/dashboard/${this.id}/cabinet`
+          }
+        ];
+      }
     },
     languages() {
       return languages;

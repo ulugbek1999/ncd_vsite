@@ -247,7 +247,7 @@ export default {
       if (val == "") {
         this.paginatedData = this.emps;
       } else {
-        this.paginatedData = this.emps.filter(el => {
+        this.paginatedData = this.employees.filter(el => {
           if (el.birth_date) {
             return (new Date().getFullYear() - el.birth_date.split("-")[0])
               .toString()
@@ -263,7 +263,7 @@ export default {
       if (val == "") {
         this.paginatedData = this.emps;
       } else if (val == this.t.g_female) {
-        this.paginatedData = this.emps.filter(el => {
+        this.paginatedData = this.employees.filter(el => {
           if (el.gender) {
             return el.gender == "f";
           } else {
@@ -271,7 +271,7 @@ export default {
           }
         });
       } else {
-        this.paginatedData = this.emps.filter(el => {
+        this.paginatedData = this.employees.filter(el => {
           if (el.gender) {
             return el.gender == "m";
           } else {
@@ -305,7 +305,9 @@ export default {
                 this.educations[this.emps[i].education[j].type + "et"]
                   .name_en == val
               ) {
-                arr.push(this.emps[i]);
+                if (!arr.includes(this.emps[i])) {
+                  arr.push(this.emps[i]);
+                }
               }
             } else {
               if (
@@ -340,7 +342,7 @@ export default {
                 this.languages[this.emps[i].language[j].language + "l"]
                   .name_ru == val
               ) {
-                arr.push(this.emps[i]);
+                if (!arr.includes(this.emps[i])) arr.push(this.emps[i]);
               }
             }
           }

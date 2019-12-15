@@ -304,6 +304,14 @@ export default {
             id: this.$auth.user.id
           }
         });
+      } else if (this.$auth.user.role == "employee") {
+        this.$router.push({
+          name: "lang-employee-dashboard-id-cabinet",
+          params: {
+            lang: this.lang,
+            id: this.$auth.user.id
+          }
+        });
       }
     },
     logout() {

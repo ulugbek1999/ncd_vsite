@@ -42,8 +42,8 @@
                   :label="t.password + ' *'"
                   color="secondary"
                   required
+                  :rules="rules.common"
                   type="password"
-                  :rules="passwordRule"
                 ></v-text-field>
                 <v-text-field
                   :label="t.confirm_password + ' *'"
@@ -81,8 +81,8 @@
                   required
                   :rules="genderRule"
                 >
-                  <v-radio :label="t.g_male" value="M"></v-radio>
-                  <v-radio :label="t.g_female" value="F"></v-radio>
+                  <v-radio :label="t.g_male" value="m"></v-radio>
+                  <v-radio :label="t.g_female" value="f"></v-radio>
                 </v-radio-group>
               </v-col>
               <v-col class="px-12">
@@ -96,7 +96,6 @@
                 </v-text-field>
                 <v-menu
                   v-model="menu1"
-                  :close-on-content-click="false"
                   transition="scale-transition"
                   offset-y
                   max-width="290px"
@@ -121,7 +120,6 @@
                 </v-menu>
                 <v-menu
                   v-model="menu2"
-                  :close-on-content-click="false"
                   transition="scale-transition"
                   offset-y
                   max-width="290px"
@@ -157,6 +155,30 @@
                   :rules="rules.common"
                 >
                 </v-text-field>
+                <v-menu
+                  v-model="menu3"
+                  transition="scale-transition"
+                  offset-y
+                  max-width="290px"
+                  min-width="290px"
+                >
+                  <template v-slot:activator="{ on }">
+                    <v-text-field
+                      v-model="dateOfBirthFormatted"
+                      :label="t.birth_date + ' *'"
+                      persistent-hint
+                      prepend-inner-icon="mdi-calendar"
+                      readonly
+                      :rules="rules.common"
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    v-model="employeeFormData.date_of_birth"
+                    no-title
+                    @input="menu3 = false"
+                  ></v-date-picker>
+                </v-menu>
                 <v-text-field
                   v-model="employeeFormData.place_of_birth"
                   :label="t.place_birth + ' *'"
@@ -173,6 +195,7 @@
                   chips
                   :rules="rules.file"
                   prepend-icon="mdi-camera"
+                  @change="selectFile"
                 >
                 </v-file-input>
               </v-col>
@@ -228,6 +251,7 @@
 
 <script>
 import { eventBus } from "~/settings/settings";
+import as from "~/services/AuthService";
 export default {
   props: {
     lang: {
@@ -263,6 +287,7 @@ export default {
         expiry_date: "",
         phone: "",
         tin: "",
+        date_of_birth: "",
         place_of_residence: "",
         place_of_birth: "",
         password: "",
@@ -275,11 +300,15 @@ export default {
         v => v == this.employeeFormData.password || "Passwords do not match",
         v => !!v || "This is field is required"
       ],
-      passwordRule: [v => v.length > 8 || "Length should be more than 8!"],
+      passwordR: [
+        v => v.length > 8 || "Password should contain more that 8 symbols"
+      ],
       formatedDate: this.formatDate(new Date().toISOString().substr(0, 10)),
       date: "",
       menu1: false,
-      menu2: false
+      menu2: false,
+      menu3: false,
+      file: ""
     };
   },
   computed: {
@@ -294,6 +323,9 @@ export default {
     },
     expiryDateFormatted() {
       return this.formatDate(this.employeeFormData.expiry_date);
+    },
+    dateOfBirthFormatted() {
+      return this.formatDate(this.employeeFormData.date_of_birth);
     }
   },
   created() {
@@ -333,8 +365,97 @@ export default {
       const [month, day, year] = date.split("/");
       return `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
     },
+    selectFile(event) {
+      this.file = event;
+    },
     register() {
-      eventBus.$emit("alert-error", "This function is not available yet!");
+      this.$nuxt.$loading.start();
+      var formData = new FormData();
+      for (const key in this.employeeFormData) {
+        formData.append(key, this.employeeFormData[key]);
+      }
+      formData.append("file", this.file);
+
+      as.registerEmployee(formData)
+        .then(response => {
+          if (response.status == 200) {
+            eventBus.$emit("alert-success", response.data);
+            this.signin();
+            this.employerFormData = {
+              company_name: "",
+              boss_fullname: "",
+              email: "",
+              legal_address: "",
+              register_number: "",
+              person_fullname_for_hiring: "",
+              phone: "",
+              workers_amount: "",
+              accepted: false
+            };
+            this.file = "";
+            localStorage.removeItem("employer-form");
+            eventBus.$emit("close-employer-form");
+            this.resetValidation();
+          }
+        })
+        .catch(error => {
+          if (error.response) {
+            if (error.response.status == 400) {
+              eventBus.$emit("alert-error", error.response.data);
+            } else {
+              eventBus.$emit("alert-error", error.message);
+            }
+          } else {
+            eventBus.$emit("alert-error", "Something went wrong!");
+          }
+        })
+        .finally(() => {
+          this.$nuxt.$loading.finish();
+        });
+    },
+    async signin() {
+      this.$nuxt.$loading.start();
+      try {
+        await this.$auth.loginWith("local", {
+          data: {
+            username: this.employeeFormData.username,
+            password: this.employeeFormData.password
+          }
+        });
+        this.navigateToDashboard();
+        this.menu = false;
+      } catch (error) {
+        if (error.response) {
+          if (error.response.data) {
+            eventBus.$emit("alert-error", error.response.data);
+          } else {
+            eventBus.$emit("alert-error", "Something went wrong!");
+          }
+        } else {
+          eventBus.$emit("alert-error", "Something went wrong!");
+        }
+      } finally {
+        this.$nuxt.$loading.finish();
+      }
+    },
+    navigateToDashboard() {
+      if (this.$auth.user.role == "employer") {
+        this.$router.push({
+          name: "lang-employer-dashboard-id-cabinet",
+          params: {
+            lang: this.lang,
+            id: this.$auth.user.id
+          }
+        });
+      } else if (this.$auth.user.role == "employee") {
+        this.$router.push({
+          name: "lang-employee-dashboard-id-cabinet",
+          params: {
+            lang: this.lang,
+            id: this.$auth.user.id
+          }
+        });
+      }
     }
   }
 };
