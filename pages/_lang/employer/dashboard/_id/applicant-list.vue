@@ -54,13 +54,13 @@
               solo
             ></v-select>
           </v-col>
-          <v-col>
+          <!-- <v-col>
             <v-text-field
               :label="t.specialty"
               color="secondary"
               solo
             ></v-text-field>
-          </v-col>
+          </v-col> -->
         </v-row>
       </v-card-text>
     </v-card>

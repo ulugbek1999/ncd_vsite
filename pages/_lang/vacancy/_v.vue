@@ -35,11 +35,11 @@
       </div>
       <hr />
       <div class="common-info mt-12 mb-5" v-html="description"></div>
-      <div class="apply-container text-center">
+      <!-- <div class="apply-container text-center">
         <v-btn class="mx-auto" tile color="#be993e" dark @click="apply">
           {{ t.apply }}
         </v-btn>
-      </div>
+      </div> -->
     </v-container>
   </div>
 </template>

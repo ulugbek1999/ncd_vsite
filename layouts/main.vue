@@ -161,7 +161,7 @@ export default {
       return DICTIONARY[this.lang];
     },
     roles() {
-      return [this.t.employer, this.t.candidate, this.t.student];
+      return [this.t.employer, this.t.candidate];
     },
     termsOfUseCms() {
       return this.extra.filter(el => {
