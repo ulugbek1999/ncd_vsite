@@ -99,24 +99,24 @@
             </div>
             <div class="subtitle-1">
               <strong> {{ t.age }}: </strong
-              ><v-badge v-if="employee.birth_date != null" class="body-2">{{
+              ><v-badge color="white" v-if="employee.birth_date != null" class="body-2">{{
                 new Date().getFullYear() - employee.birth_date.split("-")[0]
               }}</v-badge>
-              <v-badge v-else class="body-2">{{ t.undef }}</v-badge>
+              <v-badge color="white" v-else class="body-2">{{ t.undef }}</v-badge>
             </div>
             <div class="subtitle-1">
               <strong> {{ t.height }}: </strong
-              ><v-badge v-if="employee.height" class="body-2">{{
+              ><v-badge color="white" v-if="employee.height" class="body-2">{{
                 employee.height
               }}</v-badge>
-              <v-badge v-else class="body-2">{{ t.undef }}</v-badge>
+              <v-badge color="white" v-else class="body-2">{{ t.undef }}</v-badge>
             </div>
             <div class="subtitle-1 mb-4">
               <strong> {{ t.gender }}: </strong
-              ><v-badge v-if="employee.gender == 'f'" class="body-2">{{
+              ><v-badge color="white" v-if="employee.gender == 'f'" class="body-2">{{
                 t.g_female
               }}</v-badge>
-              <v-badge v-else class="body-2">{{ t.g_male }}</v-badge>
+              <v-badge color="white" v-else class="body-2">{{ t.g_male }}</v-badge>
             </div>
             <v-btn
               class="mb-4"
